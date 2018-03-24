@@ -15,17 +15,26 @@ class App extends Component {
         .then(results => {
             return results.json();
         }).then(data => {
-            this.setState({boxers: data});
-            console.log("state", this.state.boxers);
+			console.log("data", data);
+            this.setState(data);
+            console.log("state", this.state);
         })
     }
 
     render() {
         var headings = [];
         var values = [];
-        for (var key in this.state.boxers) {
-            headings.push(<th key={key}>{key}</th>);
-            values.push(<td key={key}>{this.state.boxers[key]}</td>);
+		var item = [];
+		
+        for (var index in this.state) {
+			values = [];
+			console.log("index", index, this.state[index]);
+			for (var key in this.state[index]) {
+				//headings.push(<th key={key}>{key}</th>);
+            	values.push(<td key={key+index}>{this.state[index][key]}</td>);
+			}
+			console.log("values", index, values);
+			item.push(<tr key={index}>{values}</tr>);
         }
         return (
             <div className="App">
@@ -43,9 +52,12 @@ class App extends Component {
                     <tr>
                         {headings}
                     </tr>
-                    <tr>
-                        {values}
-                    </tr>
+                    {//<tr>
+					//	{console.log("item", item)}
+                     //   {values}
+                    //</tr>
+					}
+					{item}
                 </tbody>
             </table>
             </div>
