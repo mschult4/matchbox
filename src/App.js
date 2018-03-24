@@ -21,11 +21,16 @@ class App extends Component {
     }
 
     render() {
-        var headings = [];
-        var values = [];
-        for (var key in this.state.boxers) {
-            headings.push(<th key={key}>{key}</th>);
-            values.push(<td key={key}>{this.state.boxers[key]}</td>);
+        let headings = ["boxer_id", "mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
+        let heading_disp = ["Boxer ID", "First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Vet Years", "Weight", "Handedness", "Captain", "Gender"];
+        var rows = [];
+        rows.push(heading_disp.map((str) => <th key={str}>{str}</th>));
+        for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
+            var values = [];
+            for (var i=0; i < headings.length; i++) {
+                values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
+            }
+            rows.push(<tr key={row_num}>{values}</tr>);
         }
         return (
             <div className="App">
@@ -40,12 +45,7 @@ class App extends Component {
             </p>
             <table>
                 <tbody>
-                    <tr>
-                        {headings}
-                    </tr>
-                    <tr>
-                        {values}
-                    </tr>
+                    {rows}
                 </tbody>
             </table>
             </div>
