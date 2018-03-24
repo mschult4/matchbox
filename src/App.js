@@ -6,7 +6,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            boxers: {}
+            "boxers": {}
         };
     }
 
@@ -15,7 +15,7 @@ class App extends Component {
         .then(results => {
             return results.json();
         }).then(data => {
-            this.setState({boxers: data});
+            this.setState({"boxers": data});
             console.log("state", this.state.boxers);
         })
     }
