@@ -21,6 +21,23 @@ class App extends Component {
         })
     }
 
+	tougherQuery() {
+		/*let fetchData = {
+			method : 'GET',
+			body : JSON.stringify({'year' : 'Sophomore'}),
+			headers : new Headers()
+		}*/
+        fetch("https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers/")  //test=friday")//, fetchData)
+        .then(results => {
+            return results.json();
+        }).then(data => {
+
+            this.setState({"boxers": data});
+            console.log("state", this.state.boxers);
+        })
+	
+	}
+
     render() {
         let headings = ["boxer_id", "mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
         let heading_disp = ["Boxer ID", "First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Vet Years", "Weight", "Handedness", "Captain", "Gender"];
@@ -28,10 +45,13 @@ class App extends Component {
         rows.push(heading_disp.map((str) => <th key={str}>{str}</th>));
         for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
             var values = [];
-            for (var i=0; i < headings.length; i++) {
-                values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
-            }
-            rows.push(<tr key={row_num}>{values}</tr>);
+
+			if (this.state.boxers[row_num]["year"]) {
+            	for (var i=0; i < headings.length; i++) {
+               		values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
+            	}
+            	rows.push(<tr key={row_num}>{values}</tr>);
+			}
         }
         return (
             <div className="App">
@@ -42,7 +62,7 @@ class App extends Component {
                 Click the button to query the database.
             </p>
             <p>
-                <button onClick={() => this.simpleQuery()}>select * from boxers</button>
+                <button onClick={() => this.tougherQuery()}>select * from boxers</button>
             </p>
             <table>
                 <tbody>
