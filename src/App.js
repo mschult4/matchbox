@@ -11,7 +11,8 @@ class App extends Component {
     }
 
     simpleQuery() {
-        fetch("https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers")
+		var params = {foo : "bar"};
+        fetch("https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers?hello=Sophomore" )
         .then(results => {
             return results.json();
         }).then(data => {
@@ -27,7 +28,7 @@ class App extends Component {
 			body : JSON.stringify({'year' : 'Sophomore'}),
 			headers : new Headers()
 		}*/
-        fetch("https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers/")  //test=friday")//, fetchData)
+        fetch("https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers") 
         .then(results => {
             return results.json();
         }).then(data => {
@@ -62,7 +63,7 @@ class App extends Component {
                 Click the button to query the database.
             </p>
             <p>
-                <button onClick={() => this.tougherQuery()}>select * from boxers</button>
+                <button onClick={() => this.simpleQuery()}>select * from boxers</button>
             </p>
             <table>
                 <tbody>
