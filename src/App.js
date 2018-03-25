@@ -6,7 +6,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            boxers: {}
+            "boxers": {}
         };
     }
 
@@ -15,26 +15,23 @@ class App extends Component {
         .then(results => {
             return results.json();
         }).then(data => {
-			console.log("data", data);
-            this.setState(data);
-            console.log("state", this.state);
+
+            this.setState({"boxers": data});
+            console.log("state", this.state.boxers);
         })
     }
 
     render() {
-        var headings = [];
-        var values = [];
-		var item = [];
-		
-        for (var index in this.state) {
-			values = [];
-			console.log("index", index, this.state[index]);
-			for (var key in this.state[index]) {
-				//headings.push(<th key={key}>{key}</th>);
-            	values.push(<td key={key+index}>{this.state[index][key]}</td>);
-			}
-			console.log("values", index, values);
-			item.push(<tr key={index}>{values}</tr>);
+        let headings = ["boxer_id", "mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
+        let heading_disp = ["Boxer ID", "First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Vet Years", "Weight", "Handedness", "Captain", "Gender"];
+        var rows = [];
+        rows.push(heading_disp.map((str) => <th key={str}>{str}</th>));
+        for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
+            var values = [];
+            for (var i=0; i < headings.length; i++) {
+                values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
+            }
+            rows.push(<tr key={row_num}>{values}</tr>);
         }
         return (
             <div className="App">
@@ -49,15 +46,7 @@ class App extends Component {
             </p>
             <table>
                 <tbody>
-                    <tr>
-                        {headings}
-                    </tr>
-                    {//<tr>
-					//	{console.log("item", item)}
-                     //   {values}
-                    //</tr>
-					}
-					{item}
+                    {rows}
                 </tbody>
             </table>
             </div>
