@@ -6,13 +6,43 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            "boxers": {}
+            "boxers": {},
+			"year": "",
+			"first": "",
+			"last": "",
+			"hall": ""
         };
     }
 
     simpleQuery() {
+		//alert("got here");
 		//var params = {foo : "bar"};
-        fetch("https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers?first=Fiona&last=Powers" )
+
+		console.log("top of simple: ", this.state.year);	
+		var querylist = [];	
+		for (var key in this.state) {
+			console.log("key: ", key);
+			console.log("value: ", this.state[key]);
+			if (key !== "boxers" && this.state[key] !== "") {
+				var querystr = key;
+				querystr += "=";
+				querystr += this.state[key];
+				querylist.push(querystr);
+				console.log(querylist);
+			}
+		}
+
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
+
+		var middle = "";
+		console.log(querylist);
+		if (querylist.length !== 0) { //pretty later
+			middle = "?"
+			middle += querylist.join("&");
+			console.log(middle);
+		}
+				
+        fetch(URL+middle)
         .then(results => {
             return results.json();
         }).then(data => {
@@ -20,6 +50,7 @@ class App extends Component {
             this.setState({"boxers": data});
             console.log("state", this.state.boxers);
         })
+		//alert("also here");
     }
 
 	tougherQuery() {
@@ -38,6 +69,29 @@ class App extends Component {
         })
 	
 	}
+
+	handleChange(event) {
+		this.setState({value: event.target.value});
+	}
+
+	handleSubmit(event) {
+		console.log("thingie: ", event.target.value);	
+		//event.preventDefault();
+	}
+
+	test(evt) {
+		var temp = {};
+		temp[evt.target.name] = evt.target.value;
+		this.setState(temp);
+		console.log("state from test: ", evt.target.name);
+		//console.log("state from test props: ", this.props);
+
+	}
+
+	//print() {
+		//console.log("in print");
+	//	alert(this.state.value);
+	//}
 
     render() {
         let headings = ["boxer_id", "mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
@@ -65,6 +119,28 @@ class App extends Component {
             <p>
                 <button onClick={() => this.simpleQuery()}>select * from boxers</button>
             </p>
+			<form>
+				Query<br/>
+				<label>
+				First:
+				<input type="text" name="first" onChange={(evt) => this.test(evt)}/>
+				</label>
+				<label>
+				Last:
+				<input type="text" name="last" onChange={(evt) => this.test(evt)}/>
+				</label>
+				<label>
+				Year:
+				<input type="text" name="year" onChange={(evt) => this.test(evt)}/>
+				</label>
+				<label>
+				Hall:
+				<input type="text" name="hall" onChange={(evt) => this.test(evt)}/>
+				</label>
+
+				<button type="button" onClick={() => this.simpleQuery()}>Submit</button>
+			</form>
+
             <table>
                 <tbody>
                     {rows}
