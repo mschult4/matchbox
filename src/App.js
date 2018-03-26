@@ -10,7 +10,11 @@ class App extends Component {
 			"year": "",
 			"first": "",
 			"last": "",
-			"hall": ""
+			"hall": "",
+			"year_i" : "",
+			"first_i" : "",
+			"last_i" : "",
+			"hall_i" : ""
         };
     }
 
@@ -53,22 +57,34 @@ class App extends Component {
 		//alert("also here");
     }
 
-	tougherQuery() {
-		/*let fetchData = {
-			method : 'GET',
-			body : JSON.stringify({'year' : 'Sophomore'}),
-			headers : new Headers()
-		}*/
-        fetch("https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers") 
-        .then(results => {
-            return results.json();
-        }).then(data => {
+	insert() {
+		console.log("in insert", this.state);
+		var i_keys = ["hall_i", "last_i", "year_i", "first_i"];
+		var data = {};
+		for (var i in i_keys) {
+			if (this.state[i_keys[i]] !== "") {
+				data[i_keys[i]] = this.state[i_keys[i]];
+			}
+		}
+		console.log("body: ", data);
 
-            this.setState({"boxers": data});
-            console.log("state", this.state.boxers);
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
+
+		var post_dict = {body : data, 
+			method: 'POST',
+			headers : {"Content-Type": "application/json"} };
+		
+		console.log("post_dict", post_dict);
+		fetch(URL, post_dict)
+		.then(results => {
+            return results.json();
+        }).then(datum => {
+
+            console.log("state", datum);
         })
-	
+		
 	}
+
 
 	handleChange(event) {
 		this.setState({value: event.target.value});
@@ -79,19 +95,24 @@ class App extends Component {
 		//event.preventDefault();
 	}
 
-	test(evt) {
+	make_query(evt) {
 		var temp = {};
 		temp[evt.target.name] = evt.target.value;
 		this.setState(temp);
 		console.log("state from test: ", evt.target.name);
 		//console.log("state from test props: ", this.props);
-
 	}
 
-	//print() {
-		//console.log("in print");
-	//	alert(this.state.value);
-	//}
+	make_insert(evt) {
+		var temp = {};
+		temp[evt.target.name] = evt.target.value;	
+		this.setState(temp);
+		console.log("state from test: ", evt.target.name);
+	}
+
+	print() {
+		console.log("in print", this.state);
+	}
 
     render() {
         let headings = ["boxer_id", "mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
@@ -123,22 +144,44 @@ class App extends Component {
 				Query<br/>
 				<label>
 				First:
-				<input type="text" name="first" onChange={(evt) => this.test(evt)}/>
+				<input type="text" name="first" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 				<label>
 				Last:
-				<input type="text" name="last" onChange={(evt) => this.test(evt)}/>
+				<input type="text" name="last" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 				<label>
 				Year:
-				<input type="text" name="year" onChange={(evt) => this.test(evt)}/>
+				<input type="text" name="year" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 				<label>
 				Hall:
-				<input type="text" name="hall" onChange={(evt) => this.test(evt)}/>
+				<input type="text" name="hall" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 
 				<button type="button" onClick={() => this.simpleQuery()}>Submit</button>
+			</form>
+			<br />
+			<form>
+				Insert<br/>
+				<label>
+				First:
+				<input type="text" name="first_i" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Last:
+				<input type="text" name="last_i" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Year:
+				<input type="text" name="year_i" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Hall:
+				<input type="text" name="hall_i" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+
+				<button type="button" onClick={() => this.insert()}>Submit</button>
 			</form>
 
             <table>
