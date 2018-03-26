@@ -11,8 +11,8 @@ class App extends Component {
     }
 
     simpleQuery() {
-		var params = {foo : "bar"};
-        fetch("https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers?hello=Sophomore" )
+		//var params = {foo : "bar"};
+        fetch("https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers?first=Fiona&last=Powers" )
         .then(results => {
             return results.json();
         }).then(data => {
