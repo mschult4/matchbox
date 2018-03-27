@@ -64,7 +64,6 @@ class App extends Component {
             this.setState({"boxers": data});
             console.log("state", this.state.boxers);
         })
-		//alert("also here");
     }
 
 	insert() {
@@ -100,6 +99,8 @@ class App extends Component {
         }).then(datum => {
 
             console.log("insert", datum);
+			this.setState({"boxers": datum});
+            console.log("state", this.state.boxers);
         })
 		
 	}
@@ -141,7 +142,7 @@ class App extends Component {
         for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
             var values = [];
 
-			if (this.state.boxers[row_num]["year"]) {
+			if (this.state.boxers[row_num]["eligible"]) {
             	for (var i=0; i < headings.length; i++) {
                		values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
             	}
