@@ -23,7 +23,21 @@ class App extends Component {
 			"handedness_i" : "",
 			"captain_i" : "",
 			"gender_i" : "",
-			"experience_i" : ""
+			"experience_i" : "",
+			"year_u" : "",
+			"first_u" : "",
+			"last_u" : "",
+			"hall_u" : "",
+			"goes_by_u" : "",
+			"eligible_u" : "",
+			"experience_u" : "",
+			"vet_years_u" : "",
+			"weight_u" : "",
+			"handedness_u" : "",
+			"captain_u" : "",
+			"gender_u" : "",
+			"experience_u" : "",
+			"boxer_id_u" : ""
         };
     }
 
@@ -104,6 +118,37 @@ class App extends Component {
         })
 		
 	}
+
+	update() {
+		console.log("in insert", this.state);
+		var u_keys = ["hall_u", "last_u", "goes_by_u", "year_u", "first_u", "eligible_u", "experience_u", "vet_years_u", "weight_u", "handedness_u", "captain_u", "gender_u", "experience_u", "boxer_id_u"];
+		var data = {};
+		for (var i in u_keys) {
+			if (this.state[u_keys[i]] !== "") {
+				data[u_keys[i]] = this.state[u_keys[i]];
+			}
+		}
+		console.log("body: ", data);
+
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
+
+		var put_dict = {body : JSON.stringify(data), 
+			method: 'PUT',
+			headers : {"Content-Type": "text/plain"} };
+		
+		console.log("put_dict", put_dict);
+		fetch(URL, put_dict)
+		.then(results => {
+            return results.json();
+        }).then(datum => {
+
+            console.log("update", datum);
+			this.setState({"boxers": datum});
+            console.log("state", this.state.boxers);
+        })
+		
+	}
+
 
 
 	handleChange(event) {
@@ -259,7 +304,94 @@ class App extends Component {
 
 				<button type="button" onClick={() => this.insert()}>Submit</button>
 			</form>
+		
+
+			<br />
+			<form>
+				Update<br/>
+				<label>
+				Boxer Id <strong>(Required)</strong>:
+				<input type="text" name="boxer_id_u" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<br />
+				<label>
+				First:
+				<input type="text" name="first_u" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Last:
+				<input type="text" name="last_u" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Nickname:
+				<input type="text" name="goes_by_u" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Year:
+				<input type="text" name="year_u" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Hall:
+				<input type="text" name="hall_u" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				
+				Experience:
+				<select name="experience_u" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="novice">Novice</option>
+					<option value="veteran">Veteran</option>
+				</select>
+
+
+				Eligible:
+				<select name="eligible_u" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="Y">Y</option>
+					<option value="N">N</option>
+				</select>
+
+				Vet_years:
+				<select name="vet_years_u" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+
+				<label>
+				Weight:
+				<input type="text" name="weight_u" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+
+				Handedness:
+				<select name="handedness_u" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="L">L</option>
+					<option value="R">R</option>
+				</select>
+
+				Captain:
+				<select name="captain_u" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="Y">Y</option>
+					<option value="N">N</option>
+				</select>
+
+
+				Gender:
+				<select name="gender_u" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="W">W</option>
+					<option value="M">M</option>
+				</select>
+
+
+				<button type="button" onClick={() => this.update()}>Submit</button>
+			</form>
 			
+
+	
 			<br />
             <table>
                 <tbody>
