@@ -14,7 +14,16 @@ class App extends Component {
 			"year_i" : "",
 			"first_i" : "",
 			"last_i" : "",
-			"hall_i" : ""
+			"hall_i" : "",
+			"goes_by_i" : "",
+			"eligible_i" : "",
+			"experience_i" : "",
+			"vet_years_i" : "",
+			"weight_i" : "",
+			"handedness_i" : "",
+			"captain_i" : "",
+			"gender_i" : "",
+			"experience_i" : ""
         };
     }
 
@@ -23,11 +32,12 @@ class App extends Component {
 		//var params = {foo : "bar"};
 
 		console.log("top of simple: ", this.state.year);	
-		var querylist = [];	
+		var querylist = [];
+		var i_keys = ["hall_i", "last_i", "year_i", "first_i"]
 		for (var key in this.state) {
 			console.log("key: ", key);
 			console.log("value: ", this.state[key]);
-			if (key !== "boxers" && this.state[key] !== "") {
+			if (key !== "boxers" && this.state[key] !== "" && !i_keys.includes(key)) {
 				var querystr = key;
 				querystr += "=";
 				querystr += this.state[key];
@@ -59,7 +69,7 @@ class App extends Component {
 
 	insert() {
 		console.log("in insert", this.state);
-		var i_keys = ["hall_i", "last_i", "year_i", "first_i"];
+		var i_keys = ["hall_i", "last_i", "goes_by_i", "year_i", "first_i", "eligible_i", "experience_i", "vet_years_i", "weight_i", "handedness_i", "captain_i", "gender_i", "experience_i"];
 		var data = {};
 		for (var i in i_keys) {
 			if (this.state[i_keys[i]] !== "") {
@@ -69,10 +79,19 @@ class App extends Component {
 		console.log("body: ", data);
 
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
+		var dt = Date.now();
+		console.log("date: ", Date.now());
+		//console.log("date2: ", dt.toISOString());
 
-		var post_dict = {body : data, 
+		
+
+		var post_dict = {body : JSON.stringify(data), 
 			method: 'POST',
-			headers : {"Content-Type": "application/json"} };
+			headers : {"Content-Type": "text/plain",
+						//"Access-Control-Allow-Headers" : "*",
+						//"Access-Control-Allow-Origin" : "*"
+						//"host" : "apigateway.us-east-2.amazonaws.com",
+						} };
 		
 		console.log("post_dict", post_dict);
 		fetch(URL, post_dict)
@@ -80,7 +99,7 @@ class App extends Component {
             return results.json();
         }).then(datum => {
 
-            console.log("state", datum);
+            console.log("insert", datum);
         })
 		
 	}
@@ -173,6 +192,10 @@ class App extends Component {
 				<input type="text" name="last_i" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 				<label>
+				Nickname:
+				<input type="text" name="goes_by_i" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
 				Year:
 				<input type="text" name="year_i" onChange={(evt) => this.make_query(evt)}/>
 				</label>
@@ -180,10 +203,63 @@ class App extends Component {
 				Hall:
 				<input type="text" name="hall_i" onChange={(evt) => this.make_query(evt)}/>
 				</label>
+				
+				Experience:
+				<select name="experience_i" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="novice">Novice</option>
+					<option value="veteran">Veteran</option>
+				</select>
+
+
+				Eligible:
+				<select name="eligible_i" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="Y">Y</option>
+					<option value="N">N</option>
+				</select>
+
+				Vet_years:
+				<select name="vet_years_i" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+
+				<label>
+				Weight:
+				<input type="text" name="weight_i" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+
+				Handedness:
+				<select name="handedness_i" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="L">L</option>
+					<option value="R">R</option>
+				</select>
+
+				Captain:
+				<select name="captain_i" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="Y">Y</option>
+					<option value="N">N</option>
+				</select>
+
+
+				Gender:
+				<select name="gender_i" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="W">W</option>
+					<option value="M">M</option>
+				</select>
+
 
 				<button type="button" onClick={() => this.insert()}>Submit</button>
 			</form>
-
+			
+			<br />
             <table>
                 <tbody>
                     {rows}
