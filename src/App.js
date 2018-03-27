@@ -37,7 +37,21 @@ class App extends Component {
 			"captain_u" : "",
 			"gender_u" : "",
 			"experience_u" : "",
-			"boxer_id_u" : ""
+        	"boxer_id_u" : "",
+			"year_d" : "",
+			"first_d" : "",
+			"last_d" : "",
+			"hall_d" : "",
+			"goes_by_d" : "",
+			"eligible_d" : "",
+			"experience_d" : "",
+			"vet_years_d" : "",
+			"weight_d" : "",
+			"handedness_d" : "",
+			"captain_d" : "",
+			"gender_d" : "",
+			"experience_d" : "",
+			"boxer_id_d" : ""
         };
     }
 
@@ -149,6 +163,35 @@ class App extends Component {
 		
 	}
 
+	delete() {
+		console.log("in delete", this.state);
+		var d_keys = ["hall_d", "last_d", "goes_by_d", "year_d", "first_d", "eligible_d", "experience_d", "vet_years_d", "weight_d", "handedness_d", "captain_d", "gender_d", "experience_d", "boxer_id_d"];
+		var data = {};
+		for (var i in d_keys) {
+			if (this.state[d_keys[i]] !== "") {
+				data[d_keys[i]] = this.state[d_keys[i]];
+			}
+		}
+		console.log("body: ", data);
+
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
+
+		var delete_dict = {body : JSON.stringify(data), 
+			method: 'DELETE',
+			headers : {"Content-Type": "text/plain"} };
+		
+		console.log("put_dict", delete_dict);
+		fetch(URL, delete_dict)
+		.then(results => {
+            return results.json();
+        }).then(datum => {
+
+            console.log("update", datum);
+			this.setState({"boxers": datum});
+            console.log("state", this.state.boxers);
+        })
+		
+	}
 
 
 	handleChange(event) {
@@ -389,7 +432,91 @@ class App extends Component {
 
 				<button type="button" onClick={() => this.update()}>Submit</button>
 			</form>
-			
+
+			<br />
+			<form>
+				Delete<br/>
+				<label>
+				Boxer Id:
+				<input type="text" name="boxer_id_d" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<br />
+				<label>
+				First:
+				<input type="text" name="first_d" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Last:
+				<input type="text" name="last_d" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Nickname:
+				<input type="text" name="goes_by_d" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Year:
+				<input type="text" name="year_d" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Hall:
+				<input type="text" name="hall_d" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				
+				Experience:
+				<select name="experience_d" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="novice">Novice</option>
+					<option value="veteran">Veteran</option>
+				</select>
+
+
+				Eligible:
+				<select name="eligible_d" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="Y">Y</option>
+					<option value="N">N</option>
+				</select>
+
+				Vet_years:
+				<select name="vet_years_d" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+
+				<label>
+				Weight:
+				<input type="text" name="weight_d" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+
+				Handedness:
+				<select name="handedness_d" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="L">L</option>
+					<option value="R">R</option>
+				</select>
+
+				Captain:
+				<select name="captain_d" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="Y">Y</option>
+					<option value="N">N</option>
+				</select>
+
+
+				Gender:
+				<select name="gender_d" onChange={(evt) => this.make_query(evt)}>
+					<option value=""></option>
+					<option value="W">W</option>
+					<option value="M">M</option>
+				</select>
+
+
+				<button type="button" onClick={() => this.delete()}>Submit</button>
+			</form>
+		
 
 	
 			<br />
