@@ -197,11 +197,6 @@ class App extends Component {
 		
 	}
 
-	checkPass() {
-		var URL="";
-
-	}
-
 
 	handleChange(event) {
 		this.setState({value: event.target.value});
