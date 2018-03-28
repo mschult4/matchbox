@@ -260,6 +260,7 @@ class App extends Component {
             <header className="App-header">
             <h1 className="App-title">Welcome to MatchBox</h1>
             </header>
+			<h2>Boxers</h2>
             <p className="App-intro">
                 Click the button to query the database.
             </p>

@@ -11,14 +11,18 @@ class Spars extends Component {
 			"num_spar" : "",
 			"date" : "",
 			"boxer_id" : "",
+			"boxer_first" : "",
+			"boxer_last" : "",
 			"opp_id" : "",
+			"opp_first" : "",
+			"opp_last" : "",
 			"num_rounds" : "",
 			"len_rds" : "",
 			"commments" : "",
 			"score" : "",
 			"coach_initials" : "",
 			"season" : "",
-			"gender" : "",
+			"spars.gender" : "",
 			"med_comm" : "",
 
 			"num_spar_i" : "",
@@ -68,7 +72,7 @@ class Spars extends Component {
 	}
 
     simpleQuery() {
-		console.log("top of simple: ", this.state.year);	
+		console.log("top of simple: ", this.state.spars);	
 		var querylist = [];
 		var bad_keys = ["num_spar_i", "date_i", "boxer_id_i", "opp_id_i", "num_rounds_i", "len_rds_i", "commments_i", "score_i", "coach_initials_i", "season_i", "gender_i", "med_comm_i", "num_spar_u", "date_u", "boxer_id_u", "opp_id_u", "num_rounds_u", "len_rds_u", "commments_u", "score_u", "coach_initials_u", "season_u", "gender_u", "med_comm_u", "num_spar_d", "date_d", "boxer_id_d", "opp_id_d"]
 		for (var key in this.state) {
@@ -228,9 +232,9 @@ class Spars extends Component {
 
 
     render() {
-        var ConditionalLink = "div";//(this.state['username'] && this.state['password'] === 'gordonramsay') ? Link : "div";
-        let headings = ["num_spar", "date", "boxer_id", "opp_id", "num_rounds", "len_rds", "comments", "score", "coach_initials", "season", "gender", "med_comm"];
-        let heading_disp = ["Spar Number", "Date", "Boxer ID", "Opponent ID", "Num Rounds", "Length Rounds", "Comments", "Score", "Coach", "Season", "Gender", "Medical Comments"];
+        var ConditionalLink = "div";
+        let headings = ["num_spar", "date", "boxer_first" , "boxer_last", "opp_first", "opp_last", "num_rounds", "len_rds", "comments", "score", "coach_initials", "season", "gender", "med_comm"];
+        let heading_disp = ["Spar Number", "Date", "Boxer First" , "Boxer Last","Opponent First", "Opponent Last", "Num Rounds", "Length Rounds", "Comments", "Score", "Coach", "Season", "Gender", "Medical Comments"];
         var rows = [];
         rows.push(heading_disp.map((str) => <th key={str}>{str}</th>));
         for (var row_num = 0; row_num < this.state.spars.length; row_num++) {
@@ -243,36 +247,49 @@ class Spars extends Component {
         }
         return (
             <div className="App">
-			            <header className="App-header">
+			<header className="App-header">
             <h1 className="App-title">Welcome to MatchBox</h1>
             </header>
-            <p className="App-intro">
-                Click the button to query the database.
-            </p>
-            <p>
-                <button onClick={() => this.starQuery()}>select * from boxers</button>
-            </p>
+			<h2>Spars</h2>
+			<br />
 	    <Link to="/boxers">Boxers</Link><br />
 	    <Link to="/signups">Signups</Link><br />
 	    <Link to="/bracket">Bracket</Link><br />
 	    <Link to="/stats">Stats</Link><br />
+			<br />
 			<form>
 				Query<br/>
 				<label>
 				Num Spar:
 				<input type="text" name="num_spar" onChange={(evt) => this.make_query(evt)}/>
 				</label>
-				<label>
+				{ /*<label>
 				Date:
 				<input type="text" name="date" onChange={(evt) => this.make_query(evt)}/>
-				</label>
+				</label> */ } 
 				<label>
 				Boxer ID:
 				<input type="text" name="boxer_id" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 				<label>
+				Boxer First:
+				<input type="text" name="boxer_first" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Boxer Last:
+				<input type="text" name="boxer_last" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
 				Opponent ID:
 				<input type="text" name="opp_id" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Opponent First:
+				<input type="text" name="opp_first" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Opponent Last:
+				<input type="text" name="opp_last" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 				<label>
 				Score:
@@ -282,7 +299,7 @@ class Spars extends Component {
 				<button type="button" onClick={() => this.simpleQuery()}>Submit</button>
 			</form>
 			<br />
-			<form>
+			{ /*<form>
 				Insert<br/>
 				<label>
 				First:
@@ -454,7 +471,7 @@ class Spars extends Component {
 				</label>
 
 				<button type="button" onClick={() => this.delete_func()}>Submit</button>
-			</form>
+			</form> */}
 		
 
 	
