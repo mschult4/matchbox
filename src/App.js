@@ -49,8 +49,8 @@ class App extends Component {
 			"captain_d" : "",
 			"gender_d" : "",
 			"boxer_id_d" : "",
-			"display" : "Pending",
-			"username" : "password"
+			//"display" : "Pending",
+			//"username" : "password"
         };
     }
 
@@ -258,7 +258,7 @@ class App extends Component {
             	rows.push(<tr key={row_num}>{values}</tr>);
 			}
         }
-		if (this.state['display'] === "True") { 
+		//if (this.state['display'] === "True") { 
         return (
             <div className="App">
             <header className="App-header">
@@ -549,7 +549,7 @@ class App extends Component {
             </table>
             </div>
         );
-		} else if (this.state["display"] === "Pending") {
+		/*} else if (this.state["display"] === "Pending") {
 			return(
 			<div className="App">
             	<header className="App-header">
@@ -573,7 +573,7 @@ class App extends Component {
 				</form>
 			</div>
 		);
-		}
+		} */
     }
 }
 
