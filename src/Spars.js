@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 
-class App extends Component {
+class Spars extends Component {
 
     constructor() {
         super();
@@ -261,12 +261,12 @@ class App extends Component {
             <h1 className="App-title">Welcome to MatchBox</h1>
             </header>
             <p className="App-intro">
-                Click the button to query the database.
+                Spar Records
             </p>
             <p>
                 <button onClick={() => this.starQuery()}>select * from boxers</button>
             </p>
-	    <Link to="/spars">Spars</Link><br />
+	    <Link to="/boxers">Boxers</Link><br />
 	    <Link to="/signups">Signups</Link><br />
 	    <Link to="/bracket">Bracket</Link><br />
 	    <Link to="/stats">Stats</Link><br />
@@ -577,4 +577,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Spars;
