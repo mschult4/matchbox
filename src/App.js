@@ -23,7 +23,6 @@ class App extends Component {
 			"handedness_i" : "",
 			"captain_i" : "",
 			"gender_i" : "",
-			"experience_i" : "",
 			"year_u" : "",
 			"first_u" : "",
 			"last_u" : "",
@@ -36,7 +35,6 @@ class App extends Component {
 			"handedness_u" : "",
 			"captain_u" : "",
 			"gender_u" : "",
-			"experience_u" : "",
         	"boxer_id_u" : "",
 			"year_d" : "",
 			"first_d" : "",
@@ -50,22 +48,33 @@ class App extends Component {
 			"handedness_d" : "",
 			"captain_d" : "",
 			"gender_d" : "",
-			"experience_d" : "",
-			"boxer_id_d" : ""
+			"boxer_id_d" : "",
+			"display" : "Pending",
+			"username" : "password"
         };
     }
 
-    simpleQuery() {
-		//alert("got here");
-		//var params = {foo : "bar"};
+	starQuery() {
+		var URL = "https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
+		
+		fetch(URL)
+        .then(results => {
+            return results.json();
+        }).then(data => {
 
+            this.setState({"boxers": data});
+            console.log("state", this.state.boxers);
+        })
+	}
+
+    simpleQuery() {
 		console.log("top of simple: ", this.state.year);	
 		var querylist = [];
-		var i_keys = ["hall_i", "last_i", "year_i", "first_i"]
+		var bad_keys = ["hall_i", "last_i", "year_i", "first_i", "goes_by_i",  "eligible_i", "experience_i", "vet_years_i", "weight_i", "handedness_i", "captain_i", "gender_i", "experience_i", "hall_u", "last_u", "goes_by_u", "year_u", "first_u", "eligible_u", "experience_u", "vet_years_u", "weight_u", "handedness_u", "captain_u", "gender_u", "experience_u", "boxer_id_u", "hall_u", "last_u", "goes_by_u", "year_u", "first_u", "eligible_u", "experience_u", "vet_years_u", "weight_u", "handedness_u", "captain_u", "gender_u", "experience_u", "boxer_id_u"]
 		for (var key in this.state) {
 			console.log("key: ", key);
 			console.log("value: ", this.state[key]);
-			if (key !== "boxers" && this.state[key] !== "" && !i_keys.includes(key)) {
+			if (key !== "boxers" && this.state[key] !== "" && !bad_keys.includes(key)) {
 				var querystr = key;
 				querystr += "=";
 				querystr += this.state[key];
@@ -106,11 +115,6 @@ class App extends Component {
 		console.log("body: ", data);
 
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
-		var dt = Date.now();
-		console.log("date: ", Date.now());
-		//console.log("date2: ", dt.toISOString());
-
-		
 
 		var post_dict = {body : JSON.stringify(data), 
 			method: 'POST',
@@ -163,7 +167,7 @@ class App extends Component {
 		
 	}
 
-	delete() {
+	delete_func() {
 		console.log("in delete", this.state);
 		var d_keys = ["hall_d", "last_d", "goes_by_d", "year_d", "first_d", "eligible_d", "experience_d", "vet_years_d", "weight_d", "handedness_d", "captain_d", "gender_d", "experience_d", "boxer_id_d"];
 		var data = {};
@@ -193,6 +197,11 @@ class App extends Component {
 		
 	}
 
+	checkPass() {
+		var URL="";
+
+	}
+
 
 	handleChange(event) {
 		this.setState({value: event.target.value});
@@ -208,7 +217,6 @@ class App extends Component {
 		temp[evt.target.name] = evt.target.value;
 		this.setState(temp);
 		console.log("state from test: ", evt.target.name);
-		//console.log("state from test props: ", this.props);
 	}
 
 	make_insert(evt) {
@@ -220,6 +228,19 @@ class App extends Component {
 
 	print() {
 		console.log("in print", this.state);
+	}
+
+	set_pword(evt) {
+		if (evt.target.name === "username") {
+			this.props.user = evt.target.value;
+		}
+		if (evt.target.name === "password") {
+			this.props.pass = evt.target.value;
+		}
+
+		console.log("pword: ", this.props.user);
+		console.log("pword: ", this.props.pass);
+		
 	}
 
     render() {
@@ -237,6 +258,7 @@ class App extends Component {
             	rows.push(<tr key={row_num}>{values}</tr>);
 			}
         }
+		if (this.state['display'] === "True") { 
         return (
             <div className="App">
             <header className="App-header">
@@ -246,7 +268,7 @@ class App extends Component {
                 Click the button to query the database.
             </p>
             <p>
-                <button onClick={() => this.simpleQuery()}>select * from boxers</button>
+                <button onClick={() => this.starQuery()}>select * from boxers</button>
             </p>
 			<form>
 				Query<br/>
@@ -440,7 +462,7 @@ class App extends Component {
 				Boxer Id:
 				<input type="text" name="boxer_id_d" onChange={(evt) => this.make_query(evt)}/>
 				</label>
-				<br />
+				{/* <br />
 				<label>
 				First:
 				<input type="text" name="first_d" onChange={(evt) => this.make_query(evt)}/>
@@ -511,10 +533,10 @@ class App extends Component {
 					<option value=""></option>
 					<option value="W">W</option>
 					<option value="M">M</option>
-				</select>
+				</select> */}
 
 
-				<button type="button" onClick={() => this.delete()}>Submit</button>
+				<button type="button" onClick={() => this.delete_func()}>Submit</button>
 			</form>
 		
 
@@ -527,6 +549,31 @@ class App extends Component {
             </table>
             </div>
         );
+		} else if (this.state["display"] === "Pending") {
+			return(
+			<div className="App">
+            	<header className="App-header">
+            	<h1 className="App-title">Welcome to MatchBox</h1>
+				<br />
+				<h2>Please sign in</h2>
+            	</header>
+
+				<form>
+				<br/><br />
+				<label>
+				Username:
+				<input type="text" name="username" onChange={(evt) => this.set_pword(evt)}/>
+				</label>
+				&emsp;&emsp;
+				<label>
+				Password:
+				<input type="text" name="password" onChange={(evt) => this.set_pword(evt)}/>
+				</label>
+				<button type="button" onClick={() => this.checkPass()}>Submit</button>
+				</form>
+			</div>
+		);
+		}
     }
 }
 
