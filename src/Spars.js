@@ -7,51 +7,50 @@ class Spars extends Component {
     constructor() {
         super();
         this.state = {
-            "boxers": {},
-			"year": "",
-			"first": "",
-			"last": "",
-			"hall": "",
-			"year_i" : "",
-			"first_i" : "",
-			"last_i" : "",
-			"hall_i" : "",
-			"goes_by_i" : "",
-			"eligible_i" : "",
-			"experience_i" : "",
-			"vet_years_i" : "",
-			"weight_i" : "",
-			"handedness_i" : "",
-			"captain_i" : "",
+            "spars": {},
+			"num_spar" : "",
+			"date" : "",
+			"boxer_id" : "",
+			"opp_id" : "",
+			"num_rounds" : "",
+			"len_rds" : "",
+			"commments" : "",
+			"score" : "",
+			"coach_initials" : "",
+			"season" : "",
+			"gender" : "",
+			"med_comm" : "",
+
+			"num_spar_i" : "",
+			"date_i" : "",
+			"boxer_id_i" : "",
+			"opp_id_i" : "",
+			"num_rounds_i" : "",
+			"len_rds_i" : "",
+			"commments_i" : "",
+			"score_i" : "",
+			"coach_initials_i" : "",
+			"season_i" : "",
 			"gender_i" : "",
-			"year_u" : "",
-			"first_u" : "",
-			"last_u" : "",
-			"hall_u" : "",
-			"goes_by_u" : "",
-			"eligible_u" : "",
-			"experience_u" : "",
-			"vet_years_u" : "",
-			"weight_u" : "",
-			"handedness_u" : "",
-			"captain_u" : "",
+			"med_comm_i" : "",
+
+			"num_spar_u" : "",
+			"date_u" : "",
+			"boxer_id_u" : "",
+			"opp_id_u" : "",
+			"num_rounds_u" : "",
+			"len_rds_u" : "",
+			"commments_u" : "",
+			"score_u" : "",
+			"coach_initials_u" : "",
+			"season_u" : "",
 			"gender_u" : "",
-        	"boxer_id_u" : "",
-			"year_d" : "",
-			"first_d" : "",
-			"last_d" : "",
-			"hall_d" : "",
-			"goes_by_d" : "",
-			"eligible_d" : "",
-			"experience_d" : "",
-			"vet_years_d" : "",
-			"weight_d" : "",
-			"handedness_d" : "",
-			"captain_d" : "",
-			"gender_d" : "",
+			"med_comm_u" : "",
+
+			"num_spar_d" : "",
+			"date_d" : "",
 			"boxer_id_d" : "",
-			//"display" : "Pending",
-			//"username" : "password"
+			"opp_id_d" : "",
         };
     }
 
@@ -63,19 +62,19 @@ class Spars extends Component {
             return results.json();
         }).then(data => {
 
-            this.setState({"boxers": data});
-            console.log("state", this.state.boxers);
+            this.setState({"spars": data});
+            console.log("state", this.state.spars);
         })
 	}
 
     simpleQuery() {
 		console.log("top of simple: ", this.state.year);	
 		var querylist = [];
-		var bad_keys = ["hall_i", "last_i", "year_i", "first_i", "goes_by_i",  "eligible_i", "experience_i", "vet_years_i", "weight_i", "handedness_i", "captain_i", "gender_i", "experience_i", "hall_u", "last_u", "goes_by_u", "year_u", "first_u", "eligible_u", "experience_u", "vet_years_u", "weight_u", "handedness_u", "captain_u", "gender_u", "experience_u", "boxer_id_u", "hall_u", "last_u", "goes_by_u", "year_u", "first_u", "eligible_u", "experience_u", "vet_years_u", "weight_u", "handedness_u", "captain_u", "gender_u", "experience_u", "boxer_id_u"]
+		var bad_keys = ["num_spar_i", "date_i", "boxer_id_i", "opp_id_i", "num_rounds_i", "len_rds_i", "commments_i", "score_i", "coach_initials_i", "season_i", "gender_i", "med_comm_i", "num_spar_u", "date_u", "boxer_id_u", "opp_id_u", "num_rounds_u", "len_rds_u", "commments_u", "score_u", "coach_initials_u", "season_u", "gender_u", "med_comm_u", "num_spar_d", "date_d", "boxer_id_d", "opp_id_d"]
 		for (var key in this.state) {
 			console.log("key: ", key);
 			console.log("value: ", this.state[key]);
-			if (key !== "boxers" && this.state[key] !== "" && !bad_keys.includes(key)) {
+			if (key !== "spars" && this.state[key] !== "" && !bad_keys.includes(key)) {
 				var querystr = key;
 				querystr += "=";
 				querystr += this.state[key];
@@ -84,7 +83,7 @@ class Spars extends Component {
 			}
 		}
 
-		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/spars";
 
 		var middle = "";
 		console.log(querylist);
@@ -99,8 +98,8 @@ class Spars extends Component {
             return results.json();
         }).then(data => {
 
-            this.setState({"boxers": data});
-            console.log("state", this.state.boxers);
+            this.setState({"spars": data});
+            console.log("SPARZZZZ", this.state.spars);
         })
     }
 
@@ -132,8 +131,8 @@ class Spars extends Component {
         }).then(datum => {
 
             console.log("insert", datum);
-			this.setState({"boxers": datum});
-            console.log("state", this.state.boxers);
+			this.setState({"spars": datum});
+            console.log("state", this.state.spars);
         })
 		
 	}
@@ -162,8 +161,8 @@ class Spars extends Component {
         }).then(datum => {
 
             console.log("update", datum);
-			this.setState({"boxers": datum});
-            console.log("state", this.state.boxers);
+			this.setState({"spars": datum});
+            console.log("state", this.state.spars);
         })
 		
 	}
@@ -192,11 +191,12 @@ class Spars extends Component {
         }).then(datum => {
 
             console.log("update", datum);
-			this.setState({"boxers": datum});
-            console.log("state", this.state.boxers);
+			this.setState({"spars": datum});
+            console.log("state", this.state.spars);
         })
 		
 	}
+
 
 
 	handleChange(event) {
@@ -226,42 +226,28 @@ class Spars extends Component {
 		console.log("in print", this.state);
 	}
 
-	set_pword(evt) {
-		if (evt.target.name === "username") {
-			this.props.user = evt.target.value;
-		}
-		if (evt.target.name === "password") {
-			this.props.pass = evt.target.value;
-		}
-
-		console.log("pword: ", this.props.user);
-		console.log("pword: ", this.props.pass);
-		
-	}
 
     render() {
-        let headings = ["boxer_id", "mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
-        let heading_disp = ["Boxer ID", "First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Vet Years", "Weight", "Handedness", "Captain", "Gender"];
+        var ConditionalLink = "div";//(this.state['username'] && this.state['password'] === 'gordonramsay') ? Link : "div";
+        let headings = ["num_spar", "date", "boxer_id", "opp_id", "num_rounds", "len_rds", "comments", "score", "coach_initials", "season", "gender", "med_comm"];
+        let heading_disp = ["Spar Number", "Date", "Boxer ID", "Opponent ID", "Num Rounds", "Length Rounds", "Comments", "Score", "Coach", "Season", "Gender", "Medical Comments"];
         var rows = [];
         rows.push(heading_disp.map((str) => <th key={str}>{str}</th>));
-        for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
+        for (var row_num = 0; row_num < this.state.spars.length; row_num++) {
             var values = [];
 
-			if (this.state.boxers[row_num]["eligible"]) {
-            	for (var i=0; i < headings.length; i++) {
-               		values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
+            for (var i=0; i < headings.length; i++) {
+               		values.push(<td key={i}>{this.state.spars[row_num][headings[i]]}</td>);
             	}
-            	rows.push(<tr key={row_num}>{values}</tr>);
-			}
+            rows.push(<tr key={row_num}>{values}</tr>);
         }
-		//if (this.state['display'] === "True") { 
         return (
             <div className="App">
-            <header className="App-header">
+			            <header className="App-header">
             <h1 className="App-title">Welcome to MatchBox</h1>
             </header>
             <p className="App-intro">
-                Spar Records
+                Click the button to query the database.
             </p>
             <p>
                 <button onClick={() => this.starQuery()}>select * from boxers</button>
@@ -273,20 +259,24 @@ class Spars extends Component {
 			<form>
 				Query<br/>
 				<label>
-				First:
-				<input type="text" name="first" onChange={(evt) => this.make_query(evt)}/>
+				Num Spar:
+				<input type="text" name="num_spar" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 				<label>
-				Last:
-				<input type="text" name="last" onChange={(evt) => this.make_query(evt)}/>
+				Date:
+				<input type="text" name="date" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 				<label>
-				Year:
-				<input type="text" name="year" onChange={(evt) => this.make_query(evt)}/>
+				Boxer ID:
+				<input type="text" name="boxer_id" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 				<label>
-				Hall:
-				<input type="text" name="hall" onChange={(evt) => this.make_query(evt)}/>
+				Opponent ID:
+				<input type="text" name="opp_id" onChange={(evt) => this.make_query(evt)}/>
+				</label>
+				<label>
+				Score:
+				<input type="text" name="score" onChange={(evt) => this.make_query(evt)}/>
 				</label>
 
 				<button type="button" onClick={() => this.simpleQuery()}>Submit</button>
@@ -462,79 +452,6 @@ class Spars extends Component {
 				Boxer Id:
 				<input type="text" name="boxer_id_d" onChange={(evt) => this.make_query(evt)}/>
 				</label>
-				{/* <br />
-				<label>
-				First:
-				<input type="text" name="first_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				<label>
-				Last:
-				<input type="text" name="last_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				<label>
-				Nickname:
-				<input type="text" name="goes_by_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				<label>
-				Year:
-				<input type="text" name="year_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				<label>
-				Hall:
-				<input type="text" name="hall_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				
-				Experience:
-				<select name="experience_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="novice">Novice</option>
-					<option value="veteran">Veteran</option>
-				</select>
-
-
-				Eligible:
-				<select name="eligible_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="Y">Y</option>
-					<option value="N">N</option>
-				</select>
-
-				Vet_years:
-				<select name="vet_years_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-				</select>
-
-				<label>
-				Weight:
-				<input type="text" name="weight_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-
-				Handedness:
-				<select name="handedness_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="L">L</option>
-					<option value="R">R</option>
-				</select>
-
-				Captain:
-				<select name="captain_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="Y">Y</option>
-					<option value="N">N</option>
-				</select>
-
-
-				Gender:
-				<select name="gender_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="W">W</option>
-					<option value="M">M</option>
-				</select> */}
-
 
 				<button type="button" onClick={() => this.delete_func()}>Submit</button>
 			</form>
@@ -547,33 +464,9 @@ class Spars extends Component {
                     {rows}
                 </tbody>
             </table>
-            </div>
-        );
-		/*} else if (this.state["display"] === "Pending") {
-			return(
-			<div className="App">
-            	<header className="App-header">
-            	<h1 className="App-title">Welcome to MatchBox</h1>
-				<br />
-				<h2>Please sign in</h2>
-            	</header>
+            </div> 
 
-				<form>
-				<br/><br />
-				<label>
-				Username:
-				<input type="text" name="username" onChange={(evt) => this.set_pword(evt)}/>
-				</label>
-				&emsp;&emsp;
-				<label>
-				Password:
-				<input type="text" name="password" onChange={(evt) => this.set_pword(evt)}/>
-				</label>
-				<button type="button" onClick={() => this.checkPass()}>Submit</button>
-				</form>
-			</div>
-		);
-		} */
+        );
     }
 }
 
