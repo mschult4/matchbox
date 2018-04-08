@@ -67,10 +67,24 @@ class App extends Component {
 			"season" : "",
 			"spars.gender" : "",
 			"med_comm" : "",
-			"page" : "boxers",
+			"page" : "login",
 			//"display" : "Pending",
 			//"username" : "password"
         };
+        console.log("session ", sessionStorage.authenticated);
+        if (sessionStorage.authenticated) {
+            if (sessionStorage.page) {
+                this.state["page"] = sessionStorage.page;
+            } else {
+                this.state["page"] = "boxers";
+                sessionStorage.page = "boxers";
+            }
+        }
+    }
+
+    change_page(page) {
+        this.setState({"page":page});
+        sessionStorage.page = page;
     }
 
 	starQuery() {
@@ -257,6 +271,38 @@ class App extends Component {
 		
 	}
 
+    authenticate_user() {
+        var data = {};
+        data['username'] = this.state.username;
+        data['password'] = this.state.password;
+        console.log("body: ", data);
+
+        var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/signin";
+
+        var post_dict = {body : JSON.stringify(data), 
+            method: 'POST',
+            headers : {"Content-Type": "application/json",
+                //"Access-Control-Allow-Headers" : "*",
+                //"Access-Control-Allow-Origin" : "*"
+                //"host" : "apigateway.us-east-2.amazonaws.com",
+            } };
+
+        console.log("post_dict", post_dict);
+        fetch(URL, post_dict)
+            .then(results => {
+                return results.json();
+            }).then(datum => {
+                console.log("datum: ", datum);
+                console.log("datum: ", datum['verified'] === 'true');
+                if (datum['verified'] === 'true') {
+                    sessionStorage.authenticated = true;
+                    console.log("sessionStorage.authenticated: ", sessionStorage.authenticated);
+                    this.change_page("boxers");
+                }
+            })
+
+    }
+
 
 	ren_boxers() {
         let headings = ["boxer_id", "mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
@@ -286,7 +332,7 @@ class App extends Component {
             <p>
                 <button onClick={() => this.starQuery()}>select * from boxers</button>
             </p>
-	    <button onClick={() => {this.setState({"page" : "spars"})}} >SPARS</button> <br />
+	    <button onClick={() => this.change_page("spars")} >SPARS</button> <br />
 			<form>
 				Query<br/>
 				<label>
@@ -479,79 +525,6 @@ class App extends Component {
 				Boxer Id:
 				<input type="text" name="boxer_id_d" onChange={(evt) => this.make_query(evt)}/>
 				</label>
-				{/* <br />
-				<label>
-				First:
-				<input type="text" name="first_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				<label>
-				Last:
-				<input type="text" name="last_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				<label>
-				Nickname:
-				<input type="text" name="goes_by_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				<label>
-				Year:
-				<input type="text" name="year_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				<label>
-				Hall:
-				<input type="text" name="hall_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-				
-				Experience:
-				<select name="experience_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="novice">Novice</option>
-					<option value="veteran">Veteran</option>
-				</select>
-
-
-				Eligible:
-				<select name="eligible_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="Y">Y</option>
-					<option value="N">N</option>
-				</select>
-
-				Vet_years:
-				<select name="vet_years_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-				</select>
-
-				<label>
-				Weight:
-				<input type="text" name="weight_d" onChange={(evt) => this.make_query(evt)}/>
-				</label>
-
-				Handedness:
-				<select name="handedness_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="L">L</option>
-					<option value="R">R</option>
-				</select>
-
-				Captain:
-				<select name="captain_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="Y">Y</option>
-					<option value="N">N</option>
-				</select>
-
-
-				Gender:
-				<select name="gender_d" onChange={(evt) => this.make_query(evt)}>
-					<option value=""></option>
-					<option value="W">W</option>
-					<option value="M">M</option>
-				</select> */}
-
 
 				<button type="button" onClick={() => this.delete_func()}>Submit</button>
 			</form>
@@ -567,31 +540,6 @@ class App extends Component {
             </table>
             </div>
         );
-		/*} else if (this.state["display"] === "Pending") {
-			return(
-			<div className="App">
-            	<header className="App-header">
-            	<h1 className="App-title">Welcome to MatchBox</h1>
-				<br />
-				<h2>Please sign in</h2>
-            	</header>
-
-				<form>
-				<br/><br />
-				<label>
-				Username:
-				<input type="text" name="username" onChange={(evt) => this.set_pword(evt)}/>
-				</label>
-				&emsp;&emsp;
-				<label>
-				Password:
-				<input type="text" name="password" onChange={(evt) => this.set_pword(evt)}/>
-				</label>
-				<button type="button" onClick={() => this.checkPass()}>Submit</button>
-				</form>
-			</div>
-		);
-		} */
     }
 
 	
@@ -655,7 +603,7 @@ class App extends Component {
             </header>
 			<h2>Spars</h2>
 			<br />
-	    <button onClick={() => {this.setState({"page" : "boxers"})}} >BOXERS</button> <br />
+	    <button onClick={() => this.change_page("boxers")} >BOXERS</button> <br />
 			<br />
 			<form>
 				Query<br/>
@@ -714,9 +662,36 @@ class App extends Component {
 		);
 	}
 
+    ren_login() {
+		return(
+            <div className="App">
+            <header className="App-header">
+            <h1 className="App-title">Welcome to MatchBox</h1>
+            </header>
+            <form>
+                Login<br/>
+                <label>
+                Username:
+                <input type="text" name="username" onChange={(evt) => this.make_query(evt)}/>
+                </label>
+        <br />
+                <label>
+                Password:
+                <input type="password" name="password" onChange={(evt) => this.make_query(evt)}/>
+                </label>
+        <br />
+                { /*this.check_link(ConditionalLink)*/ }
+            </form>
+            <button onClick={() => this.authenticate_user()}> Login </button>
+            </div>
+		);
+	}
+
 
 	render() {
-		if (this.state["page"] === "boxers") {
+		if (this.state["page"] === "login") {
+			return this.ren_login();
+        } else if (this.state["page"] === "boxers") {
 			return this.ren_boxers();
 		} else if (this.state["page"] === "spars") {
 			return this.ren_spars();
