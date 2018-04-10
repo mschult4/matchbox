@@ -35,7 +35,7 @@ class NavigationBar extends Component {
             <ul>
               <li>Boxer Data</li>
               <li>Spar Data</li>
-              <li onClick(() => this.props.changePage("brackets"))>Brackets</li>
+              <li onClick={() => this.props.changePage("brackets")}>Brackets</li>
               <li>Spar Schedule</li>
             </ul>
         );

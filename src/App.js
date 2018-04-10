@@ -4,6 +4,7 @@ import Boxers from './Boxers';
 import Spars from './Spars';
 import Login from './Login';
 import NavigationBar from './NavigationBar';
+import Brackets from './Brackets';
 
 class App extends Component {
 
