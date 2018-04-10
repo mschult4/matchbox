@@ -40,6 +40,7 @@ class Login extends Component {
                 console.log("datum: ", datum['verified'] === 'true');
                 if (datum['verified'] === 'true') {
                     sessionStorage.authenticated = true;
+                    sessionStorage.usertype = datum['usertype'];
                     console.log("sessionStorage.authenticated: ", sessionStorage.authenticated);
                     this.props.changePage("boxers");
                 }
