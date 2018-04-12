@@ -12,8 +12,8 @@ class NavigationBar extends Component {
     boxer_options() {
         return (
             <ul>
-                <li>My Profile</li>
-                <li>Spar Signups</li>
+                <li onClick={() => this.props.changePage("profile")}>My Profile</li>
+                <li onClick={() => this.props.changePage("signups")}>Spar Signups</li>
             </ul>
         );
     }
@@ -33,10 +33,10 @@ class NavigationBar extends Component {
     coach_options() {
         return (
             <ul>
-              <li>Boxer Data</li>
-              <li>Spar Data</li>
+              <li onClick={() => this.props.changePage("boxers")}>Boxer Data</li>
+              <li onClick={() => this.props.changePage("spars")}>Spar Data</li>
               <li onClick={() => this.props.changePage("brackets")}>Brackets</li>
-              <li>Spar Schedule</li>
+              <li onClick={() => this.props.changePage("schedule")}>Spar Schedule</li>
             </ul>
         );
     }
