@@ -30,23 +30,31 @@ class Brackets extends Component {
 
 		var rows = [];
 		var values = [];
-		rows.push(headings.map((str) => <th key={str}>{str}</th>));
 
 		console.log("length: ", this.state.rankings.length);
 		var row_num = 0;
-		for (var key in this.state.rankings) {
-			values = [];
-			console.log("key", key);
-			console.log(this.state.rankings[key]);
-			//values.push(<td key={headings.length}>{key}</td>);
-			for (var i=0; i< headings.length; i++) {
-				values.push(<td key={i}>{this.state.rankings[key][headings[i]]}</td>);
-				//console.log("value" , values);
+		var top_row = []
+		var top_row_num = 0;
+		for (var high in this.state.rankings) {
+			rows = []
+			rows.push(headings.map((str) => <th key={str}>{str}</th>));
+			for (var key in this.state.rankings[high]) {
+				values = [];
+				console.log("key", key);
+				console.log(this.state.rankings[high][key]);
+				//values.push(<td key={headings.length}>{key}</td>);
+				for (var i=0; i< headings.length; i++) {
+					values.push(<td key={i}>{this.state.rankings[high][key][headings[i]]}</td>);
+					//console.log("value" , values);
+				}
+				rows.push(<tr key={row_num}>{values}</tr>);
+				//console.log("rows", rows);
+				//break;
+				row_num++;
 			}
-			rows.push(<tr key={row_num}>{values}</tr>);
-			//console.log("rows", rows);
+			top_row.push(<table key={high}><tbody key={high}>{rows}</tbody></table>);
+			top_row_num++;
 			//break;
-			row_num++;
 		}
 
 		return (
@@ -55,11 +63,7 @@ class Brackets extends Component {
             <h1 className="App-title">Welcome to MatchBox</h1>
             </header>
             <h2>Boxers</h2>
-			<table>
-            <tbody>
-            	{rows}
-            </tbody>
-            </table>
+				{top_row}
             </div>	
 		)
 	}
