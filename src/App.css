@@ -58,3 +58,19 @@ li:hover {
 .active {
     background-color: #4CAF50;
 }
+
+.hovering {
+	width: 100px;
+	height: 100px;
+	display: none;
+}
+
+body #fixedElement {
+    position:fixed !important;
+    position: absolute; /*ie6 */
+	bottom: 1em;
+	right: 1em;
+	border: solid;
+	width : 200px;
+	height: 300px;
+}
