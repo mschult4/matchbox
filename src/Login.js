@@ -42,12 +42,14 @@ class Login extends Component {
                 if (datum['verified'] === 'true') {
                     sessionStorage.authenticated = true;
                     sessionStorage.usertype = datum['usertype'];
+                    sessionStorage.identity = datum['boxer_id'];
+                    console.log(sessionStorage);
                     console.log("sessionStorage.authenticated: ", sessionStorage.authenticated);
                     if (md5(this.state.password) === '5f4dcc3b5aa765d61d8327deb882cf99') 
                         alert("For security, please change your password from the default assigned to you. Thank you.");
                     if (datum['usertype'] === 'boxer') { 
                         console.log("boxer");
-                        this.props.changePage("boxers");
+                        this.props.changePage("profile");
                     }
                     else if (datum['usertype'] === 'coach') {
                         console.log("coach");
