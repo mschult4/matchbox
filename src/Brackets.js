@@ -7,6 +7,8 @@ class Brackets extends Component {
         super();
         this.state = {
 			"rankings" : {},
+			"boxers" : {},
+			"selected" : {},
         };
 		this.query_rank();
     }
@@ -49,6 +51,15 @@ class Brackets extends Component {
 		//console.log("ordered bracket");
 		//console.log(ordered_bracket);
 
+		var id_1 = bracket_letter+"_1"
+		var id_2 = bracket_letter+"_2"
+		var id_3 = bracket_letter+"_3"
+		var id_4 = bracket_letter+"_4"
+		var id_5 = bracket_letter+"_5"
+		var id_6 = bracket_letter+"_6"
+		var id_7 = bracket_letter+"_7"
+		var id_8 = bracket_letter+"_8"
+
 
 //<div id="testing" className="hovering">Test data</div>
 	return(
@@ -67,7 +78,7 @@ Bracket {bracket_letter}
 <td rowSpan='8'><p></p></td>
 </tr>
 <tr>
-<td id="testing8" onMouseOver={() => this.boxer_hover(ordered_bracket[8])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[8])}</p></td>
+<td id={id_8} onMouseOver={() => this.boxer_hover(ordered_bracket[8])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_8,[bracket_letter, ordered_bracket[8].boxer_id ])}><p>{this.concat(ordered_bracket[8])} </p></td>
 </tr>
 <tr>
 <td id="testing4" onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[4])}</p></td><td rowSpan='2'><p></p></td>
@@ -92,11 +103,97 @@ Bracket {bracket_letter}
 
 	}
 
+	swap_func() {
+		var to_swap = this.state.selected;
+		var item1, item2;
+		var keys = Object.keys(to_swap);
+		item1 = keys[0];
+		item2 = keys[1];
+
+		console.log(keys, item1, item2);
+
+		var td1 = document.getElementById(item1);
+		var td2 = document.getElementById(item2);
+
+		var tdtemp = document.createElement("td");
+		var tempid = td1.id; 
+		td1.setAttribute("id", td2.id);
+		td2.setAttribute("id", tempid);
+
+		td1.parentNode.insertBefore(tdtemp, td1);
+		td2.parentNode.insertBefore(td1, td2);
+		tdtemp.parentNode.insertBefore(td2, tdtemp);
+		tdtemp.parentNode.removeChild(tdtemp);
+
+		/*console.log(td1, td2);
+		var tdtemp = td1.firstChild;
+		td1.firstChild = td2.firstChild;
+		td2.firstChild = tdtemp;*/
+		
+		console.log(td1, td2);
+
+		var first, second, place1, place2;
+		for (var element in this.state.rankings[to_swap[item1][0]]) {
+			//console.log(this.state.rankings[item1[0]][element].boxer_id);
+			//console.log(to_swap[item1][1]);
+			if (this.state.rankings[to_swap[item1][0]][element].boxer_id === to_swap[item1][1]) {
+				first = this.state.rankings[to_swap[item1][0]][element];
+				place1 = element;
+				break;
+			}
+		}
+
+		for (var element in this.state.rankings[to_swap[item2][0]]) {
+			//console.log(this.state.rankings[item2[0]][element].boxer_id);
+			//console.log(to_swap[item2][1]);
+			if (this.state.rankings[to_swap[item2][0]][element].boxer_id === to_swap[item2][1]) {
+				second = this.state.rankings[to_swap[item2][0]][element];
+				place2 = element;
+				break;
+			}
+		}
+
+		var temp_rank = first;
+		this.state.rankings[to_swap[item1][0]][place1] = second;
+		this.state.rankings[to_swap[item2][0]][place2] = temp_rank;
+
+		console.log(first, place1, second, place2);
+
+
+		console.log(this.state.rankings);
+	}
+
+	select_func(bracket_slot, args) {
+		console.log(bracket_slot, args);
+		if (Object.keys(this.state.selected).length === 2 && !this.state.selected[bracket_slot]) {
+			return;
+		}
+		
+		var selec = document.getElementById(bracket_slot);
+
+		if (this.state.selected[bracket_slot]) {
+			var copyState = {...this.state.selected};
+			console.log("copy", copyState);
+			delete copyState[bracket_slot];
+			console.log("copy deleted", copyState);
+			this.setState( {"selected" : copyState});
+			selec.style.border= "none";
+
+		} else {
+			console.log("select: ", this.state.selected);
+			this.state.selected[bracket_slot] = args;
+			selec.style.border= " solid #0000FF";
+		}
+
+		console.log(selec);
+
+		console.log("selected: ", this.state.selected);
+	}
+
 	boxer_hover(b_id) {
 		if (b_id == null) {
 			return;
 		}
-		console.log("made it");
 		var internal = document.createElement("p");
 		internal.innerHTML = "Boxer ID: "+b_id.boxer_id+"<br/>";
 		//document.getElementById("fixedElement").appendChild(internal);
@@ -113,7 +210,6 @@ Bracket {bracket_letter}
 		var comment = document.createElement("p");	
 		var boxer_info = this.state.boxers[b_id.boxer_id]
 		if (boxer_info && boxer_info["comments"]) {
-			console.log("HERE", boxer_info)
 			comment.innerHTML += "Spar Comments<br/>";
 			for (var com in boxer_info["comments"]) {
 				if (boxer_info["comments"][com] === null) {
@@ -130,7 +226,6 @@ Bracket {bracket_letter}
 	}
 
 	boxer_unhover() {
-		console.log("unhover");
 		document.getElementById("fixedElement").innerHTML = this.hover_box_default();
 	
 	}
@@ -236,6 +331,8 @@ Bracket {bracket_letter}
 
 				<button type="button" onClick={() => this.save_bracket()}>Save</button>
 			</form>
+				<br />
+				<button type="button" onClick={() => this.swap_func()}>Swap</button>
 
 			</div>
 				{brackets}
