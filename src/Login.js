@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import md5 from 'md5';
 
 class Login extends Component {
 
@@ -42,9 +43,16 @@ class Login extends Component {
                     sessionStorage.authenticated = true;
                     sessionStorage.usertype = datum['usertype'];
                     console.log("sessionStorage.authenticated: ", sessionStorage.authenticated);
-                    if (this.state.password == 'password') 
+                    if (md5(this.state.password) === '5f4dcc3b5aa765d61d8327deb882cf99') 
                         alert("For security, please change your password from the default assigned to you. Thank you.");
-                    this.props.changePage("boxers");
+                    if (datum['usertype'] === 'boxer') { 
+                        console.log("boxer");
+                        this.props.changePage("boxers");
+                    }
+                    else if (datum['usertype'] === 'coach') {
+                        console.log("coach");
+                        this.props.changePage("boxers");
+                    }
                 }
                 else {
                     alert("Username and/or password are incorrect or not yet updated in system.");
