@@ -54,37 +54,37 @@ class Brackets extends Component {
 	return(
 
 
-<table rules="rows">
+<table class="bracket">
 <tbody>
 
 
 <tr>
-<td id="testing1" onMouseOver={() => this.boxer_hover(ordered_bracket[1])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[1])}</td>
-<td rowSpan='2'>Winner 1/2</td>
-<td rowSpan='4'>Winner 1/2/3/4</td>
-<td rowSpan='8'>Winner 1/2/3/4/5/6/7/8</td>
+<td id="testing1" onMouseOver={() => this.boxer_hover(ordered_bracket[1])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[1])}</p></td>
+<td rowSpan='2'><p></p></td>
+<td rowSpan='4'><p></p></td>
+<td rowSpan='8'><p></p></td>
 </tr>
 <tr>
-<td id="testing8" onMouseOver={() => this.boxer_hover(ordered_bracket[8])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[8])}</td>
+<td id="testing8" onMouseOver={() => this.boxer_hover(ordered_bracket[8])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[8])}</p></td>
 </tr>
 <tr>
-<td id="testing4" onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[4])}</td><td rowSpan='2'>Winner 3/4</td>
+<td id="testing4" onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[4])}</p></td><td rowSpan='2'><p></p></td>
 </tr>
 <tr>
-<td id="testing5" onMouseOver={() => this.boxer_hover(ordered_bracket[5])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[5])}</td>
+<td id="testing5" onMouseOver={() => this.boxer_hover(ordered_bracket[5])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[5])}</p></td>
 </tr>
 <tr>
-<td id="testing3" onMouseOver={() => this.boxer_hover(ordered_bracket[3])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[3])}</td>
-<td rowSpan='2'>Winner 5/6</td><td rowSpan='4'>Winner 5/6/7/8</td>
+<td id="testing3" onMouseOver={() => this.boxer_hover(ordered_bracket[3])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[3])}</p></td>
+<td rowSpan='2'><p></p></td><td rowSpan='4'><p></p></td>
 </tr>
 <tr>
-<td id="testing6" onMouseOver={() => this.boxer_hover(ordered_bracket[6])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[6])}</td>
+<td id="testing6" onMouseOver={() => this.boxer_hover(ordered_bracket[6])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[6])}</p></td>
 </tr>
 <tr>
-<td id="testing2" onMouseOver={() => this.boxer_hover(ordered_bracket[2])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[2])}</td><td rowSpan='2'>Winner 7/8</td>
+<td id="testing2" onMouseOver={() => this.boxer_hover(ordered_bracket[2])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[2])}</p></td><td rowSpan='2'><p></p></td>
 </tr>
 <tr>
-<td id="testing7" onMouseOver={() => this.boxer_hover(ordered_bracket[7])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[7])}</td></tr>
+<td id="testing7" onMouseOver={() => this.boxer_hover(ordered_bracket[7])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[7])}</p></td></tr>
 </tbody>
 </table>);
 

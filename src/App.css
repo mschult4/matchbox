@@ -71,7 +71,7 @@ body #fixedElement {
 	bottom: 1em;
 	right: 1em;
 	border: solid;
-	width : 250px;
+	width : 20%;
 	background: rgba(86,165,236,0.7);
 	overflow: hidden;
 	min-height: 300px;
@@ -79,4 +79,28 @@ body #fixedElement {
 
 p {
 	text-align: left;
+}
+
+table.bracket {
+    border: solid 2px black;
+	width: 75%;
+}
+
+.bracket td {
+	border: none;
+    vertical-align: middle;
+    width: 30em;
+    margin: 0;
+    padding: 5px;
+}
+
+.bracket td p {
+	text-align: center;
+    border-bottom: solid 1px black;
+    margin: 0;
+    padding: 5px 5px 5px 5px;
+}
+
+.bracket th{
+    text-align:center;
 }
