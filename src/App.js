@@ -5,6 +5,7 @@ import Spars from './Spars';
 import Login from './Login';
 import NavigationBar from './NavigationBar';
 import Brackets from './Brackets';
+import Profile from './Profile';
 
 class App extends Component {
 
@@ -53,6 +54,13 @@ class App extends Component {
                 <div>
                     <NavigationBar changePage={this.change_page}/>
                     <Brackets changePage={this.change_page}/>
+                </div>
+            );
+        } else if (this.state["page"] === "profile") {
+            return (
+                <div>
+                    <NavigationBar changePage={this.change_page}/>
+                    <Profile changePage={this.change_page}/>
                 </div>
             );
 		} else {
