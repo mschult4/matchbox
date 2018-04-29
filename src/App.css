@@ -104,3 +104,9 @@ table.bracket {
 .bracket th{
     text-align:center;
 }
+
+div.brackdiv {
+	text-align: left;
+	padding: 3%;
+}
+

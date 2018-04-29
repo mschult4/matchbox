@@ -27,15 +27,15 @@ class Brackets extends Component {
 
 	}
 
-	return_bracket(rank_set) {
+	return_bracket(bracket_letter, rank_set) {
 		//console.log("rank set");
 		//console.log(rank_set);
 
 		var ordered_bracket = {};
 
 		for (var person in rank_set) {
-			console.log("rank set person");
-			console.log(person, rank_set[person], rank_set[person].seed);
+			//console.log("rank set person");
+			//console.log(person, rank_set[person], rank_set[person].seed);
 
 			ordered_bracket[rank_set[person].seed] = rank_set[person];
 		}
@@ -46,13 +46,15 @@ class Brackets extends Component {
 			}
 		}
 
-		console.log("ordered bracket");
-		console.log(ordered_bracket);
+		//console.log("ordered bracket");
+		//console.log(ordered_bracket);
 
 
 //<div id="testing" className="hovering">Test data</div>
 	return(
 
+<div class="brackdiv">
+Bracket {bracket_letter}
 
 <table class="bracket">
 <tbody>
@@ -86,7 +88,7 @@ class Brackets extends Component {
 <tr>
 <td id="testing7" onMouseOver={() => this.boxer_hover(ordered_bracket[7])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[7])}</p></td></tr>
 </tbody>
-</table>);
+</table></div>);
 
 	}
 
@@ -104,7 +106,7 @@ class Brackets extends Component {
 		internal.innerHTML += "<br/>";	
 		internal.append("Number of Spars: "+b_id.num_spars);
 		internal.innerHTML += "<br/>";
-		internal.append("Average Score: "+b_id.av_score);
+		internal.append("Max Score: "+b_id.max_score);
 		internal.innerHTML += "<br/>";
 		document.getElementById("fixedElement").appendChild(internal);
 
@@ -145,6 +147,31 @@ class Brackets extends Component {
 		}
 	}
 
+	update_state(evt) {
+		var temp = {};
+		temp[evt.target.name] = evt.target.value;
+		this.setState(temp);
+		console.log("state from test: ", evt.target.value);
+	}
+
+	save_bracket() {
+		console.log("in save bracket");
+
+		var bracket_dict = {}
+		bracket_dict["name"] = this.state.save_as;
+		bracket_dict["bracket"] = {}
+
+		for (var bracket in this.state.rankings) {
+			//console.log(bracket);
+			bracket_dict["bracket"][bracket] = {}
+			for (var boxer in this.state.rankings[bracket]) {
+				//console.log("HERE", this.state.rankings[bracket][boxer]["seed"]);
+				bracket_dict["bracket"][bracket]["seed"+this.state.rankings[bracket][boxer]["seed"]] = this.state.rankings[bracket][boxer]["boxer_id"];
+			}
+		}
+		console.log(bracket_dict);
+	}
+
 	render() {
 		console.log("top of render: ", this.state.rankings);
 		let headings = ["boxer_id", "seed", "first", "last", "weight", "score", "av_score", "num_spars", "num_scored"];
@@ -180,26 +207,39 @@ class Brackets extends Component {
 
 		var brackets = [];
 		for (var bracket in this.state.rankings) {
-			brackets.push(this.return_bracket(this.state.rankings[bracket]));
-			brackets.push(<br />);
+			//console.log("this state rankings [bracket]", this.state.rankings[bracket], bracket);
+			brackets.push(this.return_bracket(bracket, this.state.rankings[bracket]));
 			//break;
 		}
 
 
 		//document.getElementById("testing2").onmouseenter = function() { this.boxer_hover(45) };
 
+
+
 		return (
             <div className="App">
             <header className="App-header">
-            <h1 className="App-title">Welcome to MatchBox</h1>
+            <h1 className="App-title">MatchBox</h1>
             </header>
 
 			<div id="fixedElement">{this.hover_box_default()}</div>
 
             	<h2>Brackets</h2>
+	
+			<div id="save">
+			<form>
+				<label>
+				Save as:
+				<input type="text" name="save_as" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+
+				<button type="button" onClick={() => this.save_bracket()}>Save</button>
+			</form>
+
+			</div>
 				{brackets}
 
-				{top_row}
             </div>	
 		)
 	}

@@ -89,11 +89,10 @@ class Spars extends Component {
 		
 		return(<div className="App">
 			<header className="App-header">
-            <h1 className="App-title">Welcome to MatchBox</h1>
+            <h1 className="App-title">MatchBox</h1>
             </header>
 			<h2>Spars</h2>
-			<br />
-	    <button onClick={() => this.props.changePage("boxers")} >BOXERS</button> <br />
+	    <button onClick={() => this.sparQuery()} >See All</button> <br />
 			<br />
 			<form>
 				Query<br/>

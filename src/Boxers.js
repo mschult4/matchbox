@@ -221,7 +221,7 @@ class Boxers extends Component {
         return (
             <div className="App">
             <header className="App-header">
-            <h1 className="App-title">Welcome to MatchBox</h1>
+            <h1 className="App-title">MatchBox</h1>
             </header>
 			<h2>Boxers</h2>
             <p className="App-intro">
