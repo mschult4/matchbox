@@ -71,6 +71,12 @@ body #fixedElement {
 	bottom: 1em;
 	right: 1em;
 	border: solid;
-	width : 200px;
-	height: 300px;
+	width : 250px;
+	background: rgba(86,165,236,0.7);
+	overflow: hidden;
+	min-height: 300px;
+}
+
+p {
+	text-align: left;
 }

@@ -19,8 +19,10 @@ class Brackets extends Component {
 		.then(results => {
 			return results.json();
 		}).then(data => {
-			this.setState({"rankings":data});
-			console.log("state", this.state.rankings);
+			this.setState({"rankings":data["ranks"]});
+			this.setState({"boxers": data["person_data"]});
+			console.log("state rankings", this.state.rankings);
+			console.log("state people", this.state.boxers);
 		})
 
 	}
@@ -57,51 +59,82 @@ class Brackets extends Component {
 
 
 <tr>
-<td>{this.concat(ordered_bracket[1])}</td>
+<td id="testing1" onMouseOver={() => this.boxer_hover(ordered_bracket[1])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[1])}</td>
 <td rowSpan='2'>Winner 1/2</td>
 <td rowSpan='4'>Winner 1/2/3/4</td>
 <td rowSpan='8'>Winner 1/2/3/4/5/6/7/8</td>
 </tr>
 <tr>
-<td id="testing2" onMouseOver={() => this.boxer_hover(10)} onMouseOut={() => this.boxer_unhover(10)}> {this.concat(ordered_bracket[8])}</td>
+<td id="testing8" onMouseOver={() => this.boxer_hover(ordered_bracket[8])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[8])}</td>
 </tr>
 <tr>
-<td>{this.concat(ordered_bracket[4])}</td><td rowSpan='2'>Winner 3/4</td>
+<td id="testing4" onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[4])}</td><td rowSpan='2'>Winner 3/4</td>
 </tr>
 <tr>
-<td>{this.concat(ordered_bracket[5])}</td>
+<td id="testing5" onMouseOver={() => this.boxer_hover(ordered_bracket[5])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[5])}</td>
 </tr>
 <tr>
-<td>{this.concat(ordered_bracket[3])}</td><td rowSpan='2'>Winner 5/6</td><td rowSpan='4'>Winner 5/6/7/8</td>
+<td id="testing3" onMouseOver={() => this.boxer_hover(ordered_bracket[3])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[3])}</td>
+<td rowSpan='2'>Winner 5/6</td><td rowSpan='4'>Winner 5/6/7/8</td>
 </tr>
 <tr>
-<td>{this.concat(ordered_bracket[6])}</td>
+<td id="testing6" onMouseOver={() => this.boxer_hover(ordered_bracket[6])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[6])}</td>
 </tr>
 <tr>
-<td>{this.concat(ordered_bracket[2])}</td><td rowSpan='2'>Winner 7/8</td>
+<td id="testing2" onMouseOver={() => this.boxer_hover(ordered_bracket[2])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[2])}</td><td rowSpan='2'>Winner 7/8</td>
 </tr>
 <tr>
-<td>{this.concat(ordered_bracket[7])}</td>
-</tr>
+<td id="testing7" onMouseOver={() => this.boxer_hover(ordered_bracket[7])} onMouseOut={() => this.boxer_unhover()}> {this.concat(ordered_bracket[7])}</td></tr>
 </tbody>
 </table>);
 
 	}
 
 	boxer_hover(b_id) {
+		if (b_id == null) {
+			return;
+		}
 		console.log("made it");
-		document.getElementById("fixedElement").append(<p>"HOWDY THERE"</p>);
+		var internal = document.createElement("p");
+		internal.innerHTML = "Boxer ID: "+b_id.boxer_id+"<br/>";
+		//document.getElementById("fixedElement").appendChild(internal);
+		internal.append("Boxer: "+b_id.first+" "+b_id.last);
+		internal.innerHTML += "<br/>";
+		internal.append("Weight: "+b_id.weight+" lbs");
+		internal.innerHTML += "<br/>";	
+		internal.append("Number of Spars: "+b_id.num_spars);
+		internal.innerHTML += "<br/>";
+		internal.append("Average Score: "+b_id.av_score);
+		internal.innerHTML += "<br/>";
+		document.getElementById("fixedElement").appendChild(internal);
+
+		var comment = document.createElement("p");	
+		var boxer_info = this.state.boxers[b_id.boxer_id]
+		if (boxer_info && boxer_info["comments"]) {
+			console.log("HERE", boxer_info)
+			comment.innerHTML += "Spar Comments<br/>";
+			for (var com in boxer_info["comments"]) {
+				if (boxer_info["comments"][com] === null) {
+					continue;
+				}
+				comment.innerHTML += com;
+				comment.innerHTML += "&#8594; ";
+				comment.innerHTML += boxer_info["comments"][com];
+				comment.innerHTML += "<br/>";
+			}
+		}
+		document.getElementById("fixedElement").appendChild(comment);
 		
 	}
 
-	boxer_unhover(b_id) {
+	boxer_unhover() {
 		console.log("unhover");
 		document.getElementById("fixedElement").innerHTML = this.hover_box_default();
 	
 	}
 
 	hover_box_default() {
-		return "Spar Data\n";
+		return "Spar Data";
 	}
 
 	concat(boxer) {
