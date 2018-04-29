@@ -42,7 +42,12 @@ class Login extends Component {
                     sessionStorage.authenticated = true;
                     sessionStorage.usertype = datum['usertype'];
                     console.log("sessionStorage.authenticated: ", sessionStorage.authenticated);
+                    if (this.state.password == 'password') 
+                        alert("For security, please change your password from the default assigned to you. Thank you.");
                     this.props.changePage("boxers");
+                }
+                else {
+                    alert("Username and/or password are incorrect or not yet updated in system.");
                 }
             })
 
