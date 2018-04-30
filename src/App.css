@@ -110,3 +110,14 @@ div.brackdiv {
 	padding: 3%;
 }
 
+body #fixedswap {
+    position:fixed !important;
+    position: absolute; /*ie6 */
+	top: 15em;
+	right: 1em;
+	border: solid;
+	width : 20%;
+	background: rgba(86,165,236,0.7);
+
+}
+
