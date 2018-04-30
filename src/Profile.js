@@ -17,13 +17,13 @@ class Profile extends Component {
 			"last_u" : "",
 			"hall_u" : "",
 			"goes_by_u" : "",
-			"eligible_u" : "",
 			"experience_u" : "",
 			"vet_years_u" : "",
 			"weight_u" : "",
 			"handedness_u" : "",
-			"captain_u" : "",
-			"gender_u" : "",
+			"old_pw" : "",
+			"new_pw" : "",
+			"new_pw_check" : "",
         };
         this.main = main_app;
         this.simpleQuery();
@@ -124,6 +124,55 @@ class Profile extends Component {
 	this.simpleQuery();	
 	}
 
+	updatePassword() {
+		if (this.state.new_pw !== this.state.new_pw_check) {
+			alert("New passwords do not match.");
+			return;
+		}
+		console.log("update password", this.state);
+		var u_keys = ["old_pw", "new_pw", "new_pw_check", "boxer_id"];
+		var data = {};
+		for (var i in u_keys) {
+			if (this.state[u_keys[i]] !== "") {
+				data[u_keys[i]] = this.state[u_keys[i]];
+			}
+		}
+		console.log("body: ", data);
+
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/signin";
+
+		var put_dict = {body : JSON.stringify(data), 
+			method: 'PUT',
+			headers : {"Content-Type": "text/plain"} };
+		
+		console.log("put_dict", put_dict);
+		fetch(URL, put_dict)
+		.then(results => {
+            return results.json();
+        }).then(datum => {
+
+            console.log("update password", datum);
+            //console.log(datum[176]);
+            //var save = -1;
+            //for (var i = 0; i < datum.length; i = i + 1) {
+            //    if (datum[i]['boxer_id'] == sessionStorage.identity) {
+            //        save = i;
+            //        console.log(save, i);
+            //        break;
+            //    }
+            //}    
+            //console.log("save", save);  
+            //datum[0] = datum[save];
+            //console.log(datum);   
+            //var new_datum = []; 
+            //new_datum.push(datum[0]); 
+            //console.log(new_datum); 
+	    //this.setState({"boxers": new_datum});
+            //console.log("state", this.state.boxers);
+        })
+	this.simpleQuery();	
+	}
+
 	update_state(evt) {
 		console.log(sessionStorage);
 		var temp = {};
@@ -171,41 +220,37 @@ class Profile extends Component {
 			<form>
 				Update<br/>
 				<label>
-				First:
+				First: 
 				<input type="text" name="first_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<br />
 				<label>
 				Last:
 				<input type="text" name="last_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<br />
 				<label>
 				Nickname:
 				<input type="text" name="goes_by_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<br />
 				<label>
 				Year:
 				<input type="text" name="year_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<br />
 				<label>
 				Hall:
 				<input type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-				
+				<br />
 				Experience:
 				<select name="experience_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="novice">Novice</option>
 					<option value="veteran">Veteran</option>
 				</select>
-
-
-				Eligible:
-				<select name="eligible_u" onChange={(evt) => this.update_state(evt)}>
-					<option value=""></option>
-					<option value="Y">Y</option>
-					<option value="N">N</option>
-				</select>
-
+				<br />
 				Vet_years:
 				<select name="vet_years_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -214,37 +259,46 @@ class Profile extends Component {
 					<option value="2">2</option>
 					<option value="3">3</option>
 				</select>
-
+				<br />
 				<label>
 				Weight:
 				<input type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-
+				<br />
 				Handedness:
 				<select name="handedness_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="L">L</option>
 					<option value="R">R</option>
 				</select>
-
-				Captain:
-				<select name="captain_u" onChange={(evt) => this.update_state(evt)}>
-					<option value=""></option>
-					<option value="Y">Y</option>
-					<option value="N">N</option>
-				</select>
-
-
-				Gender:
-				<select name="gender_u" onChange={(evt) => this.update_state(evt)}>
-					<option value=""></option>
-					<option value="W">W</option>
-					<option value="M">M</option>
-				</select>
-
+				<br />
 
 				<button type="button" onClick={() => this.update()}>Submit</button>
 			</form>
+                        <br />
+			<form>
+				Change Password<br/>
+				<label>
+				Old Password:
+				<input type="password" name="old_pw" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<br />
+				<label>
+				New Password:
+				<input type="password" name="new_pw" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<br />
+				<label>
+				Retype New Password:
+				<input type="password" name="new_pw_check" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<br />
+
+				<button type="button" onClick={() => this.updatePassword()}>Submit</button>
+			</form>
+                        <p>
+                        Show Spars
+                        </p>
 
             </div>
         );
