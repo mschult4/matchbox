@@ -103,6 +103,10 @@ class Boxers extends Component {
     }
 
 	insert() {
+                if (this.state['first_i'] === "" || this.state['last_i'] === "") {
+                    alert("New boxer must have both FIRST and LAST name entered.");
+                    return;
+                }
 		console.log("in insert", this.state);
 		var i_keys = ["hall_i", "last_i", "goes_by_i", "year_i", "first_i", "eligible_i", "experience_i", "vet_years_i", "weight_i", "handedness_i", "captain_i", "gender_i", "experience_i"];
 		var data = {};
