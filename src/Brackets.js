@@ -301,8 +301,9 @@ Bracket {bracket_letter}
 		fetch(URL, put_dict)
 		.then(results => {
 			return results.json();
-		}).then (datum => {
-			console.log("From put", datum);
+		}).then (data => {
+			console.log("From put", data);
+
 		})
 
 	}
@@ -324,8 +325,12 @@ Bracket {bracket_letter}
 		fetch(URL, put_dict)
 		.then(results => {
 			return results.json();
-		}).then (datum => {
-			console.log("From put", datum);
+		}).then (data => {
+			console.log("From put", data);
+			this.setState({"rankings":data["ranks"]});
+			this.setState({"boxers": data["person_data"]});
+			console.log("state rankings", this.state.rankings);
+			console.log("state people", this.state.boxers);
 		})
 
 	}
@@ -334,7 +339,6 @@ Bracket {bracket_letter}
 		console.log("top of options");
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/getSavedBracketNames";
 
-		var ret_value = [];
 		fetch(URL)
 		.then(results => {
 			return results.json();
@@ -355,7 +359,7 @@ Bracket {bracket_letter}
 		//console.log("length: ", this.state.rankings.length);
 		var row_num = 0;
 		var top_row = []
-		var top_row_num = 0;
+		//var top_row_num = 0;
 		for (var high in this.state.rankings) {
 			rows = []
 			rows.push(headings.map((str) => <th key={str}>{str}</th>));
@@ -374,7 +378,7 @@ Bracket {bracket_letter}
 				row_num++;
 			}
 			top_row.push(<table key={high}><tbody key={high}>{rows}</tbody></table>);
-			top_row_num++;
+			//top_row_num++;
 			//break;
 		}
 
