@@ -9,8 +9,15 @@ class Brackets extends Component {
 			"rankings" : {},
 			"boxers" : {},
 			"selected" : {},
+			"save_as" : "",
+			"load_from" : ["friday"],
+			"bracket_load" : "",
+			"bracket_list" : {},
+			"options" : [],
         };
 		this.query_rank();
+		this.options();
+		console.log("OPTIONS", this.state.options);
     }
 
 	query_rank() {
@@ -72,7 +79,7 @@ Bracket {bracket_letter}
 
 
 <tr>
-<td id="testing1" onMouseOver={() => this.boxer_hover(ordered_bracket[1])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[1])}</p></td>
+<td id={id_1} onMouseOver={() => this.boxer_hover(ordered_bracket[1])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_1, [bracket_letter, ordered_bracket[1].boxer_id ])}><p>{this.concat(ordered_bracket[1])} </p></td>
 <td rowSpan='2'><p></p></td>
 <td rowSpan='4'><p></p></td>
 <td rowSpan='8'><p></p></td>
@@ -81,32 +88,37 @@ Bracket {bracket_letter}
 <td id={id_8} onMouseOver={() => this.boxer_hover(ordered_bracket[8])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_8,[bracket_letter, ordered_bracket[8].boxer_id ])}><p>{this.concat(ordered_bracket[8])} </p></td>
 </tr>
 <tr>
-<td id="testing4" onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[4])}</p></td><td rowSpan='2'><p></p></td>
+<td id={id_4} onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_4,[bracket_letter, ordered_bracket[4].boxer_id ])}><p>{this.concat(ordered_bracket[4])} </p></td>
 </tr>
 <tr>
-<td id="testing5" onMouseOver={() => this.boxer_hover(ordered_bracket[5])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[5])}</p></td>
+<td id={id_5} onMouseOver={() => this.boxer_hover(ordered_bracket[5])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_5,[bracket_letter, ordered_bracket[5].boxer_id ])}><p>{this.concat(ordered_bracket[5])} </p></td>
 </tr>
 <tr>
-<td id="testing3" onMouseOver={() => this.boxer_hover(ordered_bracket[3])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[3])}</p></td>
+<td id={id_3} onMouseOver={() => this.boxer_hover(ordered_bracket[3])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_3,[bracket_letter, ordered_bracket[3].boxer_id ])}><p>{this.concat(ordered_bracket[3])} </p></td>
 <td rowSpan='2'><p></p></td><td rowSpan='4'><p></p></td>
 </tr>
 <tr>
-<td id="testing6" onMouseOver={() => this.boxer_hover(ordered_bracket[6])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[6])}</p></td>
+<td id={id_6} onMouseOver={() => this.boxer_hover(ordered_bracket[6])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_6,[bracket_letter, ordered_bracket[6].boxer_id ])}><p>{this.concat(ordered_bracket[6])} </p></td>
 </tr>
 <tr>
-<td id="testing2" onMouseOver={() => this.boxer_hover(ordered_bracket[2])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[2])}</p></td><td rowSpan='2'><p></p></td>
+<td id={id_2} onMouseOver={() => this.boxer_hover(ordered_bracket[2])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_2,[bracket_letter, ordered_bracket[2].boxer_id ])}><p>{this.concat(ordered_bracket[2])} </p></td><td rowSpan='2'><p></p></td>
 </tr>
 <tr>
-<td id="testing7" onMouseOver={() => this.boxer_hover(ordered_bracket[7])} onMouseOut={() => this.boxer_unhover()}> <p>{this.concat(ordered_bracket[7])}</p></td></tr>
+<td id={id_7} onMouseOver={() => this.boxer_hover(ordered_bracket[7])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_7,[bracket_letter, ordered_bracket[7].boxer_id ])}><p>{this.concat(ordered_bracket[7])} </p></td></tr>
 </tbody>
 </table></div>);
 
 	}
 
 	swap_func() {
+
 		var to_swap = this.state.selected;
 		var item1, item2;
 		var keys = Object.keys(to_swap);
+		if (keys.length !== 2) {
+			alert("Two boxers must be selected to swap");
+			return;
+		}
 		item1 = keys[0];
 		item2 = keys[1];
 
@@ -117,8 +129,20 @@ Bracket {bracket_letter}
 
 		var tdtemp = document.createElement("td");
 		var tempid = td1.id; 
+		/*console.log("old td1", td1.id);
+		console.log("old td2", td2.id);
 		td1.setAttribute("id", td2.id);
 		td2.setAttribute("id", tempid);
+		console.log("before set onclick null", td1.onclick);
+		td1.onclick = function() {return false};
+		td2.onclick = function() {return false};
+		console.log("after", td1.onclick);
+		console.log("new td1", td1.id);
+		console.log("new td2", td2.id);
+		td1.onclick= () =>this.select_func(td1.id,[to_swap[item2][0], to_swap[item2][1]]);
+		//td2.onclick= null;
+		td2.onclick= () =>this.select_func(td2.id,[to_swap[item1][0], to_swap[item1][1]]);
+		//td1.onclick = function() { alert(this);};//this.select_func(td1.id, [to_swap[item1][0], to_swap[item1][1]]); };*/
 
 		td1.parentNode.insertBefore(tdtemp, td1);
 		td2.parentNode.insertBefore(td1, td2);
@@ -157,6 +181,9 @@ Bracket {bracket_letter}
 		this.state.rankings[to_swap[item1][0]][place1] = second;
 		this.state.rankings[to_swap[item2][0]][place2] = temp_rank;
 
+		td1.style.border = "none";
+		td2.style.border = "none";
+		this.setState( {"selected" : {}});
 		console.log(first, place1, second, place2);
 
 
@@ -249,7 +276,7 @@ Bracket {bracket_letter}
 		console.log("state from test: ", evt.target.value);
 	}
 
-	save_bracket() {
+	save_bracket() { // this is set up wrong
 		console.log("in save bracket");
 
 		var bracket_dict = {}
@@ -257,14 +284,65 @@ Bracket {bracket_letter}
 		bracket_dict["bracket"] = {}
 
 		for (var bracket in this.state.rankings) {
-			//console.log(bracket);
 			bracket_dict["bracket"][bracket] = {}
 			for (var boxer in this.state.rankings[bracket]) {
-				//console.log("HERE", this.state.rankings[bracket][boxer]["seed"]);
 				bracket_dict["bracket"][bracket]["seed"+this.state.rankings[bracket][boxer]["seed"]] = this.state.rankings[bracket][boxer]["boxer_id"];
 			}
 		}
 		console.log(bracket_dict);
+
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/putBracket";
+
+		var put_dict = {body : JSON.stringify(bracket_dict),
+				method : 'PUT',
+				headers : {"Content-Type": "text/plain"} };
+
+		console.log("put_dict", put_dict);
+		fetch(URL, put_dict)
+		.then(results => {
+			return results.json();
+		}).then (datum => {
+			console.log("From put", datum);
+		})
+
+	}
+
+	load_saved() {
+		if (this.state.bracket_load === "") {
+			alert("A bracket must be selected");
+		}
+		console.log("top of load_saved");
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/putBracket";
+
+		var bracket_dict = {"name" : this.state.bracket_load};
+
+		var put_dict = {body : JSON.stringify(bracket_dict),
+				method : 'PUT',
+				headers : {"Content-Type": "text/plain"} };
+
+		console.log("put_dict", put_dict);
+		fetch(URL, put_dict)
+		.then(results => {
+			return results.json();
+		}).then (datum => {
+			console.log("From put", datum);
+		})
+
+	}
+
+	options() {
+		console.log("top of options");
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/getSavedBracketNames";
+
+		var ret_value = [];
+		fetch(URL)
+		.then(results => {
+			return results.json();
+		}).then(data => {
+			this.setState({"bracket_list": data});
+			console.log("bracket_list", data);
+		})
+
 	}
 
 	render() {
@@ -306,11 +384,13 @@ Bracket {bracket_letter}
 			brackets.push(this.return_bracket(bracket, this.state.rankings[bracket]));
 			//break;
 		}
-
-
 		//document.getElementById("testing2").onmouseenter = function() { this.boxer_hover(45) };
-
-
+	
+		var options = [];
+		options.push(<option value=""></option>);
+		for (var i in this.state.bracket_list) {
+			options.push(<option value={this.state.bracket_list[i]}>{this.state.bracket_list[i]}</option>);
+		}
 
 		return (
             <div className="App">
@@ -319,7 +399,9 @@ Bracket {bracket_letter}
             </header>
 
 			<div id="fixedElement">{this.hover_box_default()}</div>
-
+				<div id="fixedswap">
+				<button type="button" onClick={() => this.swap_func()}>Swap</button>
+				</div>
             	<h2>Brackets</h2>
 	
 			<div id="save">
@@ -331,10 +413,24 @@ Bracket {bracket_letter}
 
 				<button type="button" onClick={() => this.save_bracket()}>Save</button>
 			</form>
+				
+			<br />
+
+<form>
+				<label>
+				Load Bracket:
+				<select name="bracket_load" onChange={(evt) => this.update_state(evt)}>
+					{options}
+				</select>
+				</label>
+
+			<button type="button" onClick={() => this.load_saved()}>Submit</button>
+			</form>
+
 				<br />
-				<button type="button" onClick={() => this.swap_func()}>Swap</button>
 
 			</div>
+			
 				{brackets}
 
             </div>	
