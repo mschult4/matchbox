@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Login.css';
 import md5 from 'md5';
+import logo from './boxing-gloves.png';
 
 class Login extends Component {
 
@@ -68,23 +70,25 @@ class Login extends Component {
     render() {
 		return(
             <div className="App">
-            <header className="App-header">
-            <h1 className="App-title">Welcome to MatchBox</h1>
-            </header>
-            <form>
-                Login<br/>
-                <label>
-                Username:
-                <input type="text" name="username" onChange={(evt) => this.update_state(evt)}/>
-                </label>
-        <br />
-                <label>
-                Password:
-                <input type="password" name="password" onChange={(evt) => this.update_state(evt)}/>
-                </label>
-        <br />
-            </form>
-            <button onClick={() => this.authenticate_user()}> Login </button>
+                <header className="App-header">
+                    <h1 className="App-title">Welcome to MatchBox</h1>
+                </header>
+                <div className="imgcontainer">
+                    <img src={logo} alt="Avatar" className="avatar" />
+                </div>
+                <div className="container">
+                    <form>
+                        <label htmlFor="username"><b>Username</b></label>
+                        <br />
+                        <input type="text" placeholder="Enter Username" name="username" onChange={(evt) => this.update_state(evt)}/>
+                        <br />
+                        <label htmlFor="password"><b>Password</b></label>
+                        <br />
+                        <input type="password" placeholder="Enter Password" name="password" onChange={(evt) => this.update_state(evt)}/>
+                        <br />
+                    </form>
+                    <button className="loginbtn" onClick={() => this.authenticate_user()}> Login </button>
+                </div>
             </div>
 		);
 	}

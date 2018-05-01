@@ -1,0 +1,42 @@
+input[type=text], input[type=password] {
+    width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.loginbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 300px;
+}
+
+.loginbtn:hover {
+    opacity: 0.8;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 0 0;
+}
+
+img.avatar {
+    width: 100px;
+}
+
+.container {
+    padding: 16px;
+    width: 300px;
+    margin: auto;
+}
+
+label {
+    float: left;
+    margin-top: 5px;
+}

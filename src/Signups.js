@@ -33,25 +33,35 @@ class Signups extends Component {
             boxer_id: sessionStorage.identity,
 		}
 		console.log("sending data to insert", data);
-		/*
+		
         var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/signups";
 
-        var post_dict = {
+        var put_dict = {
 			body : JSON.stringify(data), 
-            method: 'POST',
+            method: 'PUT',
             headers : {"Content-Type": "text/plain"}
 		};
     
-        console.log("post_dict", post_dict);
-        fetch(URL, post_dict)
+        console.log("put_dict", put_dict);
+        fetch(URL, put_dict)
         .then(results => {
             return results.json();
         }).then(datum => {
-
-            this.setState({"signups": datum});
-            //console.log("state", this.state.signups);
+            if (datum['issue'] === 'zero') {
+                alert("Cannot sign up - please update your weight in your profile");
+            } else if (datum['issue'] === 'weight') {
+                alert("Cannot sign up - your opponent's weight cannot differ from yours by more than 10 pounds");
+            } else if (datum['issue'] === 'day') {
+                alert("Cannot sign up - you cannot spar more than once in two days");
+            } else if (datum['issue'] === 'full') {
+                alert("This dialogue should never appear. If you are reading this you are a wizard and a heretic.");
+            } else if (datum['issue'] === 'none') {
+                alert("You have successfully signed up for a spar on " + day + " in ring " + ring + ". There will be soon be a way to undo this but for now you are stuck with this.");
+            }
+            //TODO: add functionality to un-signup
+            console.log("datum", datum)
         })  
-*/
+
     }
 
     renderTable() {
