@@ -55,8 +55,8 @@ class Brackets extends Component {
 			}
 		}
 
-		//console.log("ordered bracket");
-		//console.log(ordered_bracket);
+		console.log("ordered bracket");
+		console.log(ordered_bracket);
 
 		var id_1 = bracket_letter+"_1"
 		var id_2 = bracket_letter+"_2"
@@ -88,7 +88,7 @@ Bracket {bracket_letter}
 <td id={id_8} onMouseOver={() => this.boxer_hover(ordered_bracket[8])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_8,[bracket_letter, ordered_bracket[8].boxer_id ])}><p>{this.concat(ordered_bracket[8])} </p></td>
 </tr>
 <tr>
-<td id={id_4} onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_4,[bracket_letter, ordered_bracket[4].boxer_id ])}><p>{this.concat(ordered_bracket[4])} </p></td>
+<td id={id_4} onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_4,[bracket_letter, ordered_bracket[4].boxer_id ])}><p>{this.concat(ordered_bracket[4])} </p></td>< td rowspan='2'><p></p>< /td>
 </tr>
 <tr>
 <td id={id_5} onMouseOver={() => this.boxer_hover(ordered_bracket[5])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_5,[bracket_letter, ordered_bracket[5].boxer_id ])}><p>{this.concat(ordered_bracket[5])} </p></td>
@@ -144,17 +144,17 @@ Bracket {bracket_letter}
 		td2.onclick= () =>this.select_func(td2.id,[to_swap[item1][0], to_swap[item1][1]]);
 		//td1.onclick = function() { alert(this);};//this.select_func(td1.id, [to_swap[item1][0], to_swap[item1][1]]); };*/
 
-		td1.parentNode.insertBefore(tdtemp, td1);
+		/*td1.parentNode.insertBefore(tdtemp, td1);
 		td2.parentNode.insertBefore(td1, td2);
 		tdtemp.parentNode.insertBefore(td2, tdtemp);
-		tdtemp.parentNode.removeChild(tdtemp);
+		tdtemp.parentNode.removeChild(tdtemp);*/
 
 		/*console.log(td1, td2);
 		var tdtemp = td1.firstChild;
 		td1.firstChild = td2.firstChild;
 		td2.firstChild = tdtemp;*/
 		
-		console.log(td1, td2);
+		//console.log(td1, td2);
 
 		var first, second, place1, place2;
 		for (var element in this.state.rankings[to_swap[item1][0]]) {
@@ -178,6 +178,11 @@ Bracket {bracket_letter}
 		}
 
 		var temp_rank = first;
+		var old1_seed = first.seed;
+		var old2_seed = second.seed;
+		console.log("old1", old1_seed, "old2", old2_seed);
+		temp_rank.seed = old2_seed;
+		second.seed = old1_seed;
 		this.state.rankings[to_swap[item1][0]][place1] = second;
 		this.state.rankings[to_swap[item2][0]][place2] = temp_rank;
 
@@ -187,7 +192,7 @@ Bracket {bracket_letter}
 		console.log(first, place1, second, place2);
 
 
-		console.log(this.state.rankings);
+		console.log("SWAP", this.state.rankings);
 	}
 
 	select_func(bracket_slot, args) {
@@ -279,6 +284,11 @@ Bracket {bracket_letter}
 	save_bracket() { // this is set up wrong
 		console.log("in save bracket");
 
+		if (this.state.save_as === "") {
+			alert("Save As must have a bracket name");
+			return;
+		}
+
 		var bracket_dict = {}
 		bracket_dict["name"] = this.state.save_as;
 		bracket_dict["bracket"] = {}
@@ -291,7 +301,7 @@ Bracket {bracket_letter}
 		}
 		console.log(bracket_dict);
 
-		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/putBracket";
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/loadSavedBracket";
 
 		var put_dict = {body : JSON.stringify(bracket_dict),
 				method : 'PUT',
@@ -302,8 +312,8 @@ Bracket {bracket_letter}
 		.then(results => {
 			return results.json();
 		}).then (data => {
-			console.log("From put", data);
-
+			console.log("From save_brack", data);
+			this.options();
 		})
 
 	}
@@ -311,6 +321,7 @@ Bracket {bracket_letter}
 	load_saved() {
 		if (this.state.bracket_load === "") {
 			alert("A bracket must be selected");
+			return;
 		}
 		console.log("top of load_saved");
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/putBracket";
@@ -337,7 +348,7 @@ Bracket {bracket_letter}
 
 	options() {
 		console.log("top of options");
-		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/getSavedBracketNames";
+		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/loadSavedBracket";
 
 		fetch(URL)
 		.then(results => {
@@ -391,9 +402,10 @@ Bracket {bracket_letter}
 		//document.getElementById("testing2").onmouseenter = function() { this.boxer_hover(45) };
 	
 		var options = [];
+		console.log(this.state.bracket_list);
 		options.push(<option value=""></option>);
-		for (var i in this.state.bracket_list) {
-			options.push(<option value={this.state.bracket_list[i]}>{this.state.bracket_list[i]}</option>);
+		for (var j in this.state.bracket_list) {
+			options.push(<option value={this.state.bracket_list[j]}>{this.state.bracket_list[j]}</option>);
 		}
 
 		return (
