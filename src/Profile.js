@@ -210,7 +210,7 @@ class Profile extends Component {
         var rows = [];
         var name = [];
         var spars = [];
-   	        spars.push(spar_headings_disp.map((str) => <td className="profilerow2" key={str}>{str}</td>));
+   	spars.push(spar_headings_disp.map((str) => <th className="designated" key={str}>{str}</th>));
         for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
 
             	for (var i=0; i < headings.length; i++) {
@@ -242,13 +242,13 @@ class Profile extends Component {
 			if (spar_headings_disp[i] === 'Opponent') {
 			    var first = this.state.spars[row_num]['opp_first'];
                             var last = this.state.spars[row_num]['opp_last'];
-                            values.push(<td className="profiledata">{first+" "+last}</td>);
+                            values.push(<td key={i} className="designated">{first+" "+last}</td>);
                         }
 			else
-               		    values.push(<td className="profiledata" key={i}>{this.state.spars[row_num][spar_headings[i]]}</td>);
+               		    values.push(<td className="designated" key={i}>{this.state.spars[row_num][spar_headings[i]]}</td>);
                console.log(values)
 		}
-		spars.push(<tr className="profilerow2" key={row_num}>{values}</tr>);
+		spars.push(<tr className="designated" key={row_num}>{values}</tr>);
         }
         return (
             <div className="App">
@@ -358,8 +358,8 @@ class Profile extends Component {
 			<br />
  			<form className="profileform">
                         	<h4 id="spar_desc">Your Past Spars</h4>
-            			<table id = "spar_table">
-                			<tbody>
+            			<table className = "designated">
+                			<tbody className="designated">
                     				{spars}
                 			</tbody>
             			</table>
