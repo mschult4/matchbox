@@ -414,10 +414,11 @@ Bracket {bracket_letter}
             <h1 className="App-title">MatchBox</h1>
             </header>
 
-			<div id="fixedElement">{this.hover_box_default()}</div>
 				<div id="fixedswap">
-				<button type="button" onClick={() => this.swap_func()}>Swap</button>
+				<button className="swapbtn" type="button" onClick={() => this.swap_func()}>Swap Boxers</button>
 				</div>
+
+			<div id="fixedElement">{this.hover_box_default()}</div>
             	<h2>Brackets</h2>
 	
 			<div id="save">

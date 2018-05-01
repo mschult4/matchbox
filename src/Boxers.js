@@ -257,6 +257,7 @@ class Boxers extends Component {
 				Hall:
 				<input type="text" name="hall" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<br />
 				<button type="button" onClick={() => this.simpleQuery()}>Submit</button>
 			</form>
 			<br />
@@ -435,7 +436,7 @@ class Boxers extends Component {
 					<option value="M">M</option>
 				</select>
 				</label>
-
+				<br />
 				<button type="button" onClick={() => this.update()}>Submit</button>
 			</form>
 
@@ -446,7 +447,7 @@ class Boxers extends Component {
 				Boxer Id:
 				<input type="text" name="boxer_id_d" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-
+				<br />
 				<button type="button" onClick={() => this.delete_func()}>Submit</button>
 			</form>
 	

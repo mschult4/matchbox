@@ -114,13 +114,13 @@ li:hover {
 body #fixedElement {
     position:fixed !important;
     position: absolute; /*ie6 */
-	bottom: 1em;
+	bottom: 10%;
 	right: 1em;
-	border: solid;
 	width : 20%;
 	background: rgba(86,165,236,0.7);
 	overflow: hidden;
 	min-height: 300px;
+	padding: 1em;
 }
 
 p {
@@ -159,11 +159,10 @@ div.brackdiv {
 body #fixedswap {
     position:fixed !important;
     position: absolute; /*ie6 */
-	top: 15em;
+	bottom: 1%;
 	right: 1em;
-	border: solid;
-	width : 20%;
-	background: rgba(86,165,236,0.7);
+	width : 22.8%;
+	text-align: right;
 
 }
 
@@ -179,3 +178,13 @@ div {
 }
 
 
+.swapbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+	font-size: 13px;
+	width: 100%;
+}
