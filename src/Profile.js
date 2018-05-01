@@ -152,6 +152,10 @@ class Profile extends Component {
         }).then(datum => {
 
             console.log("update password", datum);
+	    if (datum[0]['verified'] == true)
+                alert('Password has been updated.');
+	    else
+		alert('Password has not updated. Please make sure your old password is correct.');
             //console.log(datum[176]);
             //var save = -1;
             //for (var i = 0; i < datum.length; i = i + 1) {
