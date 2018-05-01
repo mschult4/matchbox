@@ -29,6 +29,7 @@ class Profile extends Component {
         };
         this.main = main_app;
         this.simpleQuery();
+        this.sparQuery();
     }
 
 	starQuery() {
@@ -188,6 +189,7 @@ class Profile extends Component {
 
             this.setState({"spars": data});
             console.log("SPARZZZZ", this.state.spars);
+	    
         })
     }
 
@@ -203,8 +205,12 @@ class Profile extends Component {
 	render() {
         let headings = ["mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
         let heading_disp = ["First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Veteran Years", "Weight", "Handedness", "Captain", "Gender"];
+        let spar_headings = ["date", "opp_first", "opp_last"];
+	let spar_headings_disp = ['Date', 'Opponent'];
         var rows = [];
         var name = [];
+        var spars = [];
+   	        spars.push(spar_headings_disp.map((str) => <td className="profilerow2" key={str}>{str}</td>));
         for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
 
             	for (var i=0; i < headings.length; i++) {
@@ -229,6 +235,21 @@ class Profile extends Component {
 			rows.push(<tr className="profilerow" key={row_num}>{values}</tr>);
             	}
         }
+
+        for (var row_num = 0; row_num < this.state.spars.length; row_num++) {
+		var values = [];
+            	for (var i=0; i < spar_headings_disp.length; i++) {
+			if (spar_headings_disp[i] === 'Opponent') {
+			    var first = this.state.spars[row_num]['opp_first'];
+                            var last = this.state.spars[row_num]['opp_last'];
+                            values.push(<td className="profiledata">{first+" "+last}</td>);
+                        }
+			else
+               		    values.push(<td className="profiledata" key={i}>{this.state.spars[row_num][spar_headings[i]]}</td>);
+               console.log(values)
+		}
+		spars.push(<tr className="profilerow2" key={row_num}>{values}</tr>);
+        }
         return (
             <div className="App">
             <header className="App-header">
@@ -241,7 +262,7 @@ class Profile extends Component {
                 </tbody>
             </table>
             <br />
-			<form id = "prof_form">
+			<form className = "profileform">
 				<h4 id="desc">Enter data to update your profile.</h4><br/>
 				<label className="profilelabel">
 				First:<br /> 
@@ -305,7 +326,7 @@ class Profile extends Component {
                         <br />
 			<br />
 			<br />
-			<form id="prof_pw">
+			<form className="profileform">
 				<h4 id = "pw_desc">Change Password</h4><br/>
 				<label className="profilelabel">
 				Old Password:
@@ -329,9 +350,13 @@ class Profile extends Component {
 			<br />
 			<br />
 			<br />
- 			<form id="prof_spar">
-                        	<h4 id="spar_desc">Show Spars</h4>
-				<button className="profilebutton" type="button" onClick={() => this.sparQuery()}>Submit</button>	
+ 			<form className="profileform">
+                        	<h4 id="spar_desc">Your Past Spars</h4>
+            			<table id = "profile_table">
+                			<tbody>
+                    				{spars}
+                			</tbody>
+            			</table>
 			</form>
 			<br />
             </div>

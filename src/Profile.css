@@ -14,7 +14,7 @@
     background-color: #f2f2f2;
 }
 
-#prof_form, #prof_pw, #prof_spar {
+.profileform {
     margin-left: 40%;
     margin-right: 25%;
 }
