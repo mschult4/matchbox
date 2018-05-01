@@ -238,9 +238,9 @@ class Boxers extends Component {
             <p>
                 <button onClick={() => this.starQuery()}>select * from boxers</button>
             </p>
-	    <button onClick={() => this.props.changePage("spars")} >SPARS</button> <br />
-			<form>
-				Query<br/>
+
+			<form >
+				Lookup<br/>
 				<label>
 				First:
 				<input type="text" name="first" onChange={(evt) => this.update_state(evt)}/>
@@ -257,7 +257,7 @@ class Boxers extends Component {
 				Hall:
 				<input type="text" name="hall" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-
+				<br />
 				<button type="button" onClick={() => this.simpleQuery()}>Submit</button>
 			</form>
 			<br />
@@ -283,22 +283,26 @@ class Boxers extends Component {
 				Hall:
 				<input type="text" name="hall_i" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-				
+
+				<label>
 				Experience:
 				<select name="experience_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="novice">Novice</option>
 					<option value="veteran">Veteran</option>
 				</select>
+				</label>
 
-
+				<label>
 				Eligible:
 				<select name="eligible_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="Y">Y</option>
 					<option value="N">N</option>
 				</select>
+				</label>
 
+				<label>
 				Vet_years:
 				<select name="vet_years_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -307,35 +311,41 @@ class Boxers extends Component {
 					<option value="2">2</option>
 					<option value="3">3</option>
 				</select>
+				</label>
 
 				<label>
 				Weight:
 				<input type="text" name="weight_i" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-
+				
+				<label>
 				Handedness:
 				<select name="handedness_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="L">L</option>
 					<option value="R">R</option>
 				</select>
+				</label>
 
+				<label>
 				Captain:
 				<select name="captain_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="Y">Y</option>
 					<option value="N">N</option>
 				</select>
+				</label>
 
-
+				<label>
 				Gender:
 				<select name="gender_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="W">W</option>
 					<option value="M">M</option>
 				</select>
+				</label>
 
-
+				<br />
 				<button type="button" onClick={() => this.insert()}>Submit</button>
 			</form>
 		
@@ -368,7 +378,8 @@ class Boxers extends Component {
 				Hall:
 				<input type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-				
+								
+				<label>
 				Experience:
 				<select name="experience_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -376,14 +387,16 @@ class Boxers extends Component {
 					<option value="veteran">Veteran</option>
 				</select>
 
-
+				</label>
+				<label>
 				Eligible:
 				<select name="eligible_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="Y">Y</option>
 					<option value="N">N</option>
 				</select>
-
+				</label>
+				<label>
 				Vet_years:
 				<select name="vet_years_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -392,26 +405,29 @@ class Boxers extends Component {
 					<option value="2">2</option>
 					<option value="3">3</option>
 				</select>
-
+				</label>
 				<label>
 				Weight:
 				<input type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-
+				
+				<label>
 				Handedness:
 				<select name="handedness_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="L">L</option>
 					<option value="R">R</option>
 				</select>
-
+				</label>
+				<label>
 				Captain:
 				<select name="captain_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
 					<option value="Y">Y</option>
 					<option value="N">N</option>
 				</select>
-
+				</label>
+				<label>
 
 				Gender:
 				<select name="gender_u" onChange={(evt) => this.update_state(evt)}>
@@ -419,8 +435,8 @@ class Boxers extends Component {
 					<option value="W">W</option>
 					<option value="M">M</option>
 				</select>
-
-
+				</label>
+				<br />
 				<button type="button" onClick={() => this.update()}>Submit</button>
 			</form>
 
@@ -431,7 +447,7 @@ class Boxers extends Component {
 				Boxer Id:
 				<input type="text" name="boxer_id_d" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-
+				<br />
 				<button type="button" onClick={() => this.delete_func()}>Submit</button>
 			</form>
 	

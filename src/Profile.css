@@ -1,0 +1,44 @@
+#profile_table {
+    border-collapse: collapse;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.profiledata {
+    text-align: left;
+    padding: 8px;
+}
+
+.profilerow:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#prof_form, #prof_pw, #prof_spar {
+    margin-left: 40%;
+    margin-right: 25%;
+}
+
+.profilelabel {
+    margin-right: 50%;
+}
+
+.profilebutton {
+    margin-right: 30%;
+}
+
+#desc, #pw_desc, #spar_desc {
+    text-align: center;
+    margin-left: 0%;
+    margin-right: 25%;
+}
+
+.profileselect {
+        margin-right: 25%;
+	width: 225px;
+	height: 40px;
+	cursor: pointer;
+	background-color: white;
+	box-shadow: 0 2px 0 white;
+	border-radius: 2px;
+}

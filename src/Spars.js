@@ -136,7 +136,7 @@ class Spars extends Component {
 				Score:
 				<input type="text" name="score" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-
+				<br />
 				<button type="button" onClick={() => this.sparQuery()}>Submit</button>
 			</form>
 

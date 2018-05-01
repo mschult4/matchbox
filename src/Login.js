@@ -78,11 +78,11 @@ class Login extends Component {
                 </div>
                 <div className="logincontainer">
                     <form>
-                        <label className="loginlabel" htmlFor="username"><b>Username</b></label>
+                        <label className="login" htmlFor="username"><b>Username</b></label>
                         <br />
                         <input id="usrnmbox" type="text" placeholder="Enter Username" name="username" onChange={(evt) => this.update_state(evt)}/>
                         <br />
-                        <label className="loginlabel" htmlFor="password"><b>Password</b></label>
+                        <label className="login" htmlFor="password"><b>Password</b></label>
                         <br />
                         <input type="password" placeholder="Enter Password" name="password" onChange={(evt) => this.update_state(evt)}/>
                         <br />

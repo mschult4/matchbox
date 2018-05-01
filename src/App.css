@@ -39,6 +39,12 @@ table.designated {
     collapse; border-spacing: 0; 
 }
 
+.container {
+    padding: 10px;
+    width: 10px;
+    margin: auto;
+}
+
 .designated td, th {  
     border: 1px solid transparent; /* No more visible border */
     height: 30px; 
@@ -52,6 +58,17 @@ table.designated {
 .designated td {  
     background: #FAFAFA;
     text-align: center;
+}
+
+#profile  {
+  border-right: solid 1px black; 
+  border-left: solid 1px black;
+}
+
+td:before {
+  content: '';
+  display: block; 
+  width: 5em;
 }
 
 /* Cells in even rows (2,4,6...) are one color */        
@@ -97,13 +114,13 @@ li:hover {
 body #fixedElement {
     position:fixed !important;
     position: absolute; /*ie6 */
-	bottom: 1em;
+	bottom: 10%;
 	right: 1em;
-	border: solid;
 	width : 20%;
 	background: rgba(86,165,236,0.7);
 	overflow: hidden;
 	min-height: 300px;
+	padding: 1em;
 }
 
 p {
@@ -142,11 +159,32 @@ div.brackdiv {
 body #fixedswap {
     position:fixed !important;
     position: absolute; /*ie6 */
-	top: 15em;
+	bottom: 1%;
 	right: 1em;
-	border: solid;
-	width : 20%;
-	background: rgba(86,165,236,0.7);
+	width : 22.8%;
+	text-align: right;
 
 }
 
+label {
+	margin: auto;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	display: inline-block;
+	padding-left:1em;
+}
+
+div {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+
+.swapbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+	font-size: 13px;
+	width: 100%;
+}

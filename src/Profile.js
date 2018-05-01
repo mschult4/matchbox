@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import './Profile.css';
+import './App.css'
 
 class Profile extends Component {
 
@@ -24,6 +25,7 @@ class Profile extends Component {
 			"old_pw" : "",
 			"new_pw" : "",
 			"new_pw_check" : "",
+	    "spars": {},
         };
         this.main = main_app;
         this.simpleQuery();
@@ -156,26 +158,38 @@ class Profile extends Component {
                 alert('Password has been updated.');
 	    else
 		alert('Password has not updated. Please make sure your old password is correct.');
-            //console.log(datum[176]);
-            //var save = -1;
-            //for (var i = 0; i < datum.length; i = i + 1) {
-            //    if (datum[i]['boxer_id'] == sessionStorage.identity) {
-            //        save = i;
-            //        console.log(save, i);
-            //        break;
-            //    }
-            //}    
-            //console.log("save", save);  
-            //datum[0] = datum[save];
-            //console.log(datum);   
-            //var new_datum = []; 
-            //new_datum.push(datum[0]); 
-            //console.log(new_datum); 
-	    //this.setState({"boxers": new_datum});
-            //console.log("state", this.state.boxers);
         })
 	this.simpleQuery();	
 	}
+
+    sparQuery() {
+                console.log("top of spar: ", this.state.spars);
+                var querylist = [];
+                var querystr = "boxer_id";
+                querystr += "=";
+                querystr += this.state['boxer_id'];
+                querylist.push(querystr);
+                console.log(querylist);
+
+                var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/spars";
+
+                var middle = "";
+                console.log(querylist);
+                if (querylist.length !== 0) { //pretty later
+                        middle = "?"
+                        middle += querylist.join("&");
+                        console.log(middle);
+                }
+
+        fetch(URL+middle)
+        .then(results => {
+            return results.json();
+        }).then(data => {
+
+            this.setState({"spars": data});
+            console.log("SPARZZZZ", this.state.spars);
+        })
+    }
 
 	update_state(evt) {
 		console.log(sessionStorage);
@@ -187,24 +201,33 @@ class Profile extends Component {
 	}
 
 	render() {
-        let headings = ["boxer_id", "mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
-        let heading_disp = ["Boxer ID", "First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Vet Years", "Weight", "Handedness", "Captain", "Gender"];
+        let headings = ["mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
+        let heading_disp = ["First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Veteran Years", "Weight", "Handedness", "Captain", "Gender"];
         var rows = [];
         var name = [];
-        rows.push(heading_disp.map((str) => <th key={str}>{str}</th>));
         for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
-            var values = [];
 
-            if (this.state.boxers[row_num]["eligible"]) {
             	for (var i=0; i < headings.length; i++) {
-               		values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
-                        if (row_num === 0 && headings[i] === 'mixed_first') 
-                            name.push(<h2>{this.state.boxers[row_num][headings[i]]}</h2>);
-                        if (row_num === 0 && headings[i] === 'mixed_last') 
-                            name.push(<h2>{this.state.boxers[row_num][headings[i]]}</h2>);
-            	}
-            	rows.push(<tr key={row_num}>{values}</tr>);
+			var values = [];
+			if (headings[i] === 'mixed_first') {
+			    var first = this.state.boxers[0]['mixed_first'];
+			    var nick = this.state.boxers[0]['mixed_goes_by'];
+			    if (nick === null) 
+			        nick = " ";
+			    else
+			        nick = " \""+nick+"\" ";
+			    var last = this.state.boxers[0]['mixed_last'];
+	    		    name.push(<h2>{first+nick+last}</h2>);
+
 			}
+			else if (headings[i] === 'mixed_goes_by' || headings[i] === 'mixed_last')
+			    continue;
+			else {
+			    values.push(<td className="profiledata" key={headings[i]}>{heading_disp[i]}</td>);
+               		    values.push(<td className="profiledata" key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
+			}
+			rows.push(<tr className="profilerow" key={row_num}>{values}</tr>);
+            	}
         }
         return (
             <div className="App">
@@ -212,98 +235,105 @@ class Profile extends Component {
             <h1 className="App-title">MatchBox</h1>
             </header>
 	    {name}
-            <p className="App-intro">
-                Enter data to edit your profile.
-            </p>
-            <table>
+            <table id = "profile_table">
                 <tbody>
                     {rows}
                 </tbody>
             </table>
             <br />
-			<form>
-				Update<br/>
-				<label>
-				First: 
+			<form id = "prof_form">
+				<h4 id="desc">Enter data to update your profile.</h4><br/>
+				<label className="profilelabel">
+				First:<br /> 
 				<input type="text" name="first_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<label>
-				Last:
+				<label className="profilelabel">
+				Last:<br /> 
 				<input type="text" name="last_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<label>
-				Nickname:
+				<label className="profilelabel">
+				Nickname:<br /> 
 				<input type="text" name="goes_by_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<label>
-				Year:
+				<label className="profilelabel">
+				Year:<br /> 
 				<input type="text" name="year_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<label>
-				Hall:
+				<label className="profilelabel">
+				Hall:<br /> 
 				<input type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				Experience:
-				<select name="experience_u" onChange={(evt) => this.update_state(evt)}>
-					<option value=""></option>
+				<br />
+				<select className="profileselect" name="experience_u" onChange={(evt) => this.update_state(evt)}>
+					<option value="">Experience</option>
 					<option value="novice">Novice</option>
 					<option value="veteran">Veteran</option>
 				</select>
 				<br />
-				Vet_years:
-				<select name="vet_years_u" onChange={(evt) => this.update_state(evt)}>
-					<option value=""></option>
+				<br />
+				<br />
+				<select className="profileselect" name="vet_years_u" onChange={(evt) => this.update_state(evt)}>
+					<option value="">Veteran Years</option>
 					<option value="0">0</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 				</select>
 				<br />
-				<label>
-				Weight:
+				<br />
+				<label className="profilelabel">
+				Weight:<br />
 				<input type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				Handedness:
-				<select name="handedness_u" onChange={(evt) => this.update_state(evt)}>
-					<option value=""></option>
+				<br />
+				<select className="profileselect" name="handedness_u" onChange={(evt) => this.update_state(evt)}>
+					<option value="">Handedness</option>
 					<option value="L">L</option>
 					<option value="R">R</option>
 				</select>
 				<br />
+				<br />
 
-				<button type="button" onClick={() => this.update()}>Submit</button>
+				<button className="profilebutton" type="button" onClick={() => this.update()}>Submit</button>
 			</form>
                         <br />
-			<form>
-				Change Password<br/>
-				<label>
+			<br />
+			<br />
+			<form id="prof_pw">
+				<h4 id = "pw_desc">Change Password</h4><br/>
+				<label className="profilelabel">
 				Old Password:
 				<input type="password" name="old_pw" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<label>
+				<label className="profilelabel">
 				New Password:
 				<input type="password" name="new_pw" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<label>
+				<label className="profilelabel">
 				Retype New Password:
 				<input type="password" name="new_pw_check" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
+				<br />
 
-				<button type="button" onClick={() => this.updatePassword()}>Submit</button>
+				<button className="profilebutton" type="button" onClick={() => this.updatePassword()}>Submit</button>
 			</form>
-                        <p>
-                        Show Spars
-                        </p>
-
+			<br />
+			<br />
+			<br />
+ 			<form id="prof_spar">
+                        	<h4 id="spar_desc">Show Spars</h4>
+				<button className="profilebutton" type="button" onClick={() => this.sparQuery()}>Submit</button>	
+			</form>
+			<br />
             </div>
         );
     }
