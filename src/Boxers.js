@@ -211,15 +211,19 @@ class Boxers extends Component {
         let headings = ["boxer_id", "mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
         let heading_disp = ["Boxer ID", "First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Vet Years", "Weight", "Handedness", "Captain", "Gender"];
         var rows = [];
-        rows.push(heading_disp.map((str) => <th key={str}>{str}</th>));
+		var count = 0;
         for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
-            var values = [];
+            if (count === 0) {
+		        rows.push(heading_disp.map((str) => <th className="designated" key={str}>{str}</th>));
+			}
+			count++;
+			var values = [];
 
 			if (this.state.boxers[row_num]["eligible"]) {
             	for (var i=0; i < headings.length; i++) {
-               		values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
+               		values.push(<td className="designated" key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
             	}
-            	rows.push(<tr key={row_num}>{values}</tr>);
+            	rows.push(<tr className="designated" key={row_num}>{values}</tr>);
 			}
         }
         return (
@@ -435,8 +439,8 @@ class Boxers extends Component {
 
 	
 			<br />
-            <table>
-                <tbody>
+            <table className="designated">
+                <tbody className="designated">
                     {rows}
                 </tbody>
             </table>
