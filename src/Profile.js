@@ -191,19 +191,19 @@ class Profile extends Component {
         let heading_disp = ["Boxer ID", "First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Vet Years", "Weight", "Handedness", "Captain", "Gender"];
         var rows = [];
         var name = [];
-        rows.push(heading_disp.map((str) => <th key={str}>{str}</th>));
+        rows.push(heading_disp.map((str) => <th className="designated" key={str}>{str}</th>));
         for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
             var values = [];
 
             if (this.state.boxers[row_num]["eligible"]) {
             	for (var i=0; i < headings.length; i++) {
-               		values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
+               		values.push(<td className="designated" key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
                         if (row_num === 0 && headings[i] === 'mixed_first') 
                             name.push(<h2>{this.state.boxers[row_num][headings[i]]}</h2>);
                         if (row_num === 0 && headings[i] === 'mixed_last') 
                             name.push(<h2>{this.state.boxers[row_num][headings[i]]}</h2>);
             	}
-            	rows.push(<tr key={row_num}>{values}</tr>);
+            	rows.push(<tr className="designated" key={row_num}>{values}</tr>);
 			}
         }
         return (
@@ -215,8 +215,8 @@ class Profile extends Component {
             <p className="App-intro">
                 Enter data to edit your profile.
             </p>
-            <table>
-                <tbody>
+            <table className="designated">
+                <tbody className="designated">
                     {rows}
                 </tbody>
             </table>
