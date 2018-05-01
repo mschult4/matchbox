@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Profile.css';
+import './App.css'
 
 class Profile extends Component {
 
@@ -192,10 +193,10 @@ class Profile extends Component {
 			else if (headings[i] === 'mixed_goes_by' || headings[i] === 'mixed_last')
 			    continue;
 			else {
-			    values.push(<td key={headings[i]}>{heading_disp[i]}</td>);
-               		    values.push(<td key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
+			    values.push(<td className="profiledata" key={headings[i]}>{heading_disp[i]}</td>);
+               		    values.push(<td className="profiledata" key={i}>{this.state.boxers[row_num][headings[i]]}</td>);
 			}
-			rows.push(<tr key={row_num}>{values}</tr>);
+			rows.push(<tr className="profilerow" key={row_num}>{values}</tr>);
             	}
         }
         return (
@@ -204,15 +205,15 @@ class Profile extends Component {
             <h1 className="App-title">MatchBox</h1>
             </header>
 	    {name}
-            <table>
+            <table id = "profile_table">
                 <tbody>
                     {rows}
                 </tbody>
             </table>
             <br />
-			<form>
+			<form id = "prof_form">
 				<h4 id="desc">Enter data to update your profile.</h4><br/>
-				<label>
+				<label className="profilelabel">
 				First:<br /> 
 				<input type="text" name="first_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
@@ -220,7 +221,7 @@ class Profile extends Component {
 				<br />
 				<br />
 				<br />
-				<label>
+				<label className="profilelabel">
 				Last:<br /> 
 				<input type="text" name="last_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
@@ -228,7 +229,7 @@ class Profile extends Component {
 				<br />
 				<br />
 				<br />
-				<label>
+				<label className="profilelabel">
 				Nickname:<br /> 
 				<input type="text" name="goes_by_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
@@ -236,7 +237,7 @@ class Profile extends Component {
 				<br />
 				<br />
 				<br />
-				<label>
+				<label className="profilelabel">
 				Year:<br /> 
 				<input type="text" name="year_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
@@ -244,18 +245,14 @@ class Profile extends Component {
 				<br />
 				<br />
 				<br />
-				<label>
+				<label className="profilelabel">
 				Hall:<br /> 
 				<input type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
 				<br />
 				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<select name="experience_u" onChange={(evt) => this.update_state(evt)}>
+				<select className="profileselect" name="experience_u" onChange={(evt) => this.update_state(evt)}>
 					<option value="">Experience</option>
 					<option value="novice">Novice</option>
 					<option value="veteran">Veteran</option>
@@ -263,7 +260,7 @@ class Profile extends Component {
 				<br />
 				<br />
 				<br />
-				<select name="vet_years_u" onChange={(evt) => this.update_state(evt)}>
+				<select className="profileselect" name="vet_years_u" onChange={(evt) => this.update_state(evt)}>
 					<option value="">Veteran Years</option>
 					<option value="0">0</option>
 					<option value="1">1</option>
@@ -273,7 +270,7 @@ class Profile extends Component {
 				<br />
 				<br />
 				<br />
-				<label>
+				<label className="profilelabel">
 				Weight:<br />
 				<input type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
@@ -281,8 +278,7 @@ class Profile extends Component {
 				<br />
 				<br />
 				<br />
-				<br />
-				<select name="handedness_u" onChange={(evt) => this.update_state(evt)}>
+				<select className="profileselect" name="handedness_u" onChange={(evt) => this.update_state(evt)}>
 					<option value="">Handedness</option>
 					<option value="L">L</option>
 					<option value="R">R</option>
@@ -291,12 +287,12 @@ class Profile extends Component {
 				<br />
 				<br />
 
-				<button type="button" onClick={() => this.update()}>Submit</button>
+				<button className="profilebutton" type="button" onClick={() => this.update()}>Submit</button>
 			</form>
                         <br />
-			<form>
+			<form id="prof_pw">
 				<h4 id = "pw_desc">Change Password</h4><br/>
-				<label>
+				<label className="profilelabel">
 				Old Password:
 				<input type="password" name="old_pw" onChange={(evt) => this.update_state(evt)}/>
 				</label>
@@ -304,7 +300,7 @@ class Profile extends Component {
 				<br />
 				<br />
 				<br />
-				<label>
+				<label className="profilelabel">
 				New Password:
 				<input type="password" name="new_pw" onChange={(evt) => this.update_state(evt)}/>
 				</label>
@@ -312,7 +308,7 @@ class Profile extends Component {
 				<br />
 				<br />
 				<br />
-				<label>
+				<label className="profilelabel">
 				Retype New Password:
 				<input type="password" name="new_pw_check" onChange={(evt) => this.update_state(evt)}/>
 				</label>
@@ -321,9 +317,9 @@ class Profile extends Component {
 				<br />
 				<br />
 
-				<button type="button" onClick={() => this.updatePassword()}>Submit</button>
+				<button className="profilebutton" type="button" onClick={() => this.updatePassword()}>Submit</button>
 			</form>
- 			<form>
+ 			<form id="prof_spar">
                         	<h4 id="spar_desc">Show Spars</h4>
 			</form>
 

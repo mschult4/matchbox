@@ -1,196 +1,29 @@
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-}
-
-.App-header {
-    background-color: #222;
-    height: 50px;
-    padding: 15px;
-    color: white;
-}
-
-.App-title {
-    font-size: 1.5em;
-}
-
-.App-intro {
-    font-size: large;
-}
-
-@keyframes App-logo-spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/*table {
-    border-collapse: collapse;
-    width: 80%;
-}
-
-th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}*/
-
-table {
+#profile_table {
     border-collapse: collapse;
     width: 50%;
     margin-left: 25%;
     margin-right: 25%;
 }
 
-th, td {
+.profiledata {
     text-align: left;
     padding: 8px;
 }
 
-tr:nth-child(even) {
+.profilerow:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-/*th, td {
-    bottom-border: 1px solid black;
-}*/
-
-/*table.designated {  
-    color: #333;
-    font-family: Helvetica, Arial, sans-serif;
-    width: 640px; 
-    border-collapse: 
-    collapse; border-spacing: 0; 
-}
-
-.designated td, th {  
-    border: 1px solid transparent; *//* No more visible border */
-/*    height: 30px; 
-}
-
-.designated th {  
-    background: #DFDFDF;  *//* Darken header a bit */
-/*    font-weight: bold;
-}
-
-.designated td {  
-    background: #FAFAFA;
-    text-align: center;
-}*/
-
-/* Cells in even rows (2,4,6...) are one color */        
-/*.designated tr:nth-child(even) td { background: #F1F1F1; }   */
-
-/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */        
-/*.designated tr:nth-child(odd) td { background: #FEFEFE; }  */
-
-
-/*Navigation Bar*/
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-li {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li:hover {
-    background-color: #111;
-}
-
-.active {
-    background-color: #4CAF50;
-}
-
-.hovering {
-	width: 100px;
-	height: 100px;
-	display: none;
-}
-
-body #fixedElement {
-    position:fixed !important;
-    position: absolute; /*ie6 */
-	bottom: 1em;
-	right: 1em;
-	border: solid;
-	width : 20%;
-	background: rgba(86,165,236,0.7);
-	overflow: hidden;
-	min-height: 300px;
-}
-
-p {
-	text-align: left;
-}
-
-/*table.bracket {
-    border: solid 2px black;
-	width: 75%;
-}
-
-.bracket td {
-	border: none;
-    vertical-align: middle;
-    width: 30em;
-    margin: 0;
-    padding: 5px;
-}
-*/
-/*.bracket td p {
-	text-align: center;
-    border-bottom: solid 1px black;
-    margin: 0;
-    padding: 5px 5px 5px 5px;
-}
-
-.bracket th{
-    text-align:center;
-}*/
-
-div.brackdiv {
-	text-align: left;
-	padding: 3%;
-}
-
-body #fixedswap {
-    position:fixed !important;
-    position: absolute; /*ie6 */
-	top: 15em;
-	right: 1em;
-	border: solid;
-	width : 20%;
-	background: rgba(86,165,236,0.7);
-
-}
-
-form {
+#prof_form, #prof_pw, #prof_spar {
     margin-left: 40%;
     margin-right: 25%;
 }
 
-select {
+.profilelabel {
     margin-right: 50%;
 }
 
-label {
-    margin-right: 50%;
-}
-
-button {
+.profilebutton {
     margin-right: 30%;
 }
 
@@ -200,7 +33,8 @@ button {
     margin-right: 35%;
 }
 
-select {
+.profileselect {
+        margin-right: 25%;
 	width: 225px;
 	height: 40px;
 	cursor: pointer;
