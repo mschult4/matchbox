@@ -15,7 +15,7 @@
 }
 
 .App-title {
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 .App-intro {
@@ -31,34 +31,7 @@ table, th, td {
     border: 1px solid black;
 }
 
-table.designated {  
-    color: #333;
-    font-family: Helvetica, Arial, sans-serif;
-    width: 640px; 
-    border-collapse: 
-    collapse; border-spacing: 0; 
-}
 
-.container {
-    padding: 10px;
-    width: 10px;
-    margin: auto;
-}
-
-.designated td, th {  
-    border: 1px solid transparent; /* No more visible border */
-    height: 30px; 
-}
-
-.designated th {  
-    background: #DFDFDF;  /* Darken header a bit */
-    font-weight: bold;
-}
-
-.designated td {  
-    background: #FAFAFA;
-    text-align: center;
-}
 
 #profile  {
   border-right: solid 1px black; 
@@ -187,4 +160,27 @@ div {
     cursor: pointer;
 	font-size: 13px;
 	width: 100%;
+}
+
+.smallerbtn {
+    background-color: #0000CD;
+    color: white;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 70px;
+	height: 39px;
+	vertical-align: center;
+
+}
+
+.select select {
+   background: transparent;
+   font-size: 14px;
+   height: 39px;
+   padding: 5px;
+   width: 268px;
+	border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
 }

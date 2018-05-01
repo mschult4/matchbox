@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './Boxer.css';
 
 class Spars extends Component {
 
@@ -96,10 +96,9 @@ class Spars extends Component {
             <h1 className="App-title">MatchBox</h1>
             </header>
 			<h2>Spars</h2>
-	    <button onClick={() => this.sparQuery()} >See All</button> <br />
-			<br />
+	    <p className="selectall"><button className="selectallbtn" onClick={() => this.sparQuery()} >See All</button></p> 
 			<form>
-				Query<br/>
+				Lookup<br/>
 				<label>
 				Num Spar:
 				<input type="text" name="num_spar" onChange={(evt) => this.update_state(evt)}/>
@@ -137,7 +136,7 @@ class Spars extends Component {
 				<input type="text" name="score" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<button type="button" onClick={() => this.sparQuery()}>Submit</button>
+				<button className="littlebtn" type="button" onClick={() => this.sparQuery()}>Submit</button>
 			</form>
 
 	

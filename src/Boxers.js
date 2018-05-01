@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './Boxer.css';
 
 class Boxers extends Component {
 
@@ -63,6 +63,9 @@ class Boxers extends Component {
 
             this.setState({"boxers": data});
             console.log("state", this.state.boxers);
+			var thingie = document.getElementById("starquery");
+			thingie.innerHTML = "Loaded -- Scroll Down";
+			console.log("THINGIE", thingie);
         })
 	}
 
@@ -232,11 +235,8 @@ class Boxers extends Component {
             <h1 className="App-title">MatchBox</h1>
             </header>
 			<h2>Boxers</h2>
-            <p className="App-intro">
-                Click the button to query the database.
-            </p>
-            <p>
-                <button onClick={() => this.starQuery()}>select * from boxers</button>
+            <p className="selectall">
+                <button id="starquery" className="selectallbtn" onClick={() => this.starQuery()}>See All Boxers</button>
             </p>
 
 			<form >
@@ -258,7 +258,7 @@ class Boxers extends Component {
 				<input type="text" name="hall" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<button type="button" onClick={() => this.simpleQuery()}>Submit</button>
+				<button className="littlebtn" type="button" onClick={() => this.simpleQuery()}>Submit</button>
 			</form>
 			<br />
 			<form>
@@ -346,7 +346,7 @@ class Boxers extends Component {
 				</label>
 
 				<br />
-				<button type="button" onClick={() => this.insert()}>Submit</button>
+				<button className="littlebtn" type="button" onClick={() => this.insert()}>Submit</button>
 			</form>
 		
 
@@ -437,7 +437,7 @@ class Boxers extends Component {
 				</select>
 				</label>
 				<br />
-				<button type="button" onClick={() => this.update()}>Submit</button>
+				<button className="littlebtn" type="button" onClick={() => this.update()}>Submit</button>
 			</form>
 
 			<br />
@@ -448,7 +448,7 @@ class Boxers extends Component {
 				<input type="text" name="boxer_id_d" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<button type="button" onClick={() => this.delete_func()}>Submit</button>
+				<button className="littlebtn" type="button" onClick={() => this.delete_func()}>Submit</button>
 			</form>
 	
 

@@ -1,0 +1,65 @@
+table.designated {  
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 640px; 
+    border-collapse: 
+    collapse; border-spacing: 0; 
+}
+
+.container {
+    padding: 10px;
+    width: 10px;
+    margin: auto;
+}
+
+.designated td, th {  
+    border: 1px solid transparent; /* No more visible border */
+    height: 30px; 
+}
+
+.designated th {  
+    background: #DFDFDF;  /* Darken header a bit */
+    font-weight: bold;
+}
+
+.designated td {  
+    background: #FAFAFA;
+    text-align: center;
+}
+
+label {
+	margin: auto;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	display: inline-block;
+	padding-left:1em;
+
+}
+
+p.selectall {
+	text-align: center;
+	font-size: large;
+}
+
+.selectallbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 300px;
+	font-size: 13px;
+}
+
+.littlebtn {
+    background-color: #0000CD;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+	font-size: 13px;
+}
+
+

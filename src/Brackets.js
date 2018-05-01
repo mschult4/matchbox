@@ -428,20 +428,22 @@ Bracket {bracket_letter}
 				<input type="text" name="save_as" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 
-				<button type="button" onClick={() => this.save_bracket()}>Save</button>
+				<button className="smallerbtn" type="button" onClick={() => this.save_bracket()}>Save</button>
 			</form>
 				
 			<br />
 
 <form>
+				<div className="select">
 				<label>
 				Load Bracket:
 				<select name="bracket_load" onChange={(evt) => this.update_state(evt)}>
 					{options}
 				</select>
 				</label>
+				</div>
 
-			<button type="button" onClick={() => this.load_saved()}>Submit</button>
+			<button className="smallerbtn" type="button" onClick={() => this.load_saved()}>Submit</button>
 			</form>
 
 				<br />
