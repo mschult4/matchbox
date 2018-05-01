@@ -25,6 +25,7 @@ class Profile extends Component {
 			"old_pw" : "",
 			"new_pw" : "",
 			"new_pw_check" : "",
+	    "spars": {},
         };
         this.main = main_app;
         this.simpleQuery();
@@ -161,6 +162,35 @@ class Profile extends Component {
 	this.simpleQuery();	
 	}
 
+    sparQuery() {
+                console.log("top of spar: ", this.state.spars);
+                var querylist = [];
+                var querystr = "boxer_id";
+                querystr += "=";
+                querystr += this.state['boxer_id'];
+                querylist.push(querystr);
+                console.log(querylist);
+
+                var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/spars";
+
+                var middle = "";
+                console.log(querylist);
+                if (querylist.length !== 0) { //pretty later
+                        middle = "?"
+                        middle += querylist.join("&");
+                        console.log(middle);
+                }
+
+        fetch(URL+middle)
+        .then(results => {
+            return results.json();
+        }).then(data => {
+
+            this.setState({"spars": data});
+            console.log("SPARZZZZ", this.state.spars);
+        })
+    }
+
 	update_state(evt) {
 		console.log(sessionStorage);
 		var temp = {};
@@ -218,38 +248,25 @@ class Profile extends Component {
 				<input type="text" name="first_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<br />
-				<br />
-				<br />
 				<label className="profilelabel">
 				Last:<br /> 
 				<input type="text" name="last_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-				<br />
-				<br />
-				<br />
 				<br />
 				<label className="profilelabel">
 				Nickname:<br /> 
 				<input type="text" name="goes_by_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<br />
-				<br />
-				<br />
 				<label className="profilelabel">
 				Year:<br /> 
 				<input type="text" name="year_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<br />
-				<br />
-				<br />
 				<label className="profilelabel">
 				Hall:<br /> 
 				<input type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-				<br />
 				<br />
 				<br />
 				<select className="profileselect" name="experience_u" onChange={(evt) => this.update_state(evt)}>
@@ -269,13 +286,10 @@ class Profile extends Component {
 				</select>
 				<br />
 				<br />
-				<br />
 				<label className="profilelabel">
 				Weight:<br />
 				<input type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-				<br />
-				<br />
 				<br />
 				<br />
 				<select className="profileselect" name="handedness_u" onChange={(evt) => this.update_state(evt)}>
@@ -285,11 +299,12 @@ class Profile extends Component {
 				</select>
 				<br />
 				<br />
-				<br />
 
 				<button className="profilebutton" type="button" onClick={() => this.update()}>Submit</button>
 			</form>
                         <br />
+			<br />
+			<br />
 			<form id="prof_pw">
 				<h4 id = "pw_desc">Change Password</h4><br/>
 				<label className="profilelabel">
@@ -297,16 +312,10 @@ class Profile extends Component {
 				<input type="password" name="old_pw" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<br />
-				<br />
-				<br />
-				<br />
 				<label className="profilelabel">
 				New Password:
 				<input type="password" name="new_pw" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-				<br />
-				<br />
-				<br />
 				<br />
 				<label className="profilelabel">
 				Retype New Password:
@@ -314,15 +323,17 @@ class Profile extends Component {
 				</label>
 				<br />
 				<br />
-				<br />
-				<br />
 
 				<button className="profilebutton" type="button" onClick={() => this.updatePassword()}>Submit</button>
 			</form>
+			<br />
+			<br />
+			<br />
  			<form id="prof_spar">
                         	<h4 id="spar_desc">Show Spars</h4>
+				<button className="profilebutton" type="button" onClick={() => this.sparQuery()}>Submit</button>	
 			</form>
-
+			<br />
             </div>
         );
     }
