@@ -1,8 +1,35 @@
+.profileinput {
+    width: 35%;
+    padding: 12px 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.passinput {
+    width: 25%;
+    padding: 12px 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
 #profile_table {
     border-collapse: collapse;
     width: 50%;
     margin-left: 25%;
     margin-right: 25%;
+}
+
+#spar_table {
+    border-collapse: collapse;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .profiledata {
@@ -15,25 +42,28 @@
 }
 
 .profileform {
-    margin-left: 40%;
+    margin-left: 25%;
     margin-right: 25%;
 }
 
 .profilelabel {
-    margin-right: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .profilebutton {
-    margin-right: 30%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 #desc, #pw_desc, #spar_desc {
     text-align: center;
-    margin-left: 0%;
+    margin-left: 25%;
     margin-right: 25%;
 }
 
 .profileselect {
+	margin-left: 25%;
         margin-right: 25%;
 	width: 225px;
 	height: 40px;

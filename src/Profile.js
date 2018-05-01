@@ -266,28 +266,32 @@ class Profile extends Component {
 				<h4 id="desc">Enter data to update your profile.</h4><br/>
 				<label className="profilelabel">
 				First:<br /> 
-				<input type="text" name="first_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="first_u" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
 				Last:<br /> 
-				<input type="text" name="last_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="last_u" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
 				Nickname:<br /> 
-				<input type="text" name="goes_by_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="goes_by_u" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
 				Year:<br /> 
-				<input type="text" name="year_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="year_u" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
 				Hall:<br /> 
-				<input type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				<br />
 				<br />
 				<select className="profileselect" name="experience_u" onChange={(evt) => this.update_state(evt)}>
@@ -309,8 +313,8 @@ class Profile extends Component {
 				<br />
 				<label className="profilelabel">
 				Weight:<br />
-				<input type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				<br />
 				<br />
 				<select className="profileselect" name="handedness_u" onChange={(evt) => this.update_state(evt)}>
@@ -321,7 +325,7 @@ class Profile extends Component {
 				<br />
 				<br />
 
-				<button className="profilebutton" type="button" onClick={() => this.update()}>Submit</button>
+				<button className="profilebutton" type="button" onClick={() => this.update()}>Update</button>
 			</form>
                         <br />
 			<br />
@@ -329,30 +333,32 @@ class Profile extends Component {
 			<form className="profileform">
 				<h4 id = "pw_desc">Change Password</h4><br/>
 				<label className="profilelabel">
-				Old Password:
-				<input type="password" name="old_pw" onChange={(evt) => this.update_state(evt)}/>
+				Old Password:<br />
 				</label>
+				<input type="password" className="passinput" name="old_pw" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
-				New Password:
-				<input type="password" name="new_pw" onChange={(evt) => this.update_state(evt)}/>
+				New Password:<br />
 				</label>
+				<input type="password" name="new_pw" className="passinput" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
-				Retype New Password:
-				<input type="password" name="new_pw_check" onChange={(evt) => this.update_state(evt)}/>
+				Re-Type New Password:
 				</label>
+				<input className="passinput" type="password" name="new_pw_check" onChange={(evt) => this.update_state(evt)}/>
 				<br />
 				<br />
 
-				<button className="profilebutton" type="button" onClick={() => this.updatePassword()}>Submit</button>
+				<button className="profilebutton" type="button" onClick={() => this.updatePassword()}>Change Password</button>
 			</form>
 			<br />
 			<br />
 			<br />
  			<form className="profileform">
                         	<h4 id="spar_desc">Your Past Spars</h4>
-            			<table id = "profile_table">
+            			<table id = "spar_table">
                 			<tbody>
                     				{spars}
                 			</tbody>
