@@ -59,7 +59,7 @@ class Login extends Component {
                     }
                 }
                 else {
-                    alert("Username and/or password are incorrect or not yet updated in system.");
+                    alert("Username and/or password are incorrect.");
                 }
             })
 
