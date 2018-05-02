@@ -214,7 +214,8 @@ Bracket {bracket_letter}
 		} else {
 			console.log("select: ", this.state.selected);
 			this.state.selected[bracket_slot] = args;
-			selec.style.border= " solid #0000FF";
+			selec.style.border= "solid #55aadd";
+			selec.style["border-radius"] = "10px";
 		}
 
 		console.log(selec);
