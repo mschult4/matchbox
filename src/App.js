@@ -10,6 +10,7 @@ import Brackets from './Brackets';
 import Profile from './Profile';
 import Signups from './Signups';
 import Schedule from './Schedule';
+import logo from './boxing-gloves.png';
 
 class App extends Component {
 
@@ -19,6 +20,7 @@ class App extends Component {
 			"page" : "login",
         };
         this.change_page = this.change_page.bind(this);
+        this.logout = this.logout.bind(this);
         if (sessionStorage.authenticated) {
             if (sessionStorage.page == null || sessionStorage.page === 'undefined') {
                 this.state["page"] = "boxers";
@@ -36,12 +38,21 @@ class App extends Component {
         sessionStorage.page = page;
     }
 
+    logout() {
+        sessionStorage.authenticated = false;
+        this.change_page("login");
+    }
+
 	render() {
 		if (this.state["page"] === "login") {
 			return (<Login changePage={this.change_page}/>);
         } else if (this.state["page"] === "boxers") {
 			return (
                 <div>
+                    <header className="App-header">
+                        <h1 className="App-title">MatchBox</h1>
+                    </header>
+                    <p className="logout" onClick={() => this.logout()}>Logout</p>
                     <NavigationBar changePage={this.change_page}/>
                     <Boxers changePage={this.change_page}/>
                 </div>
@@ -49,6 +60,10 @@ class App extends Component {
 		} else if (this.state["page"] === "spars") {
 			return (
                 <div>
+                    <header className="App-header">
+                        <h1 className="App-title">MatchBox</h1>
+                    </header>
+                    <p className="logout" onClick={() => this.logout()}>Logout</p>
                     <NavigationBar changePage={this.change_page}/>
                     <Spars changePage={this.change_page}/>
                 </div>
@@ -56,6 +71,10 @@ class App extends Component {
         } else if (this.state["page"] === "brackets") {
             return (
                 <div>
+                    <header className="App-header">
+                        <h1 className="App-title">MatchBox</h1>
+                    </header>
+                    <p className="logout" onClick={() => this.logout()}>Logout</p>
                     <NavigationBar changePage={this.change_page}/>
                     <Brackets changePage={this.change_page}/>
                 </div>
@@ -63,6 +82,10 @@ class App extends Component {
         } else if (this.state["page"] === "profile") {
             return (
                 <div>
+                    <header className="App-header">
+                        <h1 className="App-title">MatchBox</h1>
+                    </header>
+                    <p className="logout" onClick={() => this.logout()}>Logout</p>
                     <NavigationBar changePage={this.change_page}/>
                     <Profile changePage={this.change_page}/>
                 </div>
@@ -70,6 +93,10 @@ class App extends Component {
         } else if (this.state["page"] === "signups") {
             return (
                 <div>
+                    <header className="App-header">
+                        <h1 className="App-title">MatchBox</h1>
+                    </header>
+                    <p className="logout" onClick={() => this.logout()}>Logout</p>
                     <NavigationBar changePage={this.change_page}/>
                     <Signups changePage={this.change_page}/>
                 </div>
@@ -77,6 +104,10 @@ class App extends Component {
         } else if (this.state["page"] === "schedule") {
             return (
                 <div>
+                    <header className="App-header">
+                        <h1 className="App-title">MatchBox</h1>
+                    </header>
+                    <p className="logout" onClick={() => this.logout()}>Logout</p>
                     <NavigationBar changePage={this.change_page}/>
                     <Schedule changePage={this.change_page}/>
                 </div>

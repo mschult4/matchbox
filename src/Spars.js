@@ -92,9 +92,6 @@ class Spars extends Component {
 
 		
 		return(<div className="App">
-			<header className="App-header">
-            <h1 className="App-title">MatchBox</h1>
-            </header>
 			<h2>Spars</h2>
 	    <p className="selectall"><button className="selectallbtn" onClick={() => this.sparQuery()} >See All Spars</button></p> 
 			<form>
