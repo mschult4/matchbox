@@ -334,7 +334,7 @@ class Profile extends Component {
 				<br />
 				<br />
 
-				<button className="profilebutton" type="button" onClick={() => this.update()}>Update</button>
+				<button className="littlebtn" type="button" onClick={() => this.update()}>Update</button>
 			</form>
                         <br />
 			<br />
@@ -360,7 +360,7 @@ class Profile extends Component {
 				<br />
 				<br />
 
-				<button className="profilebutton" type="button" onClick={() => this.updatePassword()}>Change Password</button>
+				<button className="littlebtn" type="button" onClick={() => this.updatePassword()}>Update</button>
 			</form>
 			<br />
 			<br />

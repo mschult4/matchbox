@@ -171,7 +171,7 @@ div {
     width: 70px;
 	height: 39px;
 	vertical-align: center;
-
+	font-size: 11px;
 }
 
 .select select {
@@ -186,11 +186,11 @@ div {
 }
 
 input[type=text] {
-    width: 300px;
+    width: 270px;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #999;
     box-sizing: border-box;
 }
 
