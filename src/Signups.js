@@ -63,7 +63,6 @@ class Signups extends Component {
             } else if (datum['issue'] === 'full') {
                 alert("This dialogue should never appear. If you are reading this you are a wizard and a heretic.");
             } else if (datum['issue'] === 'none') {
-                alert("You have successfully signed up for a spar on " + this.state.date + " in ring " + ring + ".");
                 this.getSignups();
             }
             //TODO: add functionality to un-signup
