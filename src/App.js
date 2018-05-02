@@ -9,6 +9,7 @@ import NavigationBar from './NavigationBar';
 import Brackets from './Brackets';
 import Profile from './Profile';
 import Signups from './Signups';
+import Schedule from './Schedule';
 
 class App extends Component {
 
@@ -71,6 +72,13 @@ class App extends Component {
                 <div>
                     <NavigationBar changePage={this.change_page}/>
                     <Signups changePage={this.change_page}/>
+                </div>
+            );
+        } else if (this.state["page"] === "schedule") {
+            return (
+                <div>
+                    <NavigationBar changePage={this.change_page}/>
+                    <Schedule changePage={this.change_page}/>
                 </div>
             );
 		} else {
