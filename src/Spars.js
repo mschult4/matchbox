@@ -96,7 +96,7 @@ class Spars extends Component {
             <h1 className="App-title">MatchBox</h1>
             </header>
 			<h2>Spars</h2>
-	    <p className="selectall"><button className="selectallbtn" onClick={() => this.sparQuery()} >See All</button></p> 
+	    <p className="selectall"><button className="selectallbtn" onClick={() => this.sparQuery()} >See All Spars</button></p> 
 			<form>
 				Lookup<br/>
 				<label>
