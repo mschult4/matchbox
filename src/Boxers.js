@@ -231,9 +231,6 @@ class Boxers extends Component {
         }
         return (
             <div className="App">
-            <header className="App-header">
-            <h1 className="App-title">MatchBox</h1>
-            </header>
 			<h2>Boxers</h2>
             <p className="selectall">
                 <button id="starquery" className="selectallbtn" onClick={() => this.starQuery()}>See All Boxers</button>

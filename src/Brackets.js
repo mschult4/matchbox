@@ -410,9 +410,6 @@ Bracket {bracket_letter}
 
 		return (
             <div className="App">
-            <header className="App-header">
-            <h1 className="App-title">MatchBox</h1>
-            </header>
 
 				<div id="fixedswap">
 				<button className="swapbtn" type="button" onClick={() => this.swap_func()}>Swap Boxers</button>

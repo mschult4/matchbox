@@ -252,9 +252,6 @@ class Profile extends Component {
         }
         return (
             <div className="App">
-            <header className="App-header">
-            <h1 className="App-title">MatchBox</h1>
-            </header>
 	    {name}
             <table id = "profile_table">
                 <tbody>
