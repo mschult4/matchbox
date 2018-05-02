@@ -41,6 +41,7 @@ table.signups td.slot {
 table.signups td.open:hover {
     border: 1px solid #55aadd;
     background-color: #55aadd;
+    cursor: pointer;
 }
 
 table.signups th {
