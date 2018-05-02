@@ -29,6 +29,7 @@ class Profile extends Component {
         };
         this.main = main_app;
         this.simpleQuery();
+        this.sparQuery();
     }
 
 	starQuery() {
@@ -188,6 +189,7 @@ class Profile extends Component {
 
             this.setState({"spars": data});
             console.log("SPARZZZZ", this.state.spars);
+	    
         })
     }
 
@@ -203,8 +205,12 @@ class Profile extends Component {
 	render() {
         let headings = ["mixed_first","mixed_last","mixed_goes_by","year","hall","eligible","experience","vet_years","weight","handedness","captain","gender"];
         let heading_disp = ["First Name", "Last Name", "Nickname", "Year", "Hall", "Eligible", "Experience", "Veteran Years", "Weight", "Handedness", "Captain", "Gender"];
+        let spar_headings = ["date", "opp_first", "opp_last"];
+	let spar_headings_disp = ['Date', 'Opponent'];
         var rows = [];
         var name = [];
+        var spars = [];
+   	spars.push(spar_headings_disp.map((str) => <th className="designated" key={str}>{str}</th>));
         for (var row_num = 0; row_num < this.state.boxers.length; row_num++) {
 
             	for (var i=0; i < headings.length; i++) {
@@ -229,6 +235,21 @@ class Profile extends Component {
 			rows.push(<tr className="profilerow" key={row_num}>{values}</tr>);
             	}
         }
+
+        for (var row_num = 0; row_num < this.state.spars.length; row_num++) {
+		var values = [];
+            	for (var i=0; i < spar_headings_disp.length; i++) {
+			if (spar_headings_disp[i] === 'Opponent') {
+			    var first = this.state.spars[row_num]['opp_first'];
+                            var last = this.state.spars[row_num]['opp_last'];
+                            values.push(<td key={i} className="designated">{first+" "+last}</td>);
+                        }
+			else
+               		    values.push(<td className="designated" key={i}>{this.state.spars[row_num][spar_headings[i]]}</td>);
+               console.log(values)
+		}
+		spars.push(<tr className="designated" key={row_num}>{values}</tr>);
+        }
         return (
             <div className="App">
             <header className="App-header">
@@ -241,32 +262,36 @@ class Profile extends Component {
                 </tbody>
             </table>
             <br />
-			<form id = "prof_form">
+			<form className = "profileform">
 				<h4 id="desc">Enter data to update your profile.</h4><br/>
 				<label className="profilelabel">
 				First:<br /> 
-				<input type="text" name="first_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="first_u" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
 				Last:<br /> 
-				<input type="text" name="last_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="last_u" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
 				Nickname:<br /> 
-				<input type="text" name="goes_by_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="goes_by_u" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
 				Year:<br /> 
-				<input type="text" name="year_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="year_u" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
 				Hall:<br /> 
-				<input type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				<br />
 				<br />
 				<select className="profileselect" name="experience_u" onChange={(evt) => this.update_state(evt)}>
@@ -288,8 +313,8 @@ class Profile extends Component {
 				<br />
 				<label className="profilelabel">
 				Weight:<br />
-				<input type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
+				<input className="profileinput" type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				<br />
 				<br />
 				<select className="profileselect" name="handedness_u" onChange={(evt) => this.update_state(evt)}>
@@ -300,38 +325,44 @@ class Profile extends Component {
 				<br />
 				<br />
 
-				<button className="profilebutton" type="button" onClick={() => this.update()}>Submit</button>
+				<button className="profilebutton" type="button" onClick={() => this.update()}>Update</button>
 			</form>
                         <br />
 			<br />
 			<br />
-			<form id="prof_pw">
+			<form className="profileform">
 				<h4 id = "pw_desc">Change Password</h4><br/>
 				<label className="profilelabel">
-				Old Password:
-				<input type="password" name="old_pw" onChange={(evt) => this.update_state(evt)}/>
+				Old Password:<br />
 				</label>
+				<input type="password" className="passinput" name="old_pw" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
-				New Password:
-				<input type="password" name="new_pw" onChange={(evt) => this.update_state(evt)}/>
+				New Password:<br />
 				</label>
+				<input type="password" name="new_pw" className="passinput" onChange={(evt) => this.update_state(evt)}/>
+				<br />
 				<br />
 				<label className="profilelabel">
-				Retype New Password:
-				<input type="password" name="new_pw_check" onChange={(evt) => this.update_state(evt)}/>
+				Re-Type New Password:
 				</label>
+				<input className="passinput" type="password" name="new_pw_check" onChange={(evt) => this.update_state(evt)}/>
 				<br />
 				<br />
 
-				<button className="profilebutton" type="button" onClick={() => this.updatePassword()}>Submit</button>
+				<button className="profilebutton" type="button" onClick={() => this.updatePassword()}>Change Password</button>
 			</form>
 			<br />
 			<br />
 			<br />
- 			<form id="prof_spar">
-                        	<h4 id="spar_desc">Show Spars</h4>
-				<button className="profilebutton" type="button" onClick={() => this.sparQuery()}>Submit</button>	
+ 			<form className="profileform">
+                        	<h4 id="spar_desc">Your Past Spars</h4>
+            			<table className = "designated">
+                			<tbody className="designated">
+                    				{spars}
+                			</tbody>
+            			</table>
 			</form>
 			<br />
             </div>

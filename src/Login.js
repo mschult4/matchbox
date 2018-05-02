@@ -76,13 +76,13 @@ class Login extends Component {
                 <div className="imgcontainer">
                     <img src={logo} alt="Avatar" className="avatar" />
                 </div>
-                <div className="container">
+                <div className="logincontainer">
                     <form>
-                        <label htmlFor="username"><b>Username</b></label>
+                        <label className="login" htmlFor="username"><b>Username</b></label>
                         <br />
-                        <input type="text" placeholder="Enter Username" name="username" onChange={(evt) => this.update_state(evt)}/>
+                        <input id="usrnmbox" type="text" placeholder="Enter Username" name="username" onChange={(evt) => this.update_state(evt)}/>
                         <br />
-                        <label htmlFor="password"><b>Password</b></label>
+                        <label className="login" htmlFor="password"><b>Password</b></label>
                         <br />
                         <input type="password" placeholder="Enter Password" name="password" onChange={(evt) => this.update_state(evt)}/>
                         <br />
