@@ -99,6 +99,8 @@ class Spars extends Component {
 
             this.setState({"spars": data});
             console.log("SPARZZZZ", this.state.spars);
+			var thingie=document.getElementById("starspar");
+			thingie.innerHTML = "Loaded -- Scroll Down";
         })
     }
 
@@ -163,7 +165,9 @@ class Spars extends Component {
 		
 		return(<div className="App">
 			<h2>Spars</h2>
-	    <p className="selectall"><button className="selectallbtn" onClick={() => this.sparQuery()} >See All Spars</button></p> 
+	    <p className="selectall">
+			<button id="starspar" className="selectallbtn" onClick={() => this.sparQuery()} >See All Spars</button>
+		</p> 
 			<form>
 				Lookup<br/>
 				<label>
