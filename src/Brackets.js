@@ -446,7 +446,6 @@ Bracket {bracket_letter}
 			<button className="smallerbtn" type="button" onClick={() => this.load_saved()}>Submit</button>
 			</form>
 
-				<br />
 
 			</div>
 			

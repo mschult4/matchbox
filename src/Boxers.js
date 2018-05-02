@@ -284,7 +284,7 @@ class Boxers extends Component {
 				<input type="text" name="hall_i" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 
-				<label>
+				<label className="select">
 				Experience:
 				<select name="experience_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -293,7 +293,7 @@ class Boxers extends Component {
 				</select>
 				</label>
 
-				<label>
+				<label className="selectsmall">
 				Eligible:
 				<select name="eligible_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -302,7 +302,7 @@ class Boxers extends Component {
 				</select>
 				</label>
 
-				<label>
+				<label className="selectsmall">
 				Vet_years:
 				<select name="vet_years_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -313,12 +313,12 @@ class Boxers extends Component {
 				</select>
 				</label>
 
-				<label>
+				<label className="selectsmall">
 				Weight:
 				<input type="text" name="weight_i" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				
-				<label>
+				<label className="selectsmall">
 				Handedness:
 				<select name="handedness_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -327,7 +327,7 @@ class Boxers extends Component {
 				</select>
 				</label>
 
-				<label>
+				<label className="selectsmall">
 				Captain:
 				<select name="captain_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -336,7 +336,7 @@ class Boxers extends Component {
 				</select>
 				</label>
 
-				<label>
+				<label className="selectsmall">
 				Gender:
 				<select name="gender_i" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -379,7 +379,7 @@ class Boxers extends Component {
 				<input type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 								
-				<label>
+				<label className="select">
 				Experience:
 				<select name="experience_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -388,7 +388,7 @@ class Boxers extends Component {
 				</select>
 
 				</label>
-				<label>
+				<label className="selectsmall">
 				Eligible:
 				<select name="eligible_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -396,7 +396,7 @@ class Boxers extends Component {
 					<option value="N">N</option>
 				</select>
 				</label>
-				<label>
+				<label className="selectsmall">
 				Vet_years:
 				<select name="vet_years_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -411,7 +411,7 @@ class Boxers extends Component {
 				<input type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				
-				<label>
+				<label className="selectsmall">
 				Handedness:
 				<select name="handedness_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -419,7 +419,7 @@ class Boxers extends Component {
 					<option value="R">R</option>
 				</select>
 				</label>
-				<label>
+				<label className="selectsmall">
 				Captain:
 				<select name="captain_u" onChange={(evt) => this.update_state(evt)}>
 					<option value=""></option>
@@ -427,7 +427,7 @@ class Boxers extends Component {
 					<option value="N">N</option>
 				</select>
 				</label>
-				<label>
+				<label className="selectsmall">
 
 				Gender:
 				<select name="gender_u" onChange={(evt) => this.update_state(evt)}>
