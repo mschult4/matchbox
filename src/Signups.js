@@ -14,6 +14,7 @@ class Signups extends Component {
         };
         this.switchDay = this.switchDay.bind(this);
         this.isActive = this.isActive.bind(this);
+        this.sign_up = this.sign_up.bind(this);
         this.main = main_app;
     }
 
