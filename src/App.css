@@ -179,7 +179,27 @@ div {
    font-size: 14px;
    height: 39px;
    padding: 5px;
-   width: 268px;
+   width: 300px;
+	border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+}
+
+input[type=text] {
+    width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.selectsmall select {
+   background: transparent;
+   font-size: 14px;
+   height: 39px;
+   padding: 5px;
+   width: 50px;
 	border-radius: 0;
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
