@@ -294,16 +294,22 @@ class Profile extends Component {
 				<input className="profileinput" type="text" name="hall_u" onChange={(evt) => this.update_state(evt)}/>
 				<br />
 				<br />
+				<label className="profilelabel">
+				Experience:<br />
+				</label>
 				<select className="profileselect" name="experience_u" onChange={(evt) => this.update_state(evt)}>
-					<option value="">Experience</option>
+					<option value=""></option>
 					<option value="novice">Novice</option>
 					<option value="veteran">Veteran</option>
 				</select>
 				<br />
 				<br />
 				<br />
+				<label className="profilelabel">
+				Veteran Years:<br />
+				</label>
 				<select className="profileselect" name="vet_years_u" onChange={(evt) => this.update_state(evt)}>
-					<option value="">Veteran Years</option>
+					<option value=""></option>
 					<option value="0">0</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -317,8 +323,11 @@ class Profile extends Component {
 				<input className="profileinput" type="text" name="weight_u" onChange={(evt) => this.update_state(evt)}/>
 				<br />
 				<br />
+				<label className="profilelabel">
+				Handedness:<br />
+				</label>
 				<select className="profileselect" name="handedness_u" onChange={(evt) => this.update_state(evt)}>
-					<option value="">Handedness</option>
+					<option value=""></option>
 					<option value="L">L</option>
 					<option value="R">R</option>
 				</select>

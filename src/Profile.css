@@ -62,7 +62,7 @@
     margin-right: 25%;
 }
 
-.profileselect {
+/*.profileselect {
 	margin-left: 25%;
         margin-right: 25%;
 	width: 225px;
@@ -71,4 +71,15 @@
 	background-color: white;
 	box-shadow: 0 2px 0 white;
 	border-radius: 2px;
+}*/
+
+.profileselect {
+   background: transparent;
+   font-size: 14px;
+   height: 39px;
+   padding: 5px;
+   width: 268px;
+        border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
 }
