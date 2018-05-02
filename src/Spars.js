@@ -23,6 +23,38 @@ class Spars extends Component {
 			"season" : "",
 			"spars.gender" : "",
 			"med_comm" : "",
+			"num_spar_i_a" : "",
+			"date_i_a" : "",
+			"boxer_id_i_a" : "",
+			"boxer_first_i_a" : "",
+			"boxer_last_i_a" : "",
+			"opp_id_i_a" : "",
+			"opp_first_i_a" : "",
+			"opp_last_i_a" : "",
+			"num_rounds_i_a" : "",
+			"len_rds_i_a" : "",
+			"commments_i_a" : "",
+			"score_i_a" : "",
+			"coach_initials_i_a" : "",
+			"season_i_a" : "",
+			"spars.gender_i_a" : "",
+			"med_comm_i_a" : "",
+			"num_spar_i_b" : "",
+			"date_i_b" : "",
+			"boxer_id_i_b" : "",
+			"boxer_first_i_b" : "",
+			"boxer_last_i_b" : "",
+			"opp_id_i_b" : "",
+			"opp_first_i_b" : "",
+			"opp_last_i_b" : "",
+			"num_rounds_i_b" : "",
+			"len_rds_i_b" : "",
+			"commments_i_b" : "",
+			"score_i_b" : "",
+			"coach_initials_i_b" : "",
+			"season_i_b" : "",
+			"spars.gender_i_b" : "",
+			"med_comm_i_b" : "",
         };
     }
 		
@@ -70,6 +102,44 @@ class Spars extends Component {
         })
     }
 
+       insert() {
+                //if (this.state['first_i'] === "" || this.state['last_i'] === "") {
+                //    alert("New boxer must have both FIRST and LAST name entered.");
+                //    return;
+                //}
+                console.log("in insert", this.state);
+		var i_keys = ["num_spar_i_a", "date_i_a", "boxer_id_i_a", "boxer_first_i_a", "boxer_last_i_a", "opp_id_i_a", "opp_first_i_a", "opp_last_i_a", "num_rounds_i_a", "len_rds_i_a", "commments_i_a", "score_i_a", "coach_initials_i_a", "season_i_a", "spars.gender_i_a", "med_comm_i_a", "num_spar_i_b", "date_i_b", "boxer_id_i_b", "boxer_first_i_b", "boxer_last_i_b", "opp_id_i_b", "opp_first_i_b", "opp_last_i_b", "num_rounds_i_b", "len_rds_i_b", "commments_i_b", "score_i_b", "coach_initials_i_b", "season_i_b", "spars.gender_i_b", "med_comm_i_b"]
+
+                var data = {};
+                for (var i in i_keys) {
+                        if (this.state[i_keys[i]] !== "") {
+                                data[i_keys[i]] = this.state[i_keys[i]];
+                        }
+                }
+                console.log("body: ", data);
+
+                var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/spars";
+
+                var post_dict = {body : JSON.stringify(data), 
+                        method: 'POST',
+                        headers : {"Content-Type": "text/plain",
+                                                //"Access-Control-Allow-Headers" : "*",
+                                                //"Access-Control-Allow-Origin" : "*"
+                                                //"host" : "apigateway.us-east-2.amazonaws.com",
+                                                } };
+                
+                console.log("post_dict", post_dict);
+                fetch(URL, post_dict)
+                .then(results => {
+            return results.json();
+        }).then(datum => {
+
+            console.log("insert", datum);
+//                        this.setState({"boxers": datum});
+//            console.log("state", this.state.boxers);
+        })
+                
+        }
 
 	render() {
 
@@ -138,7 +208,145 @@ class Spars extends Component {
 				<br />
 				<button className="littlebtn" type="button" onClick={() => this.sparQuery()}>Submit</button>
 			</form>
-
+			<br />
+			<br />
+			<form>
+				Insert Boxer 1<br /><br />
+				<label>
+				Num Spar:
+				<input type="text" name="num_spar_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Spardate:
+				<input type="text" name="date_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Boxer ID:
+				<input type="text" name="boxer_id_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Boxer First:
+				<input type="text" name="boxer_first_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Boxer Last:
+				<input type="text" name="boxer_last_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Opponent ID:
+				<input type="text" name="opp_id_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Opponent First:
+				<input type="text" name="opp_first_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Opponent Last:
+				<input type="text" name="opp_last_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Num Rounds:
+				<input type="text" name="num_rounds_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Length of Rounds:
+				<input type="text" name="len_rds_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Comments:
+				<input type="text" name="comments_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Score:
+				<input type="text" name="score_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Coach Initials:
+				<input type="text" name="coach_initials_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Year:
+				<input type="text" name="season_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Gender:
+				<input type="text" name="spars.gender_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Medical Comments:
+				<input type="text" name="med_comm_i_a" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<br />
+				<br />
+				<br />
+				Insert Boxer 2<br /><br />
+				<label>
+				Num Spar:
+				<input type="text" name="num_spar_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Spardate:
+				<input type="text" name="date_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Boxer ID:
+				<input type="text" name="boxer_id_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Boxer First:
+				<input type="text" name="boxer_first_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Boxer Last:
+				<input type="text" name="boxer_last_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Opponent ID:
+				<input type="text" name="opp_id_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Opponent First:
+				<input type="text" name="opp_first_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Opponent Last:
+				<input type="text" name="opp_last_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Num Rounds:
+				<input type="text" name="num_rounds_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Length of Rounds:
+				<input type="text" name="len_rds_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Comments:
+				<input type="text" name="comments_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Score:
+				<input type="text" name="score_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Coach Initials:
+				<input type="text" name="coach_initials_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Year:
+				<input type="text" name="season_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Gender:
+				<input type="text" name="spars.gender_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<label>
+				Medical Comments:
+				<input type="text" name="med_comm_i_b" onChange={(evt) => this.update_state(evt)}/>
+				</label>
+				<br />
+				<button className="littlebtn" type="button" onClick={() => this.insert()}>Submit</button>
+			</form>
 	
 	
 			<br />
