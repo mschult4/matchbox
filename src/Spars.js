@@ -104,12 +104,12 @@ class Spars extends Component {
         })
     }
 
-       insert() {
-                //if (this.state['first_i'] === "" || this.state['last_i'] === "") {
-                //    alert("New boxer must have both FIRST and LAST name entered.");
-                //    return;
-                //}
-                console.log("in insert", this.state);
+	insert() {
+		if (!this.state.date_i_b.match(/^[12][0-9][0-9][0-9]-[0123][0-9]-[0123][0-9]$/) || !this.state.date_i_a.match(/^[12][0-9][0-9][0-9]-[0123][0-9]-[0123][0-9]$/)) {
+			alert("Please enter both spar's dates in YYYY-MM-DD format.");
+			return;	
+		}
+        console.log("in insert", this.state);
 		var i_keys = ["num_spar_i_a", "date_i_a", "boxer_id_i_a", "boxer_first_i_a", "boxer_last_i_a", "opp_id_i_a", "opp_first_i_a", "opp_last_i_a", "num_rounds_i_a", "len_rds_i_a", "commments_i_a", "score_i_a", "coach_initials_i_a", "season_i_a", "spars.gender_i_a", "med_comm_i_a", "num_spar_i_b", "date_i_b", "boxer_id_i_b", "boxer_first_i_b", "boxer_last_i_b", "opp_id_i_b", "opp_first_i_b", "opp_last_i_b", "num_rounds_i_b", "len_rds_i_b", "commments_i_b", "score_i_b", "coach_initials_i_b", "season_i_b", "spars.gender_i_b", "med_comm_i_b"]
 
                 var data = {};
@@ -214,15 +214,15 @@ class Spars extends Component {
 			<form>
 				Insert Boxer 1<br /><br />
 				<label>
-				Num Spar:
+				Num Spar <b>(Required)</b>:
 				<input type="text" name="num_spar_i_a" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<label>
-				Spardate:
+				Spardate <b>(Required)</b>:
 				<input type="text" name="date_i_a" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<label>
-				Boxer ID:
+				Boxer ID <b>(Required)</b>:
 				<input type="text" name="boxer_id_i_a" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<label>
@@ -282,15 +282,15 @@ class Spars extends Component {
 				<br />
 				Insert Boxer 2<br /><br />
 				<label>
-				Num Spar:
+				Num Spar <b>(Required)</b>:
 				<input type="text" name="num_spar_i_b" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<label>
-				Spardate:
+				Spardate <b>(Required)</b>:
 				<input type="text" name="date_i_b" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<label>
-				Boxer ID:
+				Boxer ID <b>(Required)</b>:
 				<input type="text" name="boxer_id_i_b" onChange={(evt) => this.update_state(evt)}/>
 				</label>
 				<label>
