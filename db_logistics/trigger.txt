@@ -1,0 +1,13 @@
+delimiter \\
+CREATE TRIGGER account_setup
+AFTER INSERT ON boxers_real
+FOR EACH ROW
+BEGIN
+   declare num varchar(5);
+   set @num = (case when exists (select * from signin where username like concat(lower(concat(if(char_length(new.mixed_last) >= 10, left(replace(replace(replace(new.mixed_last, '-', ''), '''', ''), ' ', ''), 10), new.mixed_last), if(char_length(new.mixed_first) >= 3, left(new.mixed_first, 3), new.mixed_first))), '%'))
+   then (select count(*) from signin where username like concat(lower(concat(if(char_length(new.mixed_last) >= 10, left(replace(replace(replace(new.mixed_last, '-', ''), '''', ''), ' ', ''), 10), new.mixed_last), if(char_length(new.mixed_first) >= 3, left(new.mixed_first, 3), new.mixed_first))), '%'))
+   else '' end);
+
+   insert into signin (boxer_id, username) values(new.boxer_id, concat(lower(concat(if(char_length(new.mixed_last) >= 10, left(replace(replace(replace(new.mixed_last, '-', ''), '''', ''), ' ', ''), 10), new.mixed_last), if(char_length(new.mixed_first) >= 3, left(new.mixed_first, 3), new.mixed_first))), @num));
+END \\
+delimiter ;
