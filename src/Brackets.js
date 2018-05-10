@@ -79,32 +79,32 @@ Bracket {bracket_letter}
 
 
 <tr>
-<td id={id_1} onMouseOver={() => this.boxer_hover(ordered_bracket[1])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_1, [bracket_letter, ordered_bracket[1].boxer_id ])}><p>{this.concat(ordered_bracket[1])} </p></td>
+<td id={id_1} onMouseOver={() => this.boxer_hover(ordered_bracket[1])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_1, [bracket_letter, ordered_bracket[1] ])}><p>{this.concat(ordered_bracket[1])} </p></td>
 <td rowSpan='2'><p></p></td>
 <td rowSpan='4'><p></p></td>
 <td rowSpan='8'><p></p></td>
 </tr>
 <tr>
-<td id={id_8} onMouseOver={() => this.boxer_hover(ordered_bracket[8])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_8,[bracket_letter, ordered_bracket[8].boxer_id ])}><p>{this.concat(ordered_bracket[8])} </p></td>
+<td id={id_8} onMouseOver={() => this.boxer_hover(ordered_bracket[8])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_8,[bracket_letter, ordered_bracket[8]])}><p>{this.concat(ordered_bracket[8])} </p></td>
 </tr>
 <tr>
-<td id={id_4} onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_4,[bracket_letter, ordered_bracket[4].boxer_id ])}><p>{this.concat(ordered_bracket[4])} </p></td>< td rowspan='2'><p></p>< /td>
+<td id={id_4} onMouseOver={() => this.boxer_hover(ordered_bracket[4])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_4,[bracket_letter, ordered_bracket[4]])}><p>{this.concat(ordered_bracket[4])} </p></td>< td rowspan='2'><p></p>< /td>
 </tr>
 <tr>
-<td id={id_5} onMouseOver={() => this.boxer_hover(ordered_bracket[5])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_5,[bracket_letter, ordered_bracket[5].boxer_id ])}><p>{this.concat(ordered_bracket[5])} </p></td>
+<td id={id_5} onMouseOver={() => this.boxer_hover(ordered_bracket[5])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_5,[bracket_letter, ordered_bracket[5]])}><p>{this.concat(ordered_bracket[5])} </p></td>
 </tr>
 <tr>
-<td id={id_3} onMouseOver={() => this.boxer_hover(ordered_bracket[3])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_3,[bracket_letter, ordered_bracket[3].boxer_id ])}><p>{this.concat(ordered_bracket[3])} </p></td>
+<td id={id_3} onMouseOver={() => this.boxer_hover(ordered_bracket[3])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_3,[bracket_letter, ordered_bracket[3]])}><p>{this.concat(ordered_bracket[3])} </p></td>
 <td rowSpan='2'><p></p></td><td rowSpan='4'><p></p></td>
 </tr>
 <tr>
-<td id={id_6} onMouseOver={() => this.boxer_hover(ordered_bracket[6])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_6,[bracket_letter, ordered_bracket[6].boxer_id ])}><p>{this.concat(ordered_bracket[6])} </p></td>
+<td id={id_6} onMouseOver={() => this.boxer_hover(ordered_bracket[6])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_6,[bracket_letter, ordered_bracket[6] ])}><p>{this.concat(ordered_bracket[6])} </p></td>
 </tr>
 <tr>
-<td id={id_2} onMouseOver={() => this.boxer_hover(ordered_bracket[2])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_2,[bracket_letter, ordered_bracket[2].boxer_id ])}><p>{this.concat(ordered_bracket[2])} </p></td><td rowSpan='2'><p></p></td>
+<td id={id_2} onMouseOver={() => this.boxer_hover(ordered_bracket[2])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_2,[bracket_letter, ordered_bracket[2] ])}><p>{this.concat(ordered_bracket[2])} </p></td><td rowSpan='2'><p></p></td>
 </tr>
 <tr>
-<td id={id_7} onMouseOver={() => this.boxer_hover(ordered_bracket[7])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_7,[bracket_letter, ordered_bracket[7].boxer_id ])}><p>{this.concat(ordered_bracket[7])} </p></td></tr>
+<td id={id_7} onMouseOver={() => this.boxer_hover(ordered_bracket[7])} onMouseOut={() => this.boxer_unhover()} onClick={() =>this.select_func(id_7,[bracket_letter, ordered_bracket[7] ])}><p>{this.concat(ordered_bracket[7])} </p></td></tr>
 </tbody>
 </table></div>);
 
@@ -196,10 +196,21 @@ Bracket {bracket_letter}
 	}
 
 	select_func(bracket_slot, args) {
+		var new_args = args;
+		if (args[1] !== null) {
+			new_args[1] = args[1].boxer_id;
+		} else {
+			alert("Moving byes is not supported at this time");
+			return;
+		}
 		console.log(bracket_slot, args);
 		if (Object.keys(this.state.selected).length === 2 && !this.state.selected[bracket_slot]) {
 			return;
-		}
+		} 
+
+		console.log("bracket_slot", bracket_slot);
+		console.log("this.state.selected[bracket_slot]", this.state.selected[bracket_slot]);
+	
 		
 		var selec = document.getElementById(bracket_slot);
 
@@ -213,7 +224,7 @@ Bracket {bracket_letter}
 
 		} else {
 			console.log("select: ", this.state.selected);
-			this.state.selected[bracket_slot] = args;
+			this.state.selected[bracket_slot] = new_args;
 			selec.style.border= "solid #55aadd";
 			selec.style["border-radius"] = "10px";
 		}

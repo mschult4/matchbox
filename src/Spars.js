@@ -135,7 +135,7 @@ class Spars extends Component {
                 .then(results => {
             return results.json();
         }).then(datum => {
-
+			this.setState({"spars": datum});	
             console.log("insert", datum);
 //                        this.setState({"boxers": datum});
 //            console.log("state", this.state.boxers);
