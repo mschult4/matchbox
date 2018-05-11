@@ -161,7 +161,6 @@ class Signups extends Component {
 			ring: ring,
             boxer_id: sessionStorage.identity,
 		}
-		console.log("sending data to insert", data);
 		
         var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/signups";
 
@@ -171,7 +170,6 @@ class Signups extends Component {
             headers : {"Content-Type": "text/plain"}
 		};
     
-        console.log("put_dict", put_dict);
         fetch(URL, put_dict)
         .then(results => {
             return results.json();
@@ -187,7 +185,6 @@ class Signups extends Component {
             } else if (datum['issue'] === 'none') {
                 this.getSignups();
             }
-            console.log("datum", datum)
         })  
 
     }
@@ -199,7 +196,6 @@ class Signups extends Component {
 			ring: ring,
             boxer_id: sessionStorage.identity,
 		}
-		console.log("sending data to delete", data);
 		
         var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/signups";
 
@@ -209,7 +205,6 @@ class Signups extends Component {
             headers : {"Content-Type": "text/plain"}
 		};
     
-        console.log("post_dict", post_dict);
         fetch(URL, post_dict)
         .then(results => {
             return results.json();
@@ -231,7 +226,6 @@ class Signups extends Component {
                     for (var item in this.state.signups) {
                         if (this.state.signups[item]["spar_slot"]===i && this.state.signups[item]["date"]===day && this.state.signups[item]["ring"]==ring) {
                             if (this.state.signups[item]["boxer"]==sessionStorage.identity) {
-                                console.log("adding onclick");
                                 newRow.push(<td className="cancel" key={i+day+ring+found} onClick={this.un_sign_up.bind(i, i, day, ring)}>{this.state.signups[item]["mixed_first"]} {this.state.signups[item]["mixed_last"]}, {this.state.signups[item]["weight"]}, {this.state.signups[item]["experience"]}, {this.state.signups[item]["handedness"]}</td>);
                             } else {
                                 newRow.push(<td className="full" key={i+day+ring+found}>{this.state.signups[item]["mixed_first"]} {this.state.signups[item]["mixed_last"]}, {this.state.signups[item]["weight"]}, {this.state.signups[item]["experience"]}, {this.state.signups[item]["handedness"]}</td>);
@@ -272,7 +266,6 @@ class Signups extends Component {
 
 	render() {
         var rows = this.renderTable(this.state.date_format);
-        console.log("rows", rows);
         return (
             <div className="signupscontainer">
                 <h1>Spar Signups - Week of {this.state.this_week["Monday"]}/18</h1>

@@ -17,11 +17,9 @@ class Brackets extends Component {
         };
 		this.query_rank();
 		this.options();
-		console.log("OPTIONS", this.state.options);
     }
 
 	query_rank() {
-		console.log("top of query");
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/bracket";
 
 		fetch(URL)
@@ -37,26 +35,19 @@ class Brackets extends Component {
 	}
 
 	return_bracket(bracket_letter, rank_set) {
-		//console.log("rank set");
-		//console.log(rank_set);
 
 		var ordered_bracket = {};
 
 		for (var person in rank_set) {
-			//console.log("rank set person");
-			//console.log(person, rank_set[person], rank_set[person].seed);
-
 			ordered_bracket[rank_set[person].seed] = rank_set[person];
 		}
 
-		for (var i=1; i<=8; i++) {	//hard coded to 8!
+		for (var i=1; i<=8; i++) {	
 			if (!ordered_bracket[i]) {
 				ordered_bracket[i] = null;
 			}
 		}
 
-		console.log("ordered bracket");
-		console.log(ordered_bracket);
 
 		var id_1 = bracket_letter+"_1"
 		var id_2 = bracket_letter+"_2"
@@ -68,7 +59,6 @@ class Brackets extends Component {
 		var id_8 = bracket_letter+"_8"
 
 
-//<div id="testing" className="hovering">Test data</div>
 	return(
 
 <div class="brackdiv">
@@ -122,44 +112,16 @@ Bracket {bracket_letter}
 		item1 = keys[0];
 		item2 = keys[1];
 
-		console.log(keys, item1, item2);
 
 		var td1 = document.getElementById(item1);
 		var td2 = document.getElementById(item2);
 
 		var tdtemp = document.createElement("td");
 		var tempid = td1.id; 
-		/*console.log("old td1", td1.id);
-		console.log("old td2", td2.id);
-		td1.setAttribute("id", td2.id);
-		td2.setAttribute("id", tempid);
-		console.log("before set onclick null", td1.onclick);
-		td1.onclick = function() {return false};
-		td2.onclick = function() {return false};
-		console.log("after", td1.onclick);
-		console.log("new td1", td1.id);
-		console.log("new td2", td2.id);
-		td1.onclick= () =>this.select_func(td1.id,[to_swap[item2][0], to_swap[item2][1]]);
-		//td2.onclick= null;
-		td2.onclick= () =>this.select_func(td2.id,[to_swap[item1][0], to_swap[item1][1]]);
-		//td1.onclick = function() { alert(this);};//this.select_func(td1.id, [to_swap[item1][0], to_swap[item1][1]]); };*/
 
-		/*td1.parentNode.insertBefore(tdtemp, td1);
-		td2.parentNode.insertBefore(td1, td2);
-		tdtemp.parentNode.insertBefore(td2, tdtemp);
-		tdtemp.parentNode.removeChild(tdtemp);*/
-
-		/*console.log(td1, td2);
-		var tdtemp = td1.firstChild;
-		td1.firstChild = td2.firstChild;
-		td2.firstChild = tdtemp;*/
-		
-		//console.log(td1, td2);
 
 		var first, second, place1, place2;
 		for (var element in this.state.rankings[to_swap[item1][0]]) {
-			//console.log(this.state.rankings[item1[0]][element].boxer_id);
-			//console.log(to_swap[item1][1]);
 			if (this.state.rankings[to_swap[item1][0]][element].boxer_id === to_swap[item1][1]) {
 				first = this.state.rankings[to_swap[item1][0]][element];
 				place1 = element;
@@ -168,8 +130,6 @@ Bracket {bracket_letter}
 		}
 
 		for (var element in this.state.rankings[to_swap[item2][0]]) {
-			//console.log(this.state.rankings[item2[0]][element].boxer_id);
-			//console.log(to_swap[item2][1]);
 			if (this.state.rankings[to_swap[item2][0]][element].boxer_id === to_swap[item2][1]) {
 				second = this.state.rankings[to_swap[item2][0]][element];
 				place2 = element;
@@ -180,7 +140,6 @@ Bracket {bracket_letter}
 		var temp_rank = first;
 		var old1_seed = first.seed;
 		var old2_seed = second.seed;
-		console.log("old1", old1_seed, "old2", old2_seed);
 		temp_rank.seed = old2_seed;
 		second.seed = old1_seed;
 		this.state.rankings[to_swap[item1][0]][place1] = second;
@@ -189,10 +148,8 @@ Bracket {bracket_letter}
 		td1.style.border = "none";
 		td2.style.border = "none";
 		this.setState( {"selected" : {}});
-		console.log(first, place1, second, place2);
 
 
-		console.log("SWAP", this.state.rankings);
 	}
 
 	select_func(bracket_slot, args) {
@@ -203,35 +160,27 @@ Bracket {bracket_letter}
 			alert("Moving byes is not supported at this time");
 			return;
 		}
-		console.log(bracket_slot, args);
 		if (Object.keys(this.state.selected).length === 2 && !this.state.selected[bracket_slot]) {
 			return;
 		} 
 
-		console.log("bracket_slot", bracket_slot);
-		console.log("this.state.selected[bracket_slot]", this.state.selected[bracket_slot]);
 	
 		
 		var selec = document.getElementById(bracket_slot);
 
 		if (this.state.selected[bracket_slot]) {
 			var copyState = {...this.state.selected};
-			console.log("copy", copyState);
 			delete copyState[bracket_slot];
-			console.log("copy deleted", copyState);
 			this.setState( {"selected" : copyState});
 			selec.style.border= "none";
 
 		} else {
-			console.log("select: ", this.state.selected);
 			this.state.selected[bracket_slot] = new_args;
 			selec.style.border= "solid #55aadd";
 			selec.style["border-radius"] = "10px";
 		}
 
-		console.log(selec);
 
-		console.log("selected: ", this.state.selected);
 	}
 
 	boxer_hover(b_id) {
@@ -240,7 +189,6 @@ Bracket {bracket_letter}
 		}
 		var internal = document.createElement("p");
 		internal.innerHTML = "Boxer ID: "+b_id.boxer_id+"<br/>";
-		//document.getElementById("fixedElement").appendChild(internal);
 		internal.append("Boxer: "+b_id.first+" "+b_id.last);
 		internal.innerHTML += "<br/>";
 		internal.append("Weight: "+b_id.weight+" lbs");
@@ -290,11 +238,9 @@ Bracket {bracket_letter}
 		var temp = {};
 		temp[evt.target.name] = evt.target.value;
 		this.setState(temp);
-		console.log("state from test: ", evt.target.value);
 	}
 
-	save_bracket() { // this is set up wrong
-		console.log("in save bracket");
+	save_bracket() { 
 
 		if (this.state.save_as === "") {
 			alert("Save As must have a bracket name");
@@ -311,7 +257,6 @@ Bracket {bracket_letter}
 				bracket_dict["bracket"][bracket]["seed"+this.state.rankings[bracket][boxer]["seed"]] = this.state.rankings[bracket][boxer]["boxer_id"];
 			}
 		}
-		console.log(bracket_dict);
 
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/loadSavedBracket";
 
@@ -319,7 +264,6 @@ Bracket {bracket_letter}
 				method : 'PUT',
 				headers : {"Content-Type": "text/plain"} };
 
-		console.log("put_dict", put_dict);
 		fetch(URL, put_dict)
 		.then(results => {
 			return results.json();
@@ -335,7 +279,6 @@ Bracket {bracket_letter}
 			alert("A bracket must be selected");
 			return;
 		}
-		console.log("top of load_saved");
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/putBracket";
 
 		var bracket_dict = {"name" : this.state.bracket_load};
@@ -344,12 +287,10 @@ Bracket {bracket_letter}
 				method : 'PUT',
 				headers : {"Content-Type": "text/plain"} };
 
-		console.log("put_dict", put_dict);
 		fetch(URL, put_dict)
 		.then(results => {
 			return results.json();
 		}).then (data => {
-			console.log("From put", data);
 			this.setState({"rankings":data["ranks"]});
 			this.setState({"boxers": data["person_data"]});
 			console.log("state rankings", this.state.rankings);
@@ -359,7 +300,6 @@ Bracket {bracket_letter}
 	}
 
 	options() {
-		console.log("top of options");
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/loadSavedBracket";
 
 		fetch(URL)
@@ -373,48 +313,34 @@ Bracket {bracket_letter}
 	}
 
 	render() {
-		console.log("top of render: ", this.state.rankings);
 		let headings = ["boxer_id", "seed", "first", "last", "weight", "score", "av_score", "num_spars", "num_scored"];
 
 		var rows = [];
 		var values = [];
 
-		//console.log("length: ", this.state.rankings.length);
 		var row_num = 0;
 		var top_row = []
-		//var top_row_num = 0;
 		for (var high in this.state.rankings) {
 			rows = []
 			rows.push(headings.map((str) => <th key={str}>{str}</th>));
 			for (var key in this.state.rankings[high]) {
 				values = [];
-				//console.log("key", key);
-				//console.log(this.state.rankings[high][key]);
-				//values.push(<td key={headings.length}>{key}</td>);
 				for (var i=0; i< headings.length; i++) {
 					values.push(<td key={i}>{this.state.rankings[high][key][headings[i]]}</td>);
-					//console.log("value" , values);
 				}
 				rows.push(<tr key={row_num}>{values}</tr>);
-				//console.log("rows", rows);
-				//break;
 				row_num++;
 			}
 			top_row.push(<table key={high}><tbody key={high}>{rows}</tbody></table>);
-			//top_row_num++;
-			//break;
+
 		}
 
 		var brackets = [];
 		for (var bracket in this.state.rankings) {
-			//console.log("this state rankings [bracket]", this.state.rankings[bracket], bracket);
 			brackets.push(this.return_bracket(bracket, this.state.rankings[bracket]));
-			//break;
 		}
-		//document.getElementById("testing2").onmouseenter = function() { this.boxer_hover(45) };
 	
 		var options = [];
-		console.log(this.state.bracket_list);
 		options.push(<option value=""></option>);
 		for (var j in this.state.bracket_list) {
 			options.push(<option value={this.state.bracket_list[j]}>{this.state.bracket_list[j]}</option>);

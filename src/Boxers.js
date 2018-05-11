@@ -125,9 +125,6 @@ class Boxers extends Component {
 		var post_dict = {body : JSON.stringify(data), 
 			method: 'POST',
 			headers : {"Content-Type": "text/plain",
-						//"Access-Control-Allow-Headers" : "*",
-						//"Access-Control-Allow-Origin" : "*"
-						//"host" : "apigateway.us-east-2.amazonaws.com",
 						} };
 		
 		console.log("post_dict", post_dict);
