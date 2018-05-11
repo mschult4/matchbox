@@ -11,9 +11,14 @@ table.signups td, table.signups th {
     border-radius: 10px;
 }
 
-table.signups td.full {
+table.signups td.full, table.signups td.cancel {
     background-color: #DDD;
     border: 1px solid #DDD;
+}
+
+table.signups td.cancel:hover {
+    background-color: #FF5733;
+    cursor: pointer;
 }
 
 table.signups td {

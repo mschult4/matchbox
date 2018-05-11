@@ -15,10 +15,133 @@ class Signups extends Component {
         this.switchDay = this.switchDay.bind(this);
         this.isActive = this.isActive.bind(this);
         this.sign_up = this.sign_up.bind(this);
+        this.un_sign_up = this.un_sign_up.bind(this);
         this.main = main_app;
     }
 
-    /* Sample query code */
+    getWeek() {
+        var date = new Date();
+        var this_week = {};
+        var n = date.getDay();
+        var newdate = new Date(date);
+        if (n===0) {
+            newdate.setTime(date.getTime() + 1000*60*60*24*1);
+            this_week["Monday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Monday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Tuesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Tuesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Wednesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Wednesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Thursday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Thursday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Friday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Friday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+        } else if (n===1) {
+            newdate.setTime(date.getTime() + 1000*60*60*24*0);
+            this_week["Monday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Monday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Tuesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Tuesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Wednesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Wednesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Thursday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Thursday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Friday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Friday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+        } else if (n===2) {
+            newdate.setTime(date.getTime() - 1000*60*60*24*1);
+            this_week["Monday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Monday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Tuesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Tuesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Wednesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Wednesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Thursday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Thursday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Friday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Friday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+        } else if (n===3) {
+            newdate.setTime(date.getTime() - 1000*60*60*24*2);
+            this_week["Monday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Monday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Tuesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Tuesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Wednesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Wednesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Thursday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Thursday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Friday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Friday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+        } else if (n===4) {
+            newdate.setTime(date.getTime() - 1000*60*60*24*3);
+            this_week["Monday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Monday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Tuesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Tuesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Wednesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Wednesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Thursday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Thursday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Friday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Friday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+        } else if (n===5) {
+            newdate.setTime(date.getTime() - 1000*60*60*24*4);
+            this_week["Monday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Monday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Tuesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Tuesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Wednesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Wednesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Thursday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Thursday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Friday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Friday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+        } else if (n===6) {
+            newdate.setTime(date.getTime() - 1000*60*60*24*5);
+            this_week["Monday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Monday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Tuesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Tuesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Wednesday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Wednesday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Thursday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Thursday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+            newdate.setTime(newdate.getTime() + 1000*60*60*24*1);
+            this_week["Friday"] = newdate.getMonth().toString()+"/"+newdate.getDate().toString()
+            this_week["Friday_formal"] = newdate.getYear().toString()+"-"+newdate.getMonth().toString()+"-"+newdate.getDate().toString()
+        }
+        this.setState({"this_week": this_week});
+        this.setState({"date": this_week["Monday"]});
+        this.setState({"date_format": this_week["Monday_formal"]});
+    }
+
 	getSignups() {
 		var URL = "https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/signups";
 		
@@ -65,7 +188,34 @@ class Signups extends Component {
             } else if (datum['issue'] === 'none') {
                 this.getSignups();
             }
-            //TODO: add functionality to un-signup
+            console.log("datum", datum)
+        })  
+
+    }
+
+    un_sign_up(slot, day, ring, thisisahack) {
+		var data = {
+			slot: slot,
+			day: day,
+			ring: ring,
+            boxer_id: sessionStorage.identity,
+		}
+		console.log("sending data to delete", data);
+		
+        var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/signups";
+
+        var post_dict = {
+			body : JSON.stringify(data), 
+            method: 'POST',
+            headers : {"Content-Type": "text/plain"}
+		};
+    
+        console.log("post_dict", post_dict);
+        fetch(URL, post_dict)
+        .then(results => {
+            return results.json();
+        }).then(datum => {
+            this.getSignups();
             console.log("datum", datum)
         })  
 
@@ -76,13 +226,17 @@ class Signups extends Component {
         for (var i=1; i<=15; i++) {
             var newRow = [];
             newRow.push(<td className="slot" key={i}>{i}</td>);
-            //for (var day in {'2018-05-07':0, '2018-05-08':0, '2018-05-09':0, '2018-05-10':0, '2018-05-11':0}) {
                 for (var ring=1; ring<=2; ring++) {
                     var found = false;
                     var full = false;
                     for (var item in this.state.signups) {
                         if (this.state.signups[item]["spar_slot"]===i && this.state.signups[item]["date"]===day && this.state.signups[item]["ring"]==ring) {
-                            newRow.push(<td className="full" key={i+day+ring+found}>{this.state.signups[item]["mixed_first"]} {this.state.signups[item]["mixed_last"]}, {this.state.signups[item]["weight"]}, {this.state.signups[item]["experience"]}, {this.state.signups[item]["handedness"]}</td>);
+                            if (this.state.signups[item]["boxer"]==sessionStorage.identity) {
+                                console.log("adding onclick");
+                                newRow.push(<td className="cancel" key={i+day+ring+found} onClick={this.un_sign_up.bind(i, i, day, ring)}>{this.state.signups[item]["mixed_first"]} {this.state.signups[item]["mixed_last"]}, {this.state.signups[item]["weight"]}, {this.state.signups[item]["experience"]}, {this.state.signups[item]["handedness"]}</td>);
+                            } else {
+                                newRow.push(<td className="full" key={i+day+ring+found}>{this.state.signups[item]["mixed_first"]} {this.state.signups[item]["mixed_last"]}, {this.state.signups[item]["weight"]}, {this.state.signups[item]["experience"]}, {this.state.signups[item]["handedness"]}</td>);
+                            }
                             if (found) {
                                 full = true;
                             } else {
@@ -97,20 +251,11 @@ class Signups extends Component {
                         newRow.push(<td key={i+day+ring+"-2"} className="open" onClick={this.sign_up.bind(i, i, day, ring)}>Open</td>);
                     }
                 }
-            //}
             rows.push(<tr key={i}>{newRow}</tr>);
         }
         return rows;
     }
 
-    /* do I need this?
-	update_state(evt) {
-		var temp = {};
-		temp[evt.target.name] = evt.target.value;
-		this.setState(temp);
-		console.log("state from test: ", evt.target.name);
-	}
-    */
 
     switchDay(day, date, date_format) {
         this.setState({"day": day});
@@ -132,7 +277,7 @@ class Signups extends Component {
         return (
             <div className="signupscontainer">
                 <h1>Spar Signups - Week of 5/7/18</h1>
-                <p>Click an open slot to sign up.</p>
+                <p>Click an open slot to sign up. Click one of your current signups to remove yourself from that spar slot.</p>
                 <div className="tab">
                   <button className={"tablinks"+this.isActive("Monday")} onClick={() => this.switchDay("Monday", "5/7", "2018-05-07")}>Monday</button>
                   <button className={"tablinks"+this.isActive("Tuesday")} onClick={() => this.switchDay("Tuesday", "5/8", "2018-05-08")}>Tuesday</button>
