@@ -9,8 +9,8 @@ class Signups extends Component {
         this.getSignups();
         this.state = {
             day: "Monday",
-            date: "5/7",
-            date_format: "2018-05-07"
+            date: "5/14",
+            date_format: "2018-05-14"
         };
         this.switchDay = this.switchDay.bind(this);
         this.isActive = this.isActive.bind(this);
@@ -276,14 +276,14 @@ class Signups extends Component {
         console.log("rows", rows);
         return (
             <div className="signupscontainer">
-                <h1>Spar Signups - Week of 5/7/18</h1>
+                <h1>Spar Signups - Week of 5/14/18</h1>
                 <p>Click an open slot to sign up. Click one of your current signups to remove yourself from that spar slot.</p>
                 <div className="tab">
-                  <button className={"tablinks"+this.isActive("Monday")} onClick={() => this.switchDay("Monday", "5/7", "2018-05-07")}>Monday</button>
-                  <button className={"tablinks"+this.isActive("Tuesday")} onClick={() => this.switchDay("Tuesday", "5/8", "2018-05-08")}>Tuesday</button>
-                  <button className={"tablinks"+this.isActive("Wednesday")} onClick={() => this.switchDay("Wednesday", "5/9", "2018-05-09")}>Wednesday</button>
-                  <button className={"tablinks"+this.isActive("Thursday")} onClick={() => this.switchDay("Thursday", "5/10", "2018-05-10")}>Thursday</button>
-                  <button className={"tablinks"+this.isActive("Friday")} onClick={() => this.switchDay("Friday", "5/11", "2018-05-11")}>Friday</button>
+                  <button className={"tablinks"+this.isActive("Monday")} onClick={() => this.switchDay("Monday", "5/14", "2018-05-14")}>Monday</button>
+                  <button className={"tablinks"+this.isActive("Tuesday")} onClick={() => this.switchDay("Tuesday", "5/15", "2018-05-15")}>Tuesday</button>
+                  <button className={"tablinks"+this.isActive("Wednesday")} onClick={() => this.switchDay("Wednesday", "5/16", "2018-05-16")}>Wednesday</button>
+                  <button className={"tablinks"+this.isActive("Thursday")} onClick={() => this.switchDay("Thursday", "5/17", "2018-05-17")}>Thursday</button>
+                  <button className={"tablinks"+this.isActive("Friday")} onClick={() => this.switchDay("Friday", "5/18", "2018-05-18")}>Friday</button>
                 </div>
                 <table className="signups" cellSpacing="10">
                 <tbody>
