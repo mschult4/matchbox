@@ -62,34 +62,27 @@ class Spars extends Component {
 		var temp = {};
 		temp[evt.target.name] = evt.target.value;
 		this.setState(temp);
-		console.log("state from test: ", evt.target.name);
 	}
 	
 
     sparQuery() {
-		console.log("top of simple: ", this.state.spars);	
 		var querylist = [];
 		var bad_keys = ["num_spar_i", "date_i", "boxer_id_i", "opp_id_i", "num_rounds_i", "len_rds_i", "commments_i", "score_i", "coach_initials_i", "season_i", "gender_i", "med_comm_i", "num_spar_u", "date_u", "boxer_id_u", "opp_id_u", "num_rounds_u", "len_rds_u", "commments_u", "score_u", "coach_initials_u", "season_u", "gender_u", "med_comm_u", "num_spar_d", "date_d", "boxer_id_d", "opp_id_d"]
 		for (var key in this.state) {
-			console.log("key: ", key);
-			console.log("value: ", this.state[key]);
 			if (key !== "spars" && this.state[key] !== "" && !bad_keys.includes(key)) {
 				var querystr = key;
 				querystr += "=";
 				querystr += this.state[key];
 				querylist.push(querystr);
-				console.log(querylist);
 			}
 		}
 
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/spars";
 
 		var middle = "";
-		console.log(querylist);
-		if (querylist.length !== 0) { //pretty later
+		if (querylist.length !== 0) { 
 			middle = "?"
 			middle += querylist.join("&");
-			console.log(middle);
 		}
 				
         fetch(URL+middle)
@@ -98,7 +91,7 @@ class Spars extends Component {
         }).then(data => {
 
             this.setState({"spars": data});
-            console.log("SPARZZZZ", this.state.spars);
+            console.log("spars", this.state.spars);
 			var thingie=document.getElementById("starspar");
 			thingie.innerHTML = "Loaded -- Scroll Down";
         })
@@ -109,7 +102,6 @@ class Spars extends Component {
 			alert("Please enter both spar's dates in YYYY-MM-DD format.");
 			return;	
 		}
-        console.log("in insert", this.state);
 		var i_keys = ["num_spar_i_a", "date_i_a", "boxer_id_i_a", "boxer_first_i_a", "boxer_last_i_a", "opp_id_i_a", "opp_first_i_a", "opp_last_i_a", "num_rounds_i_a", "len_rds_i_a", "commments_i_a", "score_i_a", "coach_initials_i_a", "season_i_a", "spars.gender_i_a", "med_comm_i_a", "num_spar_i_b", "date_i_b", "boxer_id_i_b", "boxer_first_i_b", "boxer_last_i_b", "opp_id_i_b", "opp_first_i_b", "opp_last_i_b", "num_rounds_i_b", "len_rds_i_b", "commments_i_b", "score_i_b", "coach_initials_i_b", "season_i_b", "spars.gender_i_b", "med_comm_i_b"]
 
                 var data = {};
@@ -118,27 +110,21 @@ class Spars extends Component {
                                 data[i_keys[i]] = this.state[i_keys[i]];
                         }
                 }
-                console.log("body: ", data);
 
                 var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/spars";
 
                 var post_dict = {body : JSON.stringify(data), 
                         method: 'POST',
                         headers : {"Content-Type": "text/plain",
-                                                //"Access-Control-Allow-Headers" : "*",
-                                                //"Access-Control-Allow-Origin" : "*"
-                                                //"host" : "apigateway.us-east-2.amazonaws.com",
-                                                } };
+                } };
                 
-                console.log("post_dict", post_dict);
                 fetch(URL, post_dict)
                 .then(results => {
             return results.json();
         }).then(datum => {
 			this.setState({"spars": datum});	
             console.log("insert", datum);
-//                        this.setState({"boxers": datum});
-//            console.log("state", this.state.boxers);
+
         })
                 
         }
@@ -174,10 +160,7 @@ class Spars extends Component {
 				Num Spar:
 				<input type="text" name="num_spar" onChange={(evt) => this.update_state(evt)}/>
 				</label>
-				{ /*<label>
-				Date:
-				<input type="text" name="date" onChange={(evt) => this.update_state(evt)}/>
-				</label> */ } 
+
 				<label>
 				Boxer ID:
 				<input type="text" name="boxer_id" onChange={(evt) => this.update_state(evt)}/>

@@ -26,14 +26,12 @@ class App extends Component {
                 this.state["page"] = "boxers";
                 sessionStorage.page = "boxers";
             } else {
-                console.log("restoring page:", sessionStorage.page);
                 this.state["page"] = sessionStorage.page;
             }
         }
     }
 
     change_page(page) {
-        console.log("changing page:", page);
         this.setState({"page":page});
         sessionStorage.page = page;
     }
@@ -113,7 +111,6 @@ class App extends Component {
                 </div>
             );
 		} else {
-            console.log("page", this.state["page"]);
             return (<h2>Sorry, page not found</h2>);
         }
 

@@ -46,29 +46,23 @@ class Profile extends Component {
 	}
 
     simpleQuery() {
-		console.log("top of simple: ", this.state.year);	
 		var querylist = [];
 		var bad_keys = ["hall_i", "last_i", "year_i", "first_i", "goes_by_i",  "eligible_i", "experience_i", "vet_years_i", "weight_i", "handedness_i", "captain_i", "gender_i", "experience_i", "hall_u", "last_u", "goes_by_u", "year_u", "first_u", "eligible_u", "experience_u", "vet_years_u", "weight_u", "handedness_u", "captain_u", "gender_u", "experience_u", "boxer_id_u", "hall_u", "last_u", "goes_by_u", "year_u", "first_u", "eligible_u", "experience_u", "vet_years_u", "weight_u", "handedness_u", "captain_u", "gender_u", "experience_u", "boxer_id_u"]
 		for (var key in this.state) {
-			console.log("key: ", key);
-			console.log("value: ", this.state[key]);
 			if (key !== "boxers" && this.state[key] !== "" && !bad_keys.includes(key)) {
 				var querystr = key;
 				querystr += "=";
 				querystr += this.state[key];
 				querylist.push(querystr);
-				console.log(querylist);
 			}
 		}
 
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
 
 		var middle = "";
-		console.log(querylist);
-		if (querylist.length !== 0) { //pretty later
+		if (querylist.length !== 0) { 
 			middle = "?"
 			middle += querylist.join("&");
-			console.log(middle);
 		}
 				
         fetch(URL+middle)
@@ -78,12 +72,10 @@ class Profile extends Component {
 
             this.setState({"boxers": data});
             console.log("state", this.state.boxers);
-            console.log(this.state.boxers[0]);
         })
     }
 
 	update() {
-		console.log("in insert", this.state);
 		var u_keys = ["hall_u", "last_u", "goes_by_u", "year_u", "first_u", "eligible_u", "experience_u", "vet_years_u", "weight_u", "handedness_u", "captain_u", "gender_u", "experience_u", "boxer_id_u"];
 		var data = {};
 		for (var i in u_keys) {
@@ -91,7 +83,6 @@ class Profile extends Component {
 				data[u_keys[i]] = this.state[u_keys[i]];
 			}
 		}
-		console.log("body: ", data);
 
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/boxers";
 
@@ -99,7 +90,6 @@ class Profile extends Component {
 			method: 'PUT',
 			headers : {"Content-Type": "text/plain"} };
 		
-		console.log("put_dict", put_dict);
 		fetch(URL, put_dict)
 		.then(results => {
             return results.json();
@@ -111,16 +101,12 @@ class Profile extends Component {
             for (var i = 0; i < datum.length; i = i + 1) {
                 if (datum[i]['boxer_id'] == sessionStorage.identity) {
                     save = i;
-                    console.log(save, i);
                     break;
                 }
             }    
-            console.log("save", save);  
             datum[0] = datum[save];
-            console.log(datum);   
             var new_datum = []; 
             new_datum.push(datum[0]); 
-            console.log(new_datum); 
 			this.setState({"boxers": new_datum});
             console.log("state", this.state.boxers);
         })
@@ -132,7 +118,6 @@ class Profile extends Component {
 			alert("New passwords do not match.");
 			return;
 		}
-		console.log("update password", this.state);
 		var u_keys = ["old_pw", "new_pw", "new_pw_check", "boxer_id"];
 		var data = {};
 		for (var i in u_keys) {
@@ -140,7 +125,6 @@ class Profile extends Component {
 				data[u_keys[i]] = this.state[u_keys[i]];
 			}
 		}
-		console.log("body: ", data);
 
 		var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/signin";
 
@@ -148,7 +132,6 @@ class Profile extends Component {
 			method: 'PUT',
 			headers : {"Content-Type": "text/plain"} };
 		
-		console.log("put_dict", put_dict);
 		fetch(URL, put_dict)
 		.then(results => {
             return results.json();
@@ -164,42 +147,34 @@ class Profile extends Component {
 	}
 
     sparQuery() {
-                console.log("top of spar: ", this.state.spars);
                 var querylist = [];
                 var querystr = "boxer_id";
                 querystr += "=";
                 querystr += this.state['boxer_id'];
                 querylist.push(querystr);
-                console.log(querylist);
 
                 var URL="https://okp1u501a5.execute-api.us-east-2.amazonaws.com/test/spars";
 
                 var middle = "";
-                console.log(querylist);
                 if (querylist.length !== 0) { //pretty later
                         middle = "?"
                         middle += querylist.join("&");
-                        console.log(middle);
                 }
 
         fetch(URL+middle)
         .then(results => {
             return results.json();
         }).then(data => {
-
             this.setState({"spars": data});
-            console.log("SPARZZZZ", this.state.spars);
 	    
         })
     }
 
 	update_state(evt) {
-		console.log(sessionStorage);
 		var temp = {};
 		temp[evt.target.name] = evt.target.value;
                 temp['boxer_id_u'] = sessionStorage.identity;
 		this.setState(temp);
-		console.log("state from test: ", evt.target.name);
 	}
 
 	render() {
@@ -246,7 +221,6 @@ class Profile extends Component {
                         }
 			else
                		    values.push(<td className="designated" key={i}>{this.state.spars[row_num][spar_headings[i]]}</td>);
-               console.log(values)
 		}
 		spars.push(<tr className="designated" key={row_num}>{values}</tr>);
         }
