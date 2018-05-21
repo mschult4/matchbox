@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Stage 2</title>
+  </head>
+  <body>
+  	<h1>Development Plan</h1>
+	<h2>Relational Schema</h2>
+	<p>We will use the following relations.
+		<ul>
+			<li>Boxers(netid, name, experience, handedness, school_year, picture_url, weight, dorm, email)
+				<ul>
+					<li>netid → name, experience, handedness, school_year, picture_url, weight, dorm, email</li>
+					<li>Key: netid</li>
+					<li>Superkeys: any combination that includes netid</li>
+				</ul>
+			</li>
+			<li>Spar_Signups(date, ring, spar_number, boxer1_netid, boxer2_netid)
+				<ul>
+					<li>date, ring, spar_number → boxer1_netid, boxer2_netid</li>
+					<li>Key: date, ring, spar_number</li>
+					<li>Superkeys: any combination that includes the three elements of the key</li>
+				</ul>
+			</li>
+			<li>Spar_Results(num_spar_for_boxer, boxer_netid, date, comments, opponent, score, coach)
+				<ul>
+					<li>num_spar_for_boxer, boxer_netid → date, comments, opponent, score, coach</li>
+					<li>Key: num_spar_for_boxer, boxer_netid</li>
+					<li>Superkeys: any combination that includes the two elements of the key</li>
+				</ul>
+			</li>
+			<li>Accounts(netid, password_hash, permissions)
+				<ul>
+					<li>Passwords will be stored in an encrypted/hashed form</li>
+					<li>netid → password_hash, permissions</li>
+					<li>Key: netid</li>
+				</ul>
+			</li>
+		</ul>
+	<h2>Databases/Platforms/Languages</h2>
+	<p>We will be using the mysql database system that is on the dsg1 server. We will use HTML, Node, and React for the web programming portion. For any intermediate programming/ data processing/ algorithm-writing, we plan on using Python.</p>
+	<h2>Getting Data</h2>
+	<p>We will get our data from Notre Dame’s boxing club. We have talked to the boxing head coach and have access to spar sheet data from the last ~5 years; we may end up only inserting one year of spar data into our database, depending on time constraints. One year of data is also approximately 150 spar sheets (one per boxer) with an average of 10 spar entries per sheet. This means one year of data has around 1000 separate spar entries, which will most likely be plenty of data. In order to enter the data into the database, we will have to manually enter the paper data into a digital format. We plan on hand-entering data into a csv file, and then transferring that data programmatically into our database.</p>
+	<p>To store data in our database, we plan on using fake names to go with real spar data. We will still have a password system in order to be able to see the full list of boxers, but our entered data will have names obscured for privacy/security reasons. If this system goes live we would get users’ consent to entering their data, but for the way this is set up we’re not going to take any chances and just protect the data with obscurity.</p>
+	<h2>Labor Division</h2>
+	<p>Entering the data into a csv/the database is a task that will be split evenly between the members of the group.</p>
+	<p>The current plan is to do a lot of together-programming, where we all work in the same location on similar tasks and divide things up into smaller individual tasks after working as a group. We all want to become at least slightly proficient at all the aspects of the project, from the web programming to the database interactions and processing. We plan on dividing up the database interactions into one person taking entering, querying, and deleting data.</p>
+	<p>We also plan on dividing up the main webpages and advanced functions of the project like so: </p>
+	<ul>
+		<li>Query page, bracket analysis functions (Madalyn)</li>
+		<li>Spar sign up page, spar alternate/analytics functions (Alison)</li>
+		<li>Bracket page, email function (Grace)</li>
+	</ul>
+	<h2>Project Timeline</h2>
+	<h3>Stage 0: Throughout</h3>
+	<ul>
+		<li>Get data / Input data into database</li>
+	</ul>
+	<h3>Stage 1: Friday March 2</h3>
+	<ul>
+		<li>Create website at all</li>
+		<li>Do tutorials, install tools/dependencies/packages we need
+			<ul>
+				<li>Get a website in React/Node/HTML up and running (even a “hello world”)</li>
+			</ul>
+		</li>
+	</ul>
+	<h3>Stage 2: Friday March 23</h3>
+	<ul>
+		<li>Connect processing with web page-ing with database</li>
+		<li>Make website enter-able (users can enter data into website)
+			<ul>
+				<li>Data goes into database</li>
+				<li>Coaches can enter spar data</li>
+				<li>Boxers can add their own profile info</li>
+				<li>Make page for coaches to query data</li>
+			</ul>
+		</li>
+		<li>Make website look passable</li>
+	</ul>
+	<h3>Stage 3: Friday April 6</h3>
+	<ul>
+		<li>Create password/username sign in (two different portals)</li>
+		<li>Set up signup form</li>
+	</ul>
+	<h3>Stage 4: Friday April 27</h3>
+	<ul>
+		<li>Create algorithms for bracket creation</li>
+		<li>Create algorithms for predictive spar "results"</li>
+		<li>Create algorithms for alternate list
+			<ul>
+				<li>Preferences for alternating</li>
+			</ul>
+		</li>
+		<li>Create system for emailing people</li>
+	</ul>
+	<h3>Stage 5: Friday May 4</h3>
+	<ul>
+		<li>Make website look really pretty</li>
+		<li>Make website brackets pretty and interactive</li>
+	</ul>
+	<h3>Stage 6: Monday May 7</h3>
+	<ul>
+		<li>Project Document</li>
+		<li>Video</li>
+	</ul>
+  </body>
+</html>
+
+

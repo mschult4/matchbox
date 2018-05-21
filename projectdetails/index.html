@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>MatchBox Proj Details</title>
+	</head>
+
+	<body>
+		<h1>MatchBox: Project Details</h1>
+		<h2>Application Description</h2>
+		<p>The project will be a web application that manages spar scheduling, stores spar history, and suggests brackets for tournament use. There will be two portals, one for coaches/captains that has access to all the available data, and another for boxers. The coaches' portal has to access to all of the data; it will be able to pull up spar history for an individual boxer and information for all of the boxers on the team. The coaches will be able to alter the spar sign-ups after they've happened, and will also have access to the bracket-generating features of the site. The boxer portal allows boxers to create profiles and sign up for spars.</p>
+		<h2>Usefulness</h2>
+		<p>This application will be useful for two reasons; one is on the signup end and the other is on the spar history end. Signups for spars have many constraints (fighting weights, times people can make it to practice, how difficult they want their spar to be, etc), and currently making sure these constraints are satisfied for 40+ people a day is a large burden on the captain who has to go in and do the checks/move people around (because boxers often put their names places they shouldn't in order to get on the list at all). Our project will disallow illegal signups and create a separate pathway for becoming a part of and then getting automatically moved out of an alternate list. Secondly, all spar data is currently stored manually on paper spar sheets. At the end of the season, these sheets are laid out on the floor and arranged into brackets/seeds based on spar outcomes and on how coaches perceive people should be ranked. While our system wouldn't be perfect, it would look at all the spar data and form preliminary brackets by weight and performance, giving the coaches a jumping off point for setting up the brackets that our site would then allow them to edit and save as they please.</p>
+		<h2>Realness</h2>
+		<p>Our data is currently on paper in a file cabinet. We will talk to the coaches to make sure we can get it. We will probably have to make sure the data is adequately protected in order to have access to it. The data that will go into our system will be authentic, but will have to be from previous years, since it is offseason for boxing.</p>
+		<h2>Functionality</h2>
+		<h3>Basic Functions</h3>
+		<ul>
+			<li>Insert records: When a user signs up to spar, that match will be inserted into our database. Coaches will also be able to insert spar records. Boxers can also create profiles with their information.</li>
+			<li>Delete records: If a user cancels a match, the corresponding record will be deleted.</li>
+			<li>Update records: If a user joins a match already created, the record will be updated. Coaches will be able to change data concerning a spar after the spar occurs. If the coaches create a bracket, they will have the ability to update it as they wish. Boxers can also update their personal profile data.</li>
+			<li>Query records: Coaches will be able to look up records of sparring matches by boxer name. They will also be able to look up cursory information of the entire roster, or see spar information organized by weight class.</li>
+		</ul>
+		<h3>Advanced Functions</h3>
+		<ul>
+			<li>Bracket Creation -- The first advanced function is tournament bracket creation. This requires splitting the boxers up by weight class (and determining where those weight class boundaries fall, which will be a challenging algorithm to write) and then querying the sparring information from everyone in that class. The spar scores will then be ranked and determine people's seeds within their bracket. Bracket creation is advanced because it has to deal with byes, weight cutoffs, forming even brackets (of possibly different sizes), and creating brackets that optimize good fights in the finals.</li>
+			<li>Alternate List + Email -- The second advanced function is dealing with the signup alternate list. If there's no matching opponent on the list, we will have a separate form for signing up as an alternate. This will have options you can specify and will automatically sign you up if a matching slot becomes available; the alternate list will then email you that you've been selected to spar that day.</li>
+		</ul>
+		<h2>ER Diagram</h2>
+		<a href="./erdiagram.png">http://dsg1.crc.nd.edu/cse30246/possible/projectdetails/erdiagram.png</a>
+		<h3>Assumptions</h3>
+		<p>Boxers have a list of attributes in their user profile. A Boxer can have as many Spar Signups as they want (constraints on who's allowed to sign up where will be handled before things enter the database). A Spar Signup will have 1 or 2 Boxers associated with it; if there are 0 Boxers the Signup will cease to exist. Spar Signups become Spar Results if the Signup actually occurred as a real spar (these always split into two Spar Results). This model assumes that there are no round robin spars that happen on the fly. Each boxer have any number of Spar Results, but each Result is associated with only one Boxer. Two Results exist for every spar; each Boxer has its own result that talks about their performance.</p>
+		<h2>Development Plan</h2>
+		<a href="./devplan.html">http://dsg1.crc.nd.edu/cse30246/possible/projectdetails/devplan.html</a>
+		<h2>Live link to Project Website</h2>
+		<a href="..">http:://dsg1.crc.nd.edu/cse30246/possible/</a>
+	</body>
+
+</html>
+
+
